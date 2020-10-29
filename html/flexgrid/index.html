@@ -1,0 +1,74 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+<meta charset="UTF-8"/>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+.container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
+  flex-wrap: wrap;
+} 
+
+.container > div {
+  font-size: 5vw;
+  padding: .5em;
+  color: blue;
+  margin: 10px;
+  border-radius: 3px;
+  background: wheat;
+  border: 5px solid black;
+}
+
+.container > div:nth-child(odd) {
+  width: 10%;
+  background: plum;
+}
+.container > div:nth-child(even) {
+  width: 20%;
+}
+
+.container > div:nth-child(2),
+.container > div:nth-child(4),
+.container > div:nth-child(9) {
+  width: 60%;
+  background: powderblue;
+}  
+
+body {
+  margin: 0;
+  background: silver;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+  <div>x</div>
+</div>
+
+</body>
+</html>

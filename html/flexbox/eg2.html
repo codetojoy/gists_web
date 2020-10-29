@@ -1,0 +1,49 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+<meta charset="UTF-8"/>
+
+<style>
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  min-height: 100px;
+  background: wheat;
+  flex: calc(100% / 2);
+  text-align: center;
+  line-height: 100px;
+  border: 5px solid white;
+}
+
+.layout > div:nth-child(odd) {
+  flex: 20%;
+  background: plum;
+}
+
+.layout > div:nth-child(even) {
+  flex: 80%;
+  background: powderblue;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: silver;
+}
+</style>
+
+</head>
+
+<body>
+<div class="layout">
+  <div class="child">left lorem ipsum</div>
+  <div class="child">right lorem ipsum</div>
+</div>
+</body>
+</html>

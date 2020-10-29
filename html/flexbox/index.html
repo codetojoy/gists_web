@@ -1,0 +1,44 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+<meta charset="UTF-8"/>
+
+<style>
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  min-height: 100px;
+  background: wheat;
+  flex: calc(100% / 3);
+  text-align: center;
+  line-height: 100px;
+  border: 5px solid white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: silver;
+}
+</style>
+
+</head>
+
+<body>
+<div class="layout">
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+  <div class="child">lorem ipsum</div>
+</div>
+</body>
+</html>
