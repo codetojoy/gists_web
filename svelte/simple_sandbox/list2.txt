@@ -1,0 +1,22 @@
+[
+"Johann Sebastian Bach",
+"Ludwig van Beethoven",
+"Wolfgang Amadeus Mozart",
+"Franz Schubert",
+"Richard Wagner",
+"Antonio Vivaldi",
+"Johannes Brahms",
+"Giuseppe Verdi",
+"Robert Schumann",
+"Giacomo Puccini",
+"Antonín Leopold Dvorák",
+"George Frideric Handel",
+"Franz Liszt",
+"Franz Joseph Haydn",
+"Frédéric Chopin",
+"Igor Stravinsky",
+"Gustav Mahler",
+"Richard Strauss",
+"Dmitri Dmitriyevich Shostakovich",
+"Hector Berlioz"
+]
