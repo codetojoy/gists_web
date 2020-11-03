@@ -1,0 +1,39 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <script>
+        function go() {
+            const field = document.getElementById("field"); 
+            const value = field.value;
+            if (value.trim().length > 0) {
+                console.log(`TRACER before debugger`);
+                debugger;
+                console.log(`TRACER after debugger`);
+            }
+            console.log(`TRACER hello from go ${field.value}`);
+        }
+    </script>
+</head>
+
+<body>
+
+<main>
+<div>
+<form onsubmit="return false;">
+    <input type="text" id="field" value=""/>
+</form>
+</div>
+<div>
+<button onclick="go()">Click here</button>
+</div>
+<div>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci erat, blandit in euismod in, efficitur sed sapien. Vivamus eu ex semper, elementum lacus vitae, tincidunt velit. Suspendisse egestas, justo eu imperdiet sagittis, elit augue viverra nulla, sed aliquam velit risus sed diam. Maecenas lorem enim, tristique et iaculis aliquet, pulvinar vitae nisl. Cras congue nisl felis, feugiat pulvinar odio elementum id. Cras in condimentum odio, nec viverra dolor. Mauris vestibulum vehicula turpis. Morbi nec consequat enim, nec interdum quam. Suspendisse congue semper erat, non varius mauris. Aenean eget tellus aliquam, aliquam nunc a, semper velit.
+</p>
+</div>
+</main>
+
+</body>
+</html>
