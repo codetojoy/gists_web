@@ -1,5 +1,5 @@
 
 ### Summary
 
-* see `src/Items.svelte` for use of "flip" function
+* see `src/Items.svelte` for use of "transition" 
 
