@@ -9,17 +9,13 @@ describe('Items', () => {
  
   test('should render', () => {
     // test 
-    const {itemsList} = render(Items, {props: {items}});
+    const {getByText} = render(Items, {props: {items}});
 
     const paragraphs = document.querySelectorAll('p');
 
     expect(paragraphs).not.toBeNull(); 
-    expect(paragraphs.length).toEqual(3);
+    expect(paragraphs.length).toBe(3);
 
-    for (let i = 0; i < items.length; i++) {
-        const p = paragraphs[i];
-        console.log(`TRACER p: ${p.innerHTML}`);
-        expect(p.innerHTML).toEqual(items[i]);
-    }
+    items.forEach(item => expect(getByText(item)));
   });
 });
