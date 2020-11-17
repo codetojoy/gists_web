@@ -26,7 +26,7 @@ describe("App", () => {
     // test
     const { getByText } = render(App, { name: "MyApp" });
 
-    expectItemCount(NUM_SEED_ITEMS);
+    await expectItemCount(NUM_SEED_ITEMS);
   });
 
   test("should add an item", async () => {
@@ -36,8 +36,8 @@ describe("App", () => {
     const button = getByTestId("add-random");
     fireEvent.click(button);
 
-    expectItemCount(NUM_SEED_ITEMS + 1);
-    expectText("AutoGen1");
+    await expectItemCount(NUM_SEED_ITEMS);
+    await expectText(getByText, "AutoGen1");
   });
 
   test("should clear new items on reset", async () => {
@@ -49,7 +49,7 @@ describe("App", () => {
     const resetButton = getByTestId("reset");
     fireEvent.click(resetButton);
 
-    expectItemCount(NUM_SEED_ITEMS);
+    await expectItemCount(NUM_SEED_ITEMS);
   });
 
   test("should clear all items", async () => {
@@ -59,6 +59,6 @@ describe("App", () => {
     const clearAllButton = getByTestId("clear-all");
     fireEvent.click(clearAllButton);
 
-    expectItemCount(NUM_NO_ITEMS);
+    await expectItemCount(NUM_NO_ITEMS);
   });
 });
