@@ -2,6 +2,8 @@
 
 set -e 
 
+cd server 
+
 node server.js
 
 # OR:
