@@ -1,20 +1,17 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 
-	const dispatch = createEventDispatcher();	
+	const dispatch = createEventDispatcher();
 
-	function addRandomClicked() {
-		// console.log(`TRACER addRandom`);
-		dispatch("addRandom");
-	}
-	function resetClicked() {
-		// console.log(`TRACER reset`);
-		dispatch("reset");
-	}
-	function clearAllClicked() {
-		// console.log(`TRACER clearAll`);
-		dispatch("clearAll");
-	}
+	export let numToAdd = 1;
+
+	const addRandomClicked = () => dispatch("addRandom");
+	const resetClicked = () => dispatch("reset");
+	const clearAllClicked = () => dispatch("clearAll");
+	const changeNumToAddQuantity = function(event) {
+		const newValue = Number(event.target.value);
+		dispatch("setNumToAdd", { setNumToAdd: newValue });
+	};
 </script>
 
 <div class="control">
@@ -23,6 +20,11 @@
 	<button on:click={resetClicked}>Reset</button>
 	<br/>
 	<button on:click={clearAllClicked}>Clear All</button>
+	<br/>
+	<h3>numToAdd: {numToAdd}</h3>
+	<br/>
+	<label for="num-to-add"># items to generate:</label>
+	<input name="num-to-add" type="number" min="1" value="{numToAdd}" on:input={e => changeNumToAddQuantity(e)} />
 </div>
 
 <style>

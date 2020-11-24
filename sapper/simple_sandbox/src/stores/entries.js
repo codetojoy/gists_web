@@ -28,21 +28,28 @@ export default (function () {
 
   const { subscribe, set, update } = writable(seed);
 
-  const addRandom = () =>
-    update((entries) => [`AutoGen${counter++}`, ...entries]);
+  const addRandom = function (n) {
+    console.log(`TRACER addRandom n: ${n}`);
+    update(function (entries) {
+      for (let i = 1; i <= n; i++) {
+        entries = [`AutoGen${counter++}`, ...entries];
+      }
+      return entries;
+    });
+  };
 
   const reset = () => update((entries) => seed);
 
   const clearAll = () => set([]);
- 
+
   const size = function () {
     let result = 0;
     update(function (entries) {
-        result = entries.length;
-        return entries;
+      result = entries.length;
+      return entries;
     });
     return result;
-  }
+  };
 
   return { subscribe, addRandom, reset, clearAll, size };
 })();
