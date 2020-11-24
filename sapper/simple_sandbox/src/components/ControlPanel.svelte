@@ -21,8 +21,6 @@
 	<br/>
 	<button on:click={clearAllClicked}>Clear All</button>
 	<br/>
-	<h3>numToAdd: {numToAdd}</h3>
-	<br/>
 	<label for="num-to-add"># items to generate:</label>
 	<input name="num-to-add" type="number" min="1" value="{numToAdd}" on:input={e => changeNumToAddQuantity(e)} />
 </div>
