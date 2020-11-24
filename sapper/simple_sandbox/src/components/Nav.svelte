@@ -56,6 +56,6 @@
 </li>
 <li>
   <a aria-current={segment === "admin" ? 'page' : undefined}
-    href="admin">Admin</a>
+    href="admin" rel="prefetch">Admin</a>
 </li>
 </nav>

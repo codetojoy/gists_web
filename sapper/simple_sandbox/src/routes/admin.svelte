@@ -1,3 +1,10 @@
+<script context="module">
+  export async function preload(page, session) {
+    console.log(`TRACER hello from admin::preload`);
+    return {};
+  }
+</script>
+
 <script>
   import entries from "../stores/entries.js";
   import config from "../stores/config.js";
