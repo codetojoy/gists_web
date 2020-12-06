@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --port 8081"
+    "start": "webpack-dev-server --port 6160"
   },
   "devDependencies": {
     "ts-loader": "^5.2.1",
