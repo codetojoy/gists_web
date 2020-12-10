@@ -1,5 +1,5 @@
-import { of, from, fromEvent } from "rxjs";
-import { filter, tap, map, mergeMap, reduce } from "rxjs/operators";
+import { of, fromEvent } from "rxjs";
+import { filter } from "rxjs/operators";
 
 const seed = [
   "Johann Sebastian Bach",
@@ -26,7 +26,8 @@ const seed = [
 
 let players = shuffleNames([...seed]);
 let losers = [];
-let count = 0;
+let playerCount = 1;
+let loserCount = 1;
 let numRound = 0;
 const NUM_CHANCES = 2;
 const MAX_NUM_LOSERS = players.length - 1;
@@ -48,6 +49,8 @@ function doesSurviveRound(player, losers, numChances) {
   if (!doesSurvive) {
     losers.push(player);
   }
+
+  return doesSurvive;
 }
 
 function oneInNChance(numChances) {
@@ -61,14 +64,19 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function hasFoundWinner(losers) {
+  return losers.length == MAX_NUM_LOSERS;
+}
+
 function initializeTextAreas() {
-  count = 0;
+  playerCount = 1;
+  loserCount = 1;
   playersTextArea.innerHTML = "";
   losersTextArea.innerHTML = "";
 
-  of(...players)
-    .pipe(tap((p) => count++))
-    .subscribe((i) => (playersTextArea.innerHTML += `${count} : ${i}\n`));
+  of(...players).subscribe(
+    (i) => (playersTextArea.innerHTML += `${playerCount++} : ${i}\n`)
+  );
 }
 
 // -----------------------
@@ -89,35 +97,37 @@ resetClick$.subscribe(() => {
 });
 
 goClick$.subscribe(() => {
-  count = 0;
+  playerCount = 1;
   numRound++;
   playersTextArea.innerHTML = "";
+
+  of(...players)
+    .pipe(
+      filter((p) => !hasFoundWinner(losers)),
+      filter((p) => !losers.includes(p)),
+      filter((p) => doesSurviveRound(p, losers, NUM_CHANCES))
+    )
+    .subscribe(
+      (p) => (playersTextArea.innerHTML += `${playerCount++} : ${p}\n`)
+    );
+
+  // this is necessary because the above stream doesn't work when there
+  // is just the winner remaining:
+  if (hasFoundWinner(losers)) {
+    playersTextArea.innerHTML = ""; // in case the above stream did write the winner
+    of(...players)
+      .pipe(filter((p) => !losers.includes(p)))
+      .subscribe(
+        (p) => (playersTextArea.innerHTML += `${playerCount++} : ${p}\n`)
+      );
+  }
+
+  loserCount = 1;
   losersTextArea.innerHTML = "";
 
-  of(...players)
-    .pipe(
-      filter((p) => losers.length < MAX_NUM_LOSERS),
-      filter((p) => !losers.includes(p)),
-      tap((p) => doesSurviveRound(p, losers, NUM_CHANCES))
-    )
-    .subscribe();
-
-  players = players.filter((p) => !losers.includes(p));
-
-  of(...players)
-    .pipe(
-      tap((p) => {
-        count++;
-        console.log(
-          `TRACER r: ${numRound} c: ${count} # losers: ${losers.length}`
-        );
-      })
-    )
-    .subscribe((p) => (playersTextArea.innerHTML += `${count} : ${p}\n`));
-
-  of(...losers)
-    .pipe()
-    .subscribe((loser) => (losersTextArea.innerHTML += `${loser}\n`));
+  of(...losers).subscribe(
+    (loser) => (losersTextArea.innerHTML += `${loserCount++} : ${loser}\n`)
+  );
 });
 
 // ------------------------
