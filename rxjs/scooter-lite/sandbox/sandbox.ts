@@ -42,25 +42,12 @@ function shuffleNames(array) {
   return array;
 }
 
-// TODO: I think this could be better written using RxJS operators
-function doesLive(player, losers, numChances) {
-  let result = true;
-  const isOnePlayerLeft = losers.length === MAX_NUM_LOSERS;
+function doesSurviveRound(player, losers, numChances) {
+  const doesSurvive = oneInNChance(numChances);
 
-  if (!isOnePlayerLeft) {
-    const isAlreadyLoser = losers.includes(player);
-
-    if (!isAlreadyLoser) {
-      // roll the dice for this player
-      result = oneInNChance(numChances);
-
-      if (!result) {
-        losers.push(player);
-      }
-    }
+  if (!doesSurvive) {
+    losers.push(player);
   }
-
-  return result;
 }
 
 function oneInNChance(numChances) {
@@ -109,7 +96,16 @@ goClick$.subscribe(() => {
 
   of(...players)
     .pipe(
-      filter((p) => doesLive(p, losers, NUM_CHANCES)),
+      filter((p) => losers.length < MAX_NUM_LOSERS),
+      filter((p) => !losers.includes(p)),
+      tap((p) => doesSurviveRound(p, losers, NUM_CHANCES))
+    )
+    .subscribe();
+
+  players = players.filter((p) => !losers.includes(p));
+
+  of(...players)
+    .pipe(
       tap((p) => {
         count++;
         console.log(
@@ -117,9 +113,7 @@ goClick$.subscribe(() => {
         );
       })
     )
-    .subscribe((i) => (playersTextArea.innerHTML += `${count} : ${i}\n`));
-
-  players = players.filter((p) => !losers.includes(p));
+    .subscribe((p) => (playersTextArea.innerHTML += `${count} : ${p}\n`));
 
   of(...losers)
     .pipe()
