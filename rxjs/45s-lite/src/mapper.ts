@@ -22,7 +22,7 @@ export class Mapper {
   getCardId(ord: Ordinal, suit: Suit): number {
     let suitIndex: number = Suit[Suit[suit]];
     let id = ord + suitIndex * Constants.NUM_CARDS_IN_SUIT;
-    let card: Card = new Card(id, suit, ord);
+    let card: Card = new Card(ord, suit, id);
     return card.id;
   }
 
@@ -31,7 +31,7 @@ export class Mapper {
     let ord: number = this.mapOrdinal(zeroBasedOrd);
     let suitIndex: number = Suit[Suit[suit]];
     let id = zeroBasedOrd + suitIndex * Constants.NUM_CARDS_IN_SUIT;
-    let card: Card = new Card(id, suit, ord);
+    let card: Card = new Card(ord, suit, id);
     return card;
   }
 
@@ -48,7 +48,7 @@ export class Mapper {
     let index: number = Math.trunc(n / NUM_CARDS_IN_SUIT);
     let suit: Suit = Suit[Suit[index]];
 
-    let result = new Card(n, suit, ordinal);
+    let result = new Card(ordinal, suit, n);
 
     return result;
   }

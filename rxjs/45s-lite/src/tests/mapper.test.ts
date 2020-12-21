@@ -65,60 +65,64 @@ describe.each`
   });
 });
 
+function c(ord, suit) {
+  return new Card(ord, suit);
+}
+
 describe.each`
   ord   | suit             | expected
-  ${1}  | ${Suit.CLUBS}    | ${new Card(0, Suit.CLUBS, Ordinal.ACE)}
-  ${2}  | ${Suit.CLUBS}    | ${new Card(1, Suit.CLUBS, Ordinal.TWO)}
-  ${3}  | ${Suit.CLUBS}    | ${new Card(2, Suit.CLUBS, Ordinal.THREE)}
-  ${4}  | ${Suit.CLUBS}    | ${new Card(3, Suit.CLUBS, Ordinal.FOUR)}
-  ${5}  | ${Suit.CLUBS}    | ${new Card(4, Suit.CLUBS, Ordinal.FIVE)}
-  ${6}  | ${Suit.CLUBS}    | ${new Card(5, Suit.CLUBS, Ordinal.SIX)}
-  ${7}  | ${Suit.CLUBS}    | ${new Card(6, Suit.CLUBS, Ordinal.SEVEN)}
-  ${8}  | ${Suit.CLUBS}    | ${new Card(7, Suit.CLUBS, Ordinal.EIGHT)}
-  ${9}  | ${Suit.CLUBS}    | ${new Card(8, Suit.CLUBS, Ordinal.NINE)}
-  ${10} | ${Suit.CLUBS}    | ${new Card(9, Suit.CLUBS, Ordinal.TEN)}
-  ${11} | ${Suit.CLUBS}    | ${new Card(10, Suit.CLUBS, Ordinal.JACK)}
-  ${12} | ${Suit.CLUBS}    | ${new Card(11, Suit.CLUBS, Ordinal.QUEEN)}
-  ${13} | ${Suit.CLUBS}    | ${new Card(12, Suit.CLUBS, Ordinal.KING)}
-  ${1}  | ${Suit.DIAMONDS} | ${new Card(0 + 13, Suit.DIAMONDS, Ordinal.ACE)}
-  ${2}  | ${Suit.DIAMONDS} | ${new Card(1 + 13, Suit.DIAMONDS, Ordinal.TWO)}
-  ${3}  | ${Suit.DIAMONDS} | ${new Card(2 + 13, Suit.DIAMONDS, Ordinal.THREE)}
-  ${4}  | ${Suit.DIAMONDS} | ${new Card(3 + 13, Suit.DIAMONDS, Ordinal.FOUR)}
-  ${5}  | ${Suit.DIAMONDS} | ${new Card(4 + 13, Suit.DIAMONDS, Ordinal.FIVE)}
-  ${6}  | ${Suit.DIAMONDS} | ${new Card(5 + 13, Suit.DIAMONDS, Ordinal.SIX)}
-  ${7}  | ${Suit.DIAMONDS} | ${new Card(6 + 13, Suit.DIAMONDS, Ordinal.SEVEN)}
-  ${8}  | ${Suit.DIAMONDS} | ${new Card(7 + 13, Suit.DIAMONDS, Ordinal.EIGHT)}
-  ${9}  | ${Suit.DIAMONDS} | ${new Card(8 + 13, Suit.DIAMONDS, Ordinal.NINE)}
-  ${10} | ${Suit.DIAMONDS} | ${new Card(9 + 13, Suit.DIAMONDS, Ordinal.TEN)}
-  ${11} | ${Suit.DIAMONDS} | ${new Card(10 + 13, Suit.DIAMONDS, Ordinal.JACK)}
-  ${12} | ${Suit.DIAMONDS} | ${new Card(11 + 13, Suit.DIAMONDS, Ordinal.QUEEN)}
-  ${13} | ${Suit.DIAMONDS} | ${new Card(12 + 13, Suit.DIAMONDS, Ordinal.KING)}
-  ${1}  | ${Suit.HEARTS}   | ${new Card(0 + 26, Suit.HEARTS, Ordinal.ACE)}
-  ${2}  | ${Suit.HEARTS}   | ${new Card(1 + 26, Suit.HEARTS, Ordinal.TWO)}
-  ${3}  | ${Suit.HEARTS}   | ${new Card(2 + 26, Suit.HEARTS, Ordinal.THREE)}
-  ${4}  | ${Suit.HEARTS}   | ${new Card(3 + 26, Suit.HEARTS, Ordinal.FOUR)}
-  ${5}  | ${Suit.HEARTS}   | ${new Card(4 + 26, Suit.HEARTS, Ordinal.FIVE)}
-  ${6}  | ${Suit.HEARTS}   | ${new Card(5 + 26, Suit.HEARTS, Ordinal.SIX)}
-  ${7}  | ${Suit.HEARTS}   | ${new Card(6 + 26, Suit.HEARTS, Ordinal.SEVEN)}
-  ${8}  | ${Suit.HEARTS}   | ${new Card(7 + 26, Suit.HEARTS, Ordinal.EIGHT)}
-  ${9}  | ${Suit.HEARTS}   | ${new Card(8 + 26, Suit.HEARTS, Ordinal.NINE)}
-  ${10} | ${Suit.HEARTS}   | ${new Card(9 + 26, Suit.HEARTS, Ordinal.TEN)}
-  ${11} | ${Suit.HEARTS}   | ${new Card(10 + 26, Suit.HEARTS, Ordinal.JACK)}
-  ${12} | ${Suit.HEARTS}   | ${new Card(11 + 26, Suit.HEARTS, Ordinal.QUEEN)}
-  ${13} | ${Suit.HEARTS}   | ${new Card(12 + 26, Suit.HEARTS, Ordinal.KING)}
-  ${1}  | ${Suit.SPADES}   | ${new Card(0 + 39, Suit.SPADES, Ordinal.ACE)}
-  ${2}  | ${Suit.SPADES}   | ${new Card(1 + 39, Suit.SPADES, Ordinal.TWO)}
-  ${3}  | ${Suit.SPADES}   | ${new Card(2 + 39, Suit.SPADES, Ordinal.THREE)}
-  ${4}  | ${Suit.SPADES}   | ${new Card(3 + 39, Suit.SPADES, Ordinal.FOUR)}
-  ${5}  | ${Suit.SPADES}   | ${new Card(4 + 39, Suit.SPADES, Ordinal.FIVE)}
-  ${6}  | ${Suit.SPADES}   | ${new Card(5 + 39, Suit.SPADES, Ordinal.SIX)}
-  ${7}  | ${Suit.SPADES}   | ${new Card(6 + 39, Suit.SPADES, Ordinal.SEVEN)}
-  ${8}  | ${Suit.SPADES}   | ${new Card(7 + 39, Suit.SPADES, Ordinal.EIGHT)}
-  ${9}  | ${Suit.SPADES}   | ${new Card(8 + 39, Suit.SPADES, Ordinal.NINE)}
-  ${10} | ${Suit.SPADES}   | ${new Card(9 + 39, Suit.SPADES, Ordinal.TEN)}
-  ${11} | ${Suit.SPADES}   | ${new Card(10 + 39, Suit.SPADES, Ordinal.JACK)}
-  ${12} | ${Suit.SPADES}   | ${new Card(11 + 39, Suit.SPADES, Ordinal.QUEEN)}
-  ${13} | ${Suit.SPADES}   | ${new Card(12 + 39, Suit.SPADES, Ordinal.KING)}
+  ${1}  | ${Suit.CLUBS}    | ${c(Ordinal.ACE, Suit.CLUBS)}
+  ${2}  | ${Suit.CLUBS}    | ${c(Ordinal.TWO, Suit.CLUBS)}
+  ${3}  | ${Suit.CLUBS}    | ${c(Ordinal.THREE, Suit.CLUBS)}
+  ${4}  | ${Suit.CLUBS}    | ${c(Ordinal.FOUR, Suit.CLUBS)}
+  ${5}  | ${Suit.CLUBS}    | ${c(Ordinal.FIVE, Suit.CLUBS)}
+  ${6}  | ${Suit.CLUBS}    | ${c(Ordinal.SIX, Suit.CLUBS)}
+  ${7}  | ${Suit.CLUBS}    | ${c(Ordinal.SEVEN, Suit.CLUBS)}
+  ${8}  | ${Suit.CLUBS}    | ${c(Ordinal.EIGHT, Suit.CLUBS)}
+  ${9}  | ${Suit.CLUBS}    | ${c(Ordinal.NINE, Suit.CLUBS)}
+  ${10} | ${Suit.CLUBS}    | ${c(Ordinal.TEN, Suit.CLUBS)}
+  ${11} | ${Suit.CLUBS}    | ${c(Ordinal.JACK, Suit.CLUBS)}
+  ${12} | ${Suit.CLUBS}    | ${c(Ordinal.QUEEN, Suit.CLUBS)}
+  ${13} | ${Suit.CLUBS}    | ${c(Ordinal.KING, Suit.CLUBS)}
+  ${1}  | ${Suit.DIAMONDS} | ${c(Ordinal.ACE, Suit.DIAMONDS)}
+  ${2}  | ${Suit.DIAMONDS} | ${c(Ordinal.TWO, Suit.DIAMONDS)}
+  ${3}  | ${Suit.DIAMONDS} | ${c(Ordinal.THREE, Suit.DIAMONDS)}
+  ${4}  | ${Suit.DIAMONDS} | ${c(Ordinal.FOUR, Suit.DIAMONDS)}
+  ${5}  | ${Suit.DIAMONDS} | ${c(Ordinal.FIVE, Suit.DIAMONDS)}
+  ${6}  | ${Suit.DIAMONDS} | ${c(Ordinal.SIX, Suit.DIAMONDS)}
+  ${7}  | ${Suit.DIAMONDS} | ${c(Ordinal.SEVEN, Suit.DIAMONDS)}
+  ${8}  | ${Suit.DIAMONDS} | ${c(Ordinal.EIGHT, Suit.DIAMONDS)}
+  ${9}  | ${Suit.DIAMONDS} | ${c(Ordinal.NINE, Suit.DIAMONDS)}
+  ${10} | ${Suit.DIAMONDS} | ${c(Ordinal.TEN, Suit.DIAMONDS)}
+  ${11} | ${Suit.DIAMONDS} | ${c(Ordinal.JACK, Suit.DIAMONDS)}
+  ${12} | ${Suit.DIAMONDS} | ${c(Ordinal.QUEEN, Suit.DIAMONDS)}
+  ${13} | ${Suit.DIAMONDS} | ${c(Ordinal.KING, Suit.DIAMONDS)}
+  ${1}  | ${Suit.HEARTS}   | ${c(Ordinal.ACE, Suit.HEARTS)}
+  ${2}  | ${Suit.HEARTS}   | ${c(Ordinal.TWO, Suit.HEARTS)}
+  ${3}  | ${Suit.HEARTS}   | ${c(Ordinal.THREE, Suit.HEARTS)}
+  ${4}  | ${Suit.HEARTS}   | ${c(Ordinal.FOUR, Suit.HEARTS)}
+  ${5}  | ${Suit.HEARTS}   | ${c(Ordinal.FIVE, Suit.HEARTS)}
+  ${6}  | ${Suit.HEARTS}   | ${c(Ordinal.SIX, Suit.HEARTS)}
+  ${7}  | ${Suit.HEARTS}   | ${c(Ordinal.SEVEN, Suit.HEARTS)}
+  ${8}  | ${Suit.HEARTS}   | ${c(Ordinal.EIGHT, Suit.HEARTS)}
+  ${9}  | ${Suit.HEARTS}   | ${c(Ordinal.NINE, Suit.HEARTS)}
+  ${10} | ${Suit.HEARTS}   | ${c(Ordinal.TEN, Suit.HEARTS)}
+  ${11} | ${Suit.HEARTS}   | ${c(Ordinal.JACK, Suit.HEARTS)}
+  ${12} | ${Suit.HEARTS}   | ${c(Ordinal.QUEEN, Suit.HEARTS)}
+  ${13} | ${Suit.HEARTS}   | ${c(Ordinal.KING, Suit.HEARTS)}
+  ${1}  | ${Suit.SPADES}   | ${c(Ordinal.ACE, Suit.SPADES)}
+  ${2}  | ${Suit.SPADES}   | ${c(Ordinal.TWO, Suit.SPADES)}
+  ${3}  | ${Suit.SPADES}   | ${c(Ordinal.THREE, Suit.SPADES)}
+  ${4}  | ${Suit.SPADES}   | ${c(Ordinal.FOUR, Suit.SPADES)}
+  ${5}  | ${Suit.SPADES}   | ${c(Ordinal.FIVE, Suit.SPADES)}
+  ${6}  | ${Suit.SPADES}   | ${c(Ordinal.SIX, Suit.SPADES)}
+  ${7}  | ${Suit.SPADES}   | ${c(Ordinal.SEVEN, Suit.SPADES)}
+  ${8}  | ${Suit.SPADES}   | ${c(Ordinal.EIGHT, Suit.SPADES)}
+  ${9}  | ${Suit.SPADES}   | ${c(Ordinal.NINE, Suit.SPADES)}
+  ${10} | ${Suit.SPADES}   | ${c(Ordinal.TEN, Suit.SPADES)}
+  ${11} | ${Suit.SPADES}   | ${c(Ordinal.JACK, Suit.SPADES)}
+  ${12} | ${Suit.SPADES}   | ${c(Ordinal.QUEEN, Suit.SPADES)}
+  ${13} | ${Suit.SPADES}   | ${c(Ordinal.KING, Suit.SPADES)}
 `("for mapSimple, with ord=$ord suit=$suit expected=$expected", ({ ord, suit, expected }) => {
   it("n should be ordinal: expected", () => {
     let result: Card = new Mapper().mapSimple(ord, suit);

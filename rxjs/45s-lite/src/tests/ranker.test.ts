@@ -5,40 +5,35 @@ import { Ordinal } from "../ordinal";
 import { Ranker } from "../ranker";
 import { Util } from "../util";
 
-function c(oneBasedOrd: number, suit: Suit) {
-  let mapper: Mapper = new Mapper();
-  let card: Card = mapper.mapSimple(oneBasedOrd, suit);
-  return card;
+function c(ord: Ordinal, suit: Suit) {
+  return new Card(ord, suit);
 }
 
 describe("Ranker", () => {
   test("customSort array : clubs, non-trump", () => {
     let trump: Suit = Suit.HEARTS;
     let cards: Card[] = [];
-    cards.push(c(13, Suit.CLUBS));
-    cards.push(c(12, Suit.CLUBS));
-    cards.push(c(11, Suit.CLUBS));
-    cards.push(c(10, Suit.CLUBS));
-    cards.push(c(9, Suit.CLUBS));
-    cards.push(c(8, Suit.CLUBS));
-    cards.push(c(7, Suit.CLUBS));
-    cards.push(c(6, Suit.CLUBS));
-    cards.push(c(5, Suit.CLUBS));
-    cards.push(c(4, Suit.CLUBS));
-    cards.push(c(3, Suit.CLUBS));
-    cards.push(c(2, Suit.CLUBS));
-    cards.push(c(1, Suit.CLUBS));
+    cards.push(c(Ordinal.KING, Suit.CLUBS));
+    cards.push(c(Ordinal.QUEEN, Suit.CLUBS));
+    cards.push(c(Ordinal.JACK, Suit.CLUBS));
+    cards.push(c(Ordinal.TEN, Suit.CLUBS));
+    cards.push(c(Ordinal.NINE, Suit.CLUBS));
+    cards.push(c(Ordinal.EIGHT, Suit.CLUBS));
+    cards.push(c(Ordinal.SEVEN, Suit.CLUBS));
+    cards.push(c(Ordinal.SIX, Suit.CLUBS));
+    cards.push(c(Ordinal.FIVE, Suit.CLUBS));
+    cards.push(c(Ordinal.FOUR, Suit.CLUBS));
+    cards.push(c(Ordinal.THREE, Suit.CLUBS));
+    cards.push(c(Ordinal.TWO, Suit.CLUBS));
+    cards.push(c(Ordinal.ACE, Suit.CLUBS));
 
     new Util().shuffle(cards);
-
-    cards.forEach((card) => console.log(`TRACER before card: ${card.toString()}`));
 
     // test
     new Ranker(trump).customSortArray(cards);
 
-    cards.forEach((card) => console.log(`TRACER after card: ${card.toString()}`));
-
-    expect(cards[0].id).toBe(10 - 1);
+    let i = 0;
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
   });
 });
 

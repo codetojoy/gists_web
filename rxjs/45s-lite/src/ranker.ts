@@ -61,7 +61,6 @@ export class Ranker {
     }
 
     let result: number = this.compare(valueA, valueB);
-    console.log(`TRACER montreal maroons a: ${valueA} b: ${valueB} r: ${result}`);
 
     return result;
   }

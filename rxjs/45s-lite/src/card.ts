@@ -7,8 +7,12 @@ export class Card {
   suit: Suit;
   ordinal: Ordinal;
 
-  constructor(id: number, suit: Suit, ordinal: Ordinal) {
-    this.id = id;
+  constructor(ordinal: Ordinal, suit: Suit, id?: number) {
+    if (id == null) {
+      this.id = Ordinal[Ordinal[ordinal]] + Suit[Suit[suit]] * Constants.NUM_CARDS_IN_SUIT;
+    } else {
+      this.id = id;
+    }
     this.suit = suit;
     this.ordinal = ordinal;
   }
