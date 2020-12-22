@@ -210,6 +210,30 @@ class TrumpDiamondsMap extends BaseMap {
 class TrumpHeartsMap extends BaseMap {
   constructor() {
     super();
+
+    // trump HEARTS
+    let suit: Suit = Suit.HEARTS;
+    let value: number = 2;
+    this.init(Ordinal.TWO, suit, value++);
+    this.init(Ordinal.THREE, suit, value++);
+    this.init(Ordinal.FOUR, suit, value++);
+    value++;
+    this.init(Ordinal.SIX, suit, value++);
+    this.init(Ordinal.SEVEN, suit, value++);
+    this.init(Ordinal.EIGHT, suit, value++);
+    this.init(Ordinal.NINE, suit, value++);
+    this.init(Ordinal.TEN, suit, value++);
+    value++;
+    this.init(Ordinal.QUEEN, suit, value++);
+    this.init(Ordinal.KING, suit, value++);
+    value++;
+    this.init(Ordinal.ACE, suit, value++);
+    this.init(Ordinal.JACK, suit, value++);
+    this.init(Ordinal.FIVE, suit, value++);
+
+    if (value != 18) {
+      throw new TypeError(`internal error value: ${value}`);
+    }
   }
 }
 
@@ -224,9 +248,10 @@ export class Ranker {
   private _trumpSpades: BaseMap = new TrumpSpadesMap();
 
   private _trumpDiamonds: BaseMap = new TrumpDiamondsMap();
-  private _trumpHearts = {};
+  private _trumpHearts: BaseMap = new TrumpHeartsMap();
 
   // TODO: remove
+  /*
   init(map: any, ord: Ordinal, suit: Suit, value: number) {
     let id: number = new Card(ord, suit).id;
 
@@ -236,35 +261,12 @@ export class Ranker {
       map[id] = value;
     }
   }
+*/
 
   constructor(trump: Suit) {
     this._trump = trump;
 
     let value: number = 0;
-
-    // trump HEARTS
-    let suit = Suit.HEARTS;
-    value = 2;
-    this.init(this._trumpHearts, Ordinal.TWO, suit, value++);
-    this.init(this._trumpHearts, Ordinal.THREE, suit, value++);
-    this.init(this._trumpHearts, Ordinal.FOUR, suit, value++);
-    value++;
-    this.init(this._trumpHearts, Ordinal.SIX, suit, value++);
-    this.init(this._trumpHearts, Ordinal.SEVEN, suit, value++);
-    this.init(this._trumpHearts, Ordinal.EIGHT, suit, value++);
-    this.init(this._trumpHearts, Ordinal.NINE, suit, value++);
-    this.init(this._trumpHearts, Ordinal.TEN, suit, value++);
-    value++;
-    this.init(this._trumpHearts, Ordinal.QUEEN, suit, value++);
-    this.init(this._trumpHearts, Ordinal.KING, suit, value++);
-    value++;
-    this.init(this._trumpHearts, Ordinal.ACE, suit, value++);
-    this.init(this._trumpHearts, Ordinal.JACK, suit, value++);
-    this.init(this._trumpHearts, Ordinal.FIVE, suit, value++);
-
-    if (value != 18) {
-      throw new TypeError(`internal error value: ${value}`);
-    }
   }
 
   compare(a: number, b: number): number {
@@ -295,7 +297,7 @@ export class Ranker {
       } else if (card.suit === Suit.DIAMONDS || card.isAceOfHearts()) {
         value = this._trumpDiamonds.getAt(id);
       } else if (card.suit === Suit.HEARTS) {
-        value = this._trumpHearts[id];
+        value = this._trumpHearts.getAt(id);
       }
     }
 
