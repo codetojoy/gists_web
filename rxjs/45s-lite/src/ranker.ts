@@ -5,19 +5,15 @@ import { Mapper } from "./mapper";
 
 abstract class BaseMap {
   // map Card.id to rank #
-  protected _map = {};
+  private _map = {};
 
-  init(ord: Ordinal, suit: Suit, value: number) {
+  protected init(ord: Ordinal, suit: Suit, value: number) {
     let id: number = new Card(ord, suit).id;
     this._map[id] = value;
   }
 
   getAt(id: number): number {
     return this._map[id];
-  }
-
-  setAt(id: number, value: number) {
-    this._map[id] = value;
   }
 }
 
@@ -249,19 +245,6 @@ export class Ranker {
 
   private _trumpDiamonds: BaseMap = new TrumpDiamondsMap();
   private _trumpHearts: BaseMap = new TrumpHeartsMap();
-
-  // TODO: remove
-  /*
-  init(map: any, ord: Ordinal, suit: Suit, value: number) {
-    let id: number = new Card(ord, suit).id;
-
-    if (map instanceof BaseMap) {
-      map.setAt(id, value);
-    } else {
-      map[id] = value;
-    }
-  }
-*/
 
   constructor(trump: Suit) {
     this._trump = trump;
