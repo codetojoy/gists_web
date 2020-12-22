@@ -68,13 +68,60 @@ class OffsuitBlackMap extends BaseMap {
   }
 }
 
+class OffsuitRedMap extends BaseMap {
+  constructor() {
+    super();
+    let value: number = 0;
+
+    // off-suit DIAMONDS
+    value = 1;
+    this.init(Ordinal.ACE, Suit.DIAMONDS, value++);
+    this.init(Ordinal.TWO, Suit.DIAMONDS, value++);
+    this.init(Ordinal.THREE, Suit.DIAMONDS, value++);
+    this.init(Ordinal.FOUR, Suit.DIAMONDS, value++);
+    this.init(Ordinal.FIVE, Suit.DIAMONDS, value++);
+    this.init(Ordinal.SIX, Suit.DIAMONDS, value++);
+    this.init(Ordinal.SEVEN, Suit.DIAMONDS, value++);
+    this.init(Ordinal.EIGHT, Suit.DIAMONDS, value++);
+    this.init(Ordinal.NINE, Suit.DIAMONDS, value++);
+    this.init(Ordinal.TEN, Suit.DIAMONDS, value++);
+    this.init(Ordinal.JACK, Suit.DIAMONDS, value++);
+    this.init(Ordinal.QUEEN, Suit.DIAMONDS, value++);
+    this.init(Ordinal.KING, Suit.DIAMONDS, value++);
+
+    if (value != 14) {
+      throw new TypeError(`internal error value: ${value}`);
+    }
+
+    // off-suit HEARTS
+    value = 2;
+    this.init(Ordinal.TWO, Suit.HEARTS, value++);
+    this.init(Ordinal.THREE, Suit.HEARTS, value++);
+    this.init(Ordinal.FOUR, Suit.HEARTS, value++);
+    this.init(Ordinal.FIVE, Suit.HEARTS, value++);
+    this.init(Ordinal.SIX, Suit.HEARTS, value++);
+    this.init(Ordinal.SEVEN, Suit.HEARTS, value++);
+    this.init(Ordinal.EIGHT, Suit.HEARTS, value++);
+    this.init(Ordinal.NINE, Suit.HEARTS, value++);
+    this.init(Ordinal.TEN, Suit.HEARTS, value++);
+    // this.init(Ordinal.ACE, Suit.HEARTS, value++);
+    this.init(Ordinal.JACK, Suit.HEARTS, value++);
+    this.init(Ordinal.QUEEN, Suit.HEARTS, value++);
+    this.init(Ordinal.KING, Suit.HEARTS, value++);
+
+    if (value != 14) {
+      throw new TypeError(`internal error value: ${value}`);
+    }
+  }
+}
+
 export class Ranker {
   private readonly unknownValue: number = -1;
   private _trump: Suit;
 
   // map Card.id to rank #
   private _offSuitBlack = new OffsuitBlackMap();
-  private _offSuitRed = {};
+  private _offSuitRed = new OffsuitRedMap();
 
   private _trumpClubs = {};
   private _trumpSpades = {};
@@ -96,46 +143,6 @@ export class Ranker {
     this._trump = trump;
 
     let value: number = 0;
-
-    // off-suit DIAMONDS
-    value = 1;
-    this.init(this._offSuitRed, Ordinal.ACE, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.TWO, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.THREE, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.FOUR, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.FIVE, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.SIX, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.SEVEN, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.EIGHT, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.NINE, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.TEN, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.JACK, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.QUEEN, Suit.DIAMONDS, value++);
-    this.init(this._offSuitRed, Ordinal.KING, Suit.DIAMONDS, value++);
-
-    if (value != 14) {
-      throw new TypeError(`internal error value: ${value}`);
-    }
-
-    // off-suit HEARTS
-    value = 2;
-    this.init(this._offSuitRed, Ordinal.TWO, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.THREE, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.FOUR, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.FIVE, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.SIX, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.SEVEN, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.EIGHT, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.NINE, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.TEN, Suit.HEARTS, value++);
-    // this.init(this._offSuitRed, Ordinal.ACE, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.JACK, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.QUEEN, Suit.HEARTS, value++);
-    this.init(this._offSuitRed, Ordinal.KING, Suit.HEARTS, value++);
-
-    if (value != 14) {
-      throw new TypeError(`internal error value: ${value}`);
-    }
 
     // trump CLUBS
     value = 1;
@@ -252,9 +259,9 @@ export class Ranker {
 
     if (!card.isTrump(this._trump)) {
       if (card.isBlack()) {
-        value = this._offSuitBlack.getAt(id); // [id];
+        value = this._offSuitBlack.getAt(id);
       } else if (card.isRed()) {
-        value = this._offSuitRed[id];
+        value = this._offSuitRed.getAt(id);
       }
     } else {
       if (card.suit === Suit.CLUBS || card.isAceOfHearts()) {
