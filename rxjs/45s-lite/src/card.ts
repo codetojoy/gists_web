@@ -17,6 +17,22 @@ export class Card {
     this.ordinal = ordinal;
   }
 
+  public isRed(): boolean {
+    return this.suit === Suit.DIAMONDS || this.suit === Suit.HEARTS;
+  }
+
+  public isBlack(): boolean {
+    return this.suit === Suit.CLUBS || this.suit === Suit.SPADES;
+  }
+
+  public isAceOfHearts(): boolean {
+    return this.ordinal === Ordinal.ACE && this.suit === Suit.HEARTS;
+  }
+
+  public isTrump(trump: Suit): boolean {
+    return this.suit === trump || this.isAceOfHearts();
+  }
+
   private buildOrdinalString() {
     let result = "";
     let resultOrd = this.ordinal + 1;

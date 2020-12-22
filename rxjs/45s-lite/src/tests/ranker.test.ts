@@ -12,20 +12,21 @@ function c(ord: Ordinal, suit: Suit) {
 describe("Ranker", () => {
   test("customSort array : clubs, non-trump", () => {
     let trump: Suit = Suit.HEARTS;
-    let cards: Card[] = [];
-    cards.push(c(Ordinal.KING, Suit.CLUBS));
-    cards.push(c(Ordinal.QUEEN, Suit.CLUBS));
-    cards.push(c(Ordinal.JACK, Suit.CLUBS));
-    cards.push(c(Ordinal.TEN, Suit.CLUBS));
-    cards.push(c(Ordinal.NINE, Suit.CLUBS));
-    cards.push(c(Ordinal.EIGHT, Suit.CLUBS));
-    cards.push(c(Ordinal.SEVEN, Suit.CLUBS));
-    cards.push(c(Ordinal.SIX, Suit.CLUBS));
-    cards.push(c(Ordinal.FIVE, Suit.CLUBS));
-    cards.push(c(Ordinal.FOUR, Suit.CLUBS));
-    cards.push(c(Ordinal.THREE, Suit.CLUBS));
-    cards.push(c(Ordinal.TWO, Suit.CLUBS));
-    cards.push(c(Ordinal.ACE, Suit.CLUBS));
+    let cards: Card[] = [
+      c(Ordinal.KING, Suit.CLUBS),
+      c(Ordinal.QUEEN, Suit.CLUBS),
+      c(Ordinal.JACK, Suit.CLUBS),
+      c(Ordinal.TEN, Suit.CLUBS),
+      c(Ordinal.NINE, Suit.CLUBS),
+      c(Ordinal.EIGHT, Suit.CLUBS),
+      c(Ordinal.SEVEN, Suit.CLUBS),
+      c(Ordinal.SIX, Suit.CLUBS),
+      c(Ordinal.FIVE, Suit.CLUBS),
+      c(Ordinal.FOUR, Suit.CLUBS),
+      c(Ordinal.THREE, Suit.CLUBS),
+      c(Ordinal.TWO, Suit.CLUBS),
+      c(Ordinal.ACE, Suit.CLUBS),
+    ];
 
     new Util().shuffle(cards);
 
@@ -34,6 +35,187 @@ describe("Ranker", () => {
 
     let i = 0;
     expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.NINE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.EIGHT);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SEVEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SIX);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FIVE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FOUR);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.THREE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TWO);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.ACE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.JACK);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.QUEEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.KING);
+  });
+});
+
+describe("Ranker", () => {
+  test("customSort array : spades, non-trump", () => {
+    let trump: Suit = Suit.HEARTS;
+    let cards: Card[] = [
+      c(Ordinal.KING, Suit.SPADES),
+      c(Ordinal.QUEEN, Suit.SPADES),
+      c(Ordinal.JACK, Suit.SPADES),
+      c(Ordinal.TEN, Suit.SPADES),
+      c(Ordinal.NINE, Suit.SPADES),
+      c(Ordinal.EIGHT, Suit.SPADES),
+      c(Ordinal.SEVEN, Suit.SPADES),
+      c(Ordinal.SIX, Suit.SPADES),
+      c(Ordinal.FIVE, Suit.SPADES),
+      c(Ordinal.FOUR, Suit.SPADES),
+      c(Ordinal.THREE, Suit.SPADES),
+      c(Ordinal.TWO, Suit.SPADES),
+      c(Ordinal.ACE, Suit.SPADES),
+    ];
+
+    new Util().shuffle(cards);
+
+    // test
+    new Ranker(trump).customSortArray(cards);
+
+    let i = 0;
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.NINE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.EIGHT);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SEVEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SIX);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FIVE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FOUR);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.THREE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TWO);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.ACE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.JACK);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.QUEEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.KING);
+  });
+});
+
+describe("Ranker", () => {
+  test("customSort array : diamonds, non-trump", () => {
+    let trump: Suit = Suit.HEARTS;
+    let cards: Card[] = [
+      c(Ordinal.KING, Suit.DIAMONDS),
+      c(Ordinal.QUEEN, Suit.DIAMONDS),
+      c(Ordinal.JACK, Suit.DIAMONDS),
+      c(Ordinal.TEN, Suit.DIAMONDS),
+      c(Ordinal.NINE, Suit.DIAMONDS),
+      c(Ordinal.EIGHT, Suit.DIAMONDS),
+      c(Ordinal.SEVEN, Suit.DIAMONDS),
+      c(Ordinal.SIX, Suit.DIAMONDS),
+      c(Ordinal.FIVE, Suit.DIAMONDS),
+      c(Ordinal.FOUR, Suit.DIAMONDS),
+      c(Ordinal.THREE, Suit.DIAMONDS),
+      c(Ordinal.TWO, Suit.DIAMONDS),
+      c(Ordinal.ACE, Suit.DIAMONDS),
+    ];
+
+    new Util().shuffle(cards);
+
+    // test
+    new Ranker(trump).customSortArray(cards);
+
+    let i = 0;
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.ACE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TWO);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.THREE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FOUR);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FIVE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SIX);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SEVEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.EIGHT);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.NINE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.JACK);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.QUEEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.KING);
+  });
+});
+
+describe("Ranker", () => {
+  test("customSort array : hearts, non-trump", () => {
+    let trump: Suit = Suit.CLUBS;
+    let cards: Card[] = [
+      c(Ordinal.KING, Suit.HEARTS),
+      c(Ordinal.QUEEN, Suit.HEARTS),
+      c(Ordinal.JACK, Suit.HEARTS),
+      c(Ordinal.TEN, Suit.HEARTS),
+      c(Ordinal.NINE, Suit.HEARTS),
+      c(Ordinal.EIGHT, Suit.HEARTS),
+      c(Ordinal.SEVEN, Suit.HEARTS),
+      c(Ordinal.SIX, Suit.HEARTS),
+      c(Ordinal.FIVE, Suit.HEARTS),
+      c(Ordinal.FOUR, Suit.HEARTS),
+      c(Ordinal.THREE, Suit.HEARTS),
+      c(Ordinal.TWO, Suit.HEARTS),
+    ];
+
+    new Util().shuffle(cards);
+
+    // test
+    new Ranker(trump).customSortArray(cards);
+
+    let i = 0;
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TWO);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.THREE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FOUR);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FIVE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SIX);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SEVEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.EIGHT);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.NINE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.JACK);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.QUEEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.KING);
+  });
+});
+
+describe("Ranker", () => {
+  test("customSort array : clubs, trump", () => {
+    let trump: Suit = Suit.CLUBS;
+    let cards: Card[] = [
+      c(Ordinal.KING, Suit.CLUBS),
+      c(Ordinal.QUEEN, Suit.CLUBS),
+      c(Ordinal.JACK, Suit.CLUBS),
+      c(Ordinal.TEN, Suit.CLUBS),
+      c(Ordinal.NINE, Suit.CLUBS),
+      c(Ordinal.EIGHT, Suit.CLUBS),
+      c(Ordinal.SEVEN, Suit.CLUBS),
+      c(Ordinal.SIX, Suit.CLUBS),
+      c(Ordinal.FIVE, Suit.CLUBS),
+      c(Ordinal.FOUR, Suit.CLUBS),
+      c(Ordinal.THREE, Suit.CLUBS),
+      c(Ordinal.TWO, Suit.CLUBS),
+      c(Ordinal.ACE, Suit.CLUBS),
+      c(Ordinal.ACE, Suit.HEARTS),
+    ];
+
+    new Util().shuffle(cards);
+
+    // test
+    new Ranker(trump).customSortArray(cards);
+
+    let i = 0;
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.NINE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.EIGHT);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SEVEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.SIX);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FOUR);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.THREE);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.TWO);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.QUEEN);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.KING);
+
+    expect(cards[i].ordinal).toStrictEqual(Ordinal.ACE);
+    expect(cards[i++].suit).toStrictEqual(Suit.CLUBS);
+
+    expect(cards[i].ordinal).toStrictEqual(Ordinal.ACE);
+    expect(cards[i++].suit).toStrictEqual(Suit.HEARTS);
+
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.JACK);
+    expect(cards[i++].ordinal).toStrictEqual(Ordinal.FIVE);
   });
 });
 
