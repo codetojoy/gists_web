@@ -30,10 +30,10 @@ describe("Player", () => {
     player.hand = hand;
     let topCard: Card = buildCard(Ordinal.NINE, Suit.DIAMONDS);
     let trumpSuit: Suit = topCard.suit;
-    let leadingCard: Card = null;
+    let leadingSuit: Suit = null;
 
     // test
-    let bid: Bid = player.getBid(topCard, leadingCard, trumpSuit);
+    let bid: Bid = player.getBid(topCard, trumpSuit, leadingSuit);
 
     expect(bid.player.hand.cards.length).toBe(4);
     expect(bid.card.ordinal).toBe(Ordinal.THREE);

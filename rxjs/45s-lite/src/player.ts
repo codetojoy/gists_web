@@ -5,22 +5,22 @@ import { Table } from "./table";
 import { Hand } from "./hand";
 import { Bid } from "./bid";
 import { Suit } from "./suit";
+import { Ranker } from "./ranker";
+import { Strategies, Strategy } from "./strategy";
 
 export class Player {
   private _name: string;
   private _hand: Hand;
+  private _strategy: Strategy;
 
   constructor(name: string) {
     this._name = name;
     this._hand = new Hand();
+    this._strategy = new Strategies().getStrategy("default");
   }
 
-  public getBid(topCard: Card, leadingCard: Card, trumpSuit: Suit): Bid {
-    let card: Card = null;
-
-    if (leadingCard == null) {
-      card = this._hand.cards.shift();
-    }
+  public getBid(topCard: Card, trumpSuit: Suit, leadingSuit: Suit): Bid {
+    let card: Card = this._strategy.select(this._hand, trumpSuit, leadingSuit);
 
     let bid: Bid = new Bid(card, this);
     return bid;
@@ -29,6 +29,11 @@ export class Player {
   public toString() {
     let result = `${this._name} ${this._hand.toString()}`;
     return result;
+  }
+
+  public notifyGameStart(trump: Suit) {
+    new Ranker(trump).customSortArray(this._hand.cards);
+    this._hand.cards.reverse();
   }
 
   // -------------- getters / setters

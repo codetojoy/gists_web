@@ -357,17 +357,28 @@ describe("Ranker", () => {
 });
 
 describe.each`
-  trump          | a                   | b                   | expected
-  ${Suit.HEARTS} | ${c(2, Suit.CLUBS)} | ${c(3, Suit.CLUBS)} | ${1}
-  ${Suit.HEARTS} | ${c(3, Suit.CLUBS)} | ${c(2, Suit.CLUBS)} | ${-1}
-  ${Suit.HEARTS} | ${c(2, Suit.CLUBS)} | ${c(2, Suit.CLUBS)} | ${0}
-`("for customSort, with trump=$trump a:$a b:$b expected=$expected", ({ trump, a, b, expected }) => {
-  it("n should be ordinal: expected", () => {
-    let ranker: Ranker = new Ranker(trump);
+  num  | trump          | leading        | a                                | b                                | expected
+  ${1} | ${Suit.HEARTS} | ${null}        | ${c(Ordinal.KING, Suit.HEARTS)}  | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${1}
+  ${2} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TWO, Suit.DIAMONDS)} | ${c(Ordinal.ACE, Suit.DIAMONDS)} | ${1}
+  ${3} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${0}
+  ${4} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.ACE, Suit.CLUBS)}    | ${c(Ordinal.KING, Suit.SPADES)}  | ${1}
+  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.CLUBS)}    | ${c(Ordinal.KING, Suit.HEARTS)}  | ${1}
+  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.SPADES)}   | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
+  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
+  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${1}
+`(
+  "for customSort, with n:$num t:$trump l:$leading a:$a b:$b expected=$expected",
+  ({ trump, leading, a, b, expected }) => {
+    it("n should be ordinal: expected", () => {
+      let ranker: Ranker = new Ranker(trump, leading);
 
-    // test
-    let result: number = expected; // ranker.customSort(a, b);
+      // test
+      let result: number = ranker.customSort(a, b);
+      let resultReverse: number = ranker.customSort(b, a);
 
-    expect(result).toBe(expected);
-  });
-});
+      expect(result).toBe(expected as number);
+      let expectedReverse: number = expected == 0 ? 0 : expected * -1;
+      expect(resultReverse).toBe(expectedReverse);
+    });
+  }
+);

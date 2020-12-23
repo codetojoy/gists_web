@@ -4,6 +4,7 @@ import { Constants } from "./constants";
 import { Table } from "./table";
 import { Player } from "./player";
 import { Bid } from "./bid";
+import { Suit } from "./suit";
 
 import { of } from "rxjs";
 import { repeat, tap } from "rxjs/operators";
@@ -17,6 +18,7 @@ export class Dealer {
 
     this.dealHands(table, this.deck);
     table.topCard = this.deck.cards.shift();
+    table.notifyGameStart();
   }
 
   get numCardsInDeck(): number {
@@ -33,7 +35,8 @@ export class Dealer {
     let bids: Bid[] = [];
 
     table.players.forEach((player) => {
-      let bid: Bid = player.getBid(topCard, table.leadingCard, table.trumpSuit);
+      let leadingSuit: Suit = table.leadingCard != null ? table.leadingCard.suit : null;
+      let bid: Bid = player.getBid(topCard, table.trumpSuit, leadingSuit);
       if (table.leadingCard == null) {
         table.leadingCard = bid.card;
       }

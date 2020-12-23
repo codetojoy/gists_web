@@ -235,7 +235,8 @@ class TrumpHeartsMap extends BaseMap {
 
 export class Ranker {
   private readonly unknownValue: number = -1;
-  private _trump: Suit;
+  private _trumpSuit: Suit;
+  private _leadingSuit: Suit;
 
   private _offSuitBlack: BaseMap = new OffsuitBlackMap();
   private _offSuitRed: BaseMap = new OffsuitRedMap();
@@ -246,8 +247,9 @@ export class Ranker {
   private _trumpDiamonds: BaseMap = new TrumpDiamondsMap();
   private _trumpHearts: BaseMap = new TrumpHeartsMap();
 
-  constructor(trump: Suit) {
-    this._trump = trump;
+  constructor(trumpSuit: Suit, leadingSuit?: Suit) {
+    this._trumpSuit = trumpSuit;
+    this._leadingSuit = leadingSuit;
 
     let value: number = 0;
   }
@@ -266,13 +268,7 @@ export class Ranker {
     let value: number = this.unknownValue;
     let id: number = card.id;
 
-    if (!card.isTrump(this._trump)) {
-      if (card.isBlack()) {
-        value = this._offSuitBlack.getAt(id);
-      } else if (card.isRed()) {
-        value = this._offSuitRed.getAt(id);
-      }
-    } else {
+    if (card.isTrump(this._trumpSuit)) {
       if (card.suit === Suit.CLUBS || card.isAceOfHearts()) {
         value = this._trumpClubs.getAt(id);
       } else if (card.suit === Suit.SPADES || card.isAceOfHearts()) {
@@ -282,12 +278,18 @@ export class Ranker {
       } else if (card.suit === Suit.HEARTS) {
         value = this._trumpHearts.getAt(id);
       }
+    } else {
+      if (card.isBlack()) {
+        value = this._offSuitBlack.getAt(id);
+      } else if (card.isRed()) {
+        value = this._offSuitRed.getAt(id);
+      }
     }
 
     return value;
   }
 
-  public customSort(cardA: Card, cardB: Card): number {
+  public simpleCompare(cardA: Card, cardB: Card): number {
     let valueA: number = this.getValueFromId(cardA);
     let valueB: number = this.getValueFromId(cardB);
 
@@ -296,6 +298,37 @@ export class Ranker {
     }
 
     let result: number = this.compare(valueA, valueB);
+
+    return result;
+  }
+
+  public customSort(cardA: Card, cardB: Card): number {
+    let result: number = this.unknownValue;
+    let isCardATrump: boolean = cardA.isTrump(this._trumpSuit);
+    let isCardBTrump: boolean = cardB.isTrump(this._trumpSuit);
+
+    let isCardALeadingSuit: boolean = cardA.isLeadingSuit(this._leadingSuit);
+    let isCardBLeadingSuit: boolean = cardB.isLeadingSuit(this._leadingSuit);
+
+    let isSameSuit: boolean = cardA.suit === cardB.suit;
+
+    if (isCardATrump && isCardBTrump) {
+      result = this.simpleCompare(cardA, cardB);
+    } else if (isCardATrump && !isCardBTrump) {
+      result = 1;
+    } else if (!isCardATrump && isCardBTrump) {
+      result = -1;
+    } else if (isCardALeadingSuit && isCardBLeadingSuit) {
+      result = this.simpleCompare(cardA, cardB);
+    } else if (isCardALeadingSuit && !isCardBLeadingSuit) {
+      result = 1;
+    } else if (!isCardALeadingSuit && isCardBLeadingSuit) {
+      result = -1;
+    } else if (isSameSuit) {
+      result = this.simpleCompare(cardA, cardB);
+    } else {
+      result = this.simpleCompare(cardA, cardB);
+    }
 
     return result;
   }

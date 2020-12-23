@@ -33,6 +33,10 @@ export class Card {
     return this.suit === trump || this.isAceOfHearts();
   }
 
+  public isLeadingSuit(leadingSuit: Suit): boolean {
+    return this.suit === leadingSuit;
+  }
+
   private buildOrdinalString() {
     let result = "";
     let resultOrd = this.ordinal + 1;

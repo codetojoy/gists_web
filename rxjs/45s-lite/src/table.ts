@@ -20,6 +20,11 @@ export class Table {
     this._roundNum++;
   }
 
+  public notifyGameStart() {
+    let trump: Suit = this.topCard.suit;
+    this.players.forEach((player) => player.notifyGameStart(trump));
+  }
+
   public toString() {
     let result = `\n[${this._roundNum}] f: ${this._topCard} t: ${this._trumpSuit} l: ${this._leadingCard}\n`;
 
