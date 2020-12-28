@@ -19,6 +19,6 @@ export class Strategies {
 
 class DefaultStrategy implements Strategy {
   public select(hand: Hand, trumpSuit: Suit, leadingSuit: Suit): Card {
-    return hand.cards.shift();
+    return hand.selectBestCard();
   }
 }

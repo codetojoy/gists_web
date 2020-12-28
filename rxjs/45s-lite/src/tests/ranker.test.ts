@@ -4,10 +4,43 @@ import { Mapper } from "../mapper";
 import { Ordinal } from "../ordinal";
 import { Ranker } from "../ranker";
 import { Util } from "../util";
+import { Player } from "../player";
+import { Bid } from "../bid";
 
 function c(ord: Ordinal, suit: Suit) {
   return new Card(ord, suit);
 }
+
+function b(name: string, ord: Ordinal, suit: Suit) {
+  let card: Card = c(ord, suit);
+  let player: Player = new Player(name);
+  let bid: Bid = new Bid(card, player);
+  return bid;
+}
+
+describe("Ranker", () => {
+  test("customSortBids : basic, leading suit", () => {
+    let trumpSuit: Suit = Suit.CLUBS;
+    let leadingSuit: Suit = Suit.DIAMONDS;
+    let bids: Bid[] = [
+      b("mozart", Ordinal.KING, Suit.SPADES),
+      b("chopin", Ordinal.ACE, Suit.HEARTS),
+      b("beethoven", Ordinal.FIVE, Suit.CLUBS),
+      b("liszt", Ordinal.TWO, Suit.DIAMONDS),
+    ];
+
+    new Util().shuffle(bids);
+
+    // test
+    new Ranker(trumpSuit, leadingSuit).customSortBids(bids);
+
+    let i = 0;
+    expect(bids[i++].player.name).toBe("mozart");
+    expect(bids[i++].player.name).toBe("liszt");
+    expect(bids[i++].player.name).toBe("chopin");
+    expect(bids[i++].player.name).toBe("beethoven");
+  });
+});
 
 describe("Ranker", () => {
   test("customSort array : clubs, non-trump", () => {

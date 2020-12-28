@@ -5,6 +5,8 @@ import { Table } from "./table";
 import { Player } from "./player";
 import { Bid } from "./bid";
 import { Suit } from "./suit";
+import { Trick } from "./trick";
+import { Ranker } from "./ranker";
 
 import { of } from "rxjs";
 import { repeat, tap } from "rxjs/operators";
@@ -27,10 +29,20 @@ export class Dealer {
 
   public playRound(table: Table) {
     let bids: Bid[] = this.getBids(table);
+    let trick: Trick = this.determineRoundWinner(table, bids);
+    table.addTrick(trick);
     table.bumpRoundNum();
   }
 
-  getBids(table: Table) {
+  determineRoundWinner(table: Table, bids: Bid[]): Trick {
+    let ranker = new Ranker(table.trumpSuit, table.leadingCard.suit);
+    ranker.customSortBids(bids);
+    let winningBid: Bid = bids[bids.length - 1];
+    let trick: Trick = new Trick(winningBid, bids);
+    return trick;
+  }
+
+  getBids(table: Table): Bid[] {
     let topCard: Card = table.topCard;
     let bids: Bid[] = [];
 

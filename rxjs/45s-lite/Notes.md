@@ -12,6 +12,4 @@
 
 ### TODO
 
-* Ranker might be used to get a Bid
-* write a Trick class
-* start tests against getting a Trick from the players?
+* test for round where leading card has not been played  

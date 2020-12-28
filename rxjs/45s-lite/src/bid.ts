@@ -1,6 +1,7 @@
 import { Card } from "./card";
 import { Player } from "./player";
 
+// TODO: this is arguably a `Play` versus a `Bid`
 export class Bid {
   private _card: Card;
   private _player: Player;
@@ -11,7 +12,7 @@ export class Bid {
   }
 
   public toString() {
-    let result = ``;
+    let result = `c: ${this._card.toString()} p: ${this.player.toString()}`;
     return result;
   }
 

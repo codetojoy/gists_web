@@ -7,6 +7,7 @@ import { Bid } from "./bid";
 import { Suit } from "./suit";
 import { Ranker } from "./ranker";
 import { Strategies, Strategy } from "./strategy";
+import { Util } from "./util";
 
 export class Player {
   private _name: string;
@@ -17,6 +18,14 @@ export class Player {
     this._name = name;
     this._hand = new Hand();
     this._strategy = new Strategies().getStrategy("default");
+  }
+
+  public getNumCardsInHand() {
+    return this._hand.getNumCards();
+  }
+
+  public shuffleHandForTesting() {
+    this._hand.shuffleForTesting();
   }
 
   public getBid(topCard: Card, trumpSuit: Suit, leadingSuit: Suit): Bid {
@@ -32,8 +41,7 @@ export class Player {
   }
 
   public notifyGameStart(trump: Suit) {
-    new Ranker(trump).customSortArray(this._hand.cards);
-    this._hand.cards.reverse();
+    this._hand.sortCards(trump);
   }
 
   // -------------- getters / setters

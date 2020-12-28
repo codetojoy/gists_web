@@ -1,5 +1,6 @@
 import { Card } from "./card";
 import { Player } from "./player";
+import { Trick } from "./trick";
 
 import { of } from "rxjs";
 import { tap } from "rxjs/operators";
@@ -11,9 +12,14 @@ export class Table {
   private _trumpSuit: Suit;
   private _leadingCard: Card;
   private _roundNum: number = 0;
+  private _tricks: Trick[] = [];
 
   constructor(players: Player[]) {
     this._players = players;
+  }
+
+  public addTrick(trick: Trick) {
+    this._tricks.push(trick);
   }
 
   public bumpRoundNum() {
@@ -30,10 +36,16 @@ export class Table {
 
     this._players.map((p) => (result += `p: ${p.toString()}\n`));
 
+    this._tricks.map((t) => (result += `t: ${t.toString()}`));
+
     return result;
   }
 
   // ---------- getters / setters
+
+  get tricks(): Trick[] {
+    return this._tricks;
+  }
 
   get roundNum(): number {
     return this._roundNum;
@@ -45,6 +57,10 @@ export class Table {
 
   get trumpSuit(): Suit {
     return this._trumpSuit;
+  }
+
+  get leadingCard() {
+    return this._leadingCard;
   }
 
   set leadingCard(value: Card) {

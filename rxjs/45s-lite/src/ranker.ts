@@ -1,6 +1,7 @@
 import { Suit } from "./suit";
 import { Ordinal } from "./ordinal";
 import { Card } from "./card";
+import { Bid } from "./bid";
 
 // TODO: the card ranking has been abstracted too far, yet not far enough.
 // It is (sort of?) a DSL at this point, but should probably be pulled out into
@@ -258,6 +259,12 @@ export class Ranker {
   public customSortArray(cards: Card[]) {
     cards.sort((a, b) => {
       return this.customSort(a, b);
+    });
+  }
+
+  public customSortBids(bids: Bid[]) {
+    bids.sort((a, b) => {
+      return this.customSort(a.card, b.card);
     });
   }
 

@@ -1,12 +1,9 @@
-import { Card } from "../card";
-import { Deck } from "../deck";
-import { Constants } from "../constants";
-import { Suit } from "../suit";
-import { Player } from "../player";
-import { Hand } from "../hand";
-import { Mapper } from "../mapper";
 import { Bid } from "../bid";
+import { Card } from "../card";
+import { Hand } from "../hand";
 import { Ordinal } from "../ordinal";
+import { Player } from "../player";
+import { Suit } from "../suit";
 
 function buildCard(ordinal: Ordinal, suit: Suit) {
   return new Card(ordinal, suit);
@@ -35,7 +32,7 @@ describe("Player", () => {
     // test
     let bid: Bid = player.getBid(topCard, trumpSuit, leadingSuit);
 
-    expect(bid.player.hand.cards.length).toBe(4);
+    expect(bid.player.getNumCardsInHand()).toBe(4);
     expect(bid.card.ordinal).toBe(Ordinal.THREE);
     expect(bid.card.suit).toBe(Suit.CLUBS);
   });

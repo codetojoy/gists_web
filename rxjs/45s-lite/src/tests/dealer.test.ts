@@ -1,10 +1,27 @@
+import { Bid } from "../bid";
 import { Card } from "../card";
-import { Deck } from "../deck";
+import { Config } from "../config";
 import { Constants } from "../constants";
 import { Dealer } from "../dealer";
-import { Config } from "../config";
-import { Table } from "../table";
+import { Deck } from "../deck";
+import { Hand } from "../hand";
+import { Ordinal } from "../ordinal";
 import { Player } from "../player";
+import { Suit } from "../suit";
+import { Table } from "../table";
+import { Trick } from "../trick";
+
+function c(ord: Ordinal, suit: Suit) {
+  return new Card(ord, suit);
+}
+
+function p(name: string, cards: Card[]) {
+  let player: Player = new Player(name);
+  let hand: Hand = new Hand();
+  hand.cards = cards;
+  player.hand = hand;
+  return player;
+}
 
 describe("Dealer", () => {
   test("deal", () => {
@@ -16,7 +33,7 @@ describe("Dealer", () => {
 
     let { NUM_CARDS_IN_HAND } = Constants;
     table.players.forEach((player) => {
-      expect(player.hand.cards.length).toBe(NUM_CARDS_IN_HAND);
+      expect(player.getNumCardsInHand()).toBe(NUM_CARDS_IN_HAND);
     });
     expect(table.topCard).toBeTruthy();
   });
@@ -30,7 +47,7 @@ describe("Dealer", () => {
 
     let { NUM_CARDS_IN_HAND, NUM_CARDS_IN_DECK } = Constants;
     table.players.forEach((player) => {
-      expect(player.hand.cards.length).toBe(NUM_CARDS_IN_HAND);
+      expect(player.getNumCardsInHand()).toBe(NUM_CARDS_IN_HAND);
     });
 
     const NUM_HANDS = table.players.length;
@@ -46,9 +63,40 @@ describe("Dealer", () => {
     dealer.dealHand(player, deck);
 
     let { NUM_CARDS_IN_HAND, NUM_CARDS_IN_DECK } = Constants;
-    expect(player.hand.cards.length).toBe(NUM_CARDS_IN_HAND);
+    expect(player.getNumCardsInHand()).toBe(NUM_CARDS_IN_HAND);
 
     const NUM_HANDS = 1;
     expect(deck.cards.length).toBe(NUM_CARDS_IN_DECK - NUM_CARDS_IN_HAND * NUM_HANDS);
+  });
+  test("play round w/ leading suit", () => {
+    const trumpSuit: Suit = Suit.CLUBS;
+    const leadingSuit: Suit = Suit.DIAMONDS;
+    const players: Player[] = [
+      p("mozart", [c(Ordinal.ACE, leadingSuit), c(Ordinal.TEN, Suit.HEARTS)]),
+      p("chopin", [c(Ordinal.JACK, trumpSuit), c(Ordinal.EIGHT, leadingSuit)]),
+      p("beethoven", [c(Ordinal.SIX, Suit.HEARTS), c(Ordinal.ACE, Suit.SPADES)]),
+    ];
+    const table: Table = new Table(players);
+    table.topCard = new Card(Ordinal.SIX, trumpSuit);
+    table.leadingCard = new Card(Ordinal.SEVEN, leadingSuit);
+    const dealer: Dealer = new Dealer();
+    players.forEach((p) => {
+      p.shuffleHandForTesting();
+      p.notifyGameStart(trumpSuit);
+    });
+
+    // test
+    dealer.playRound(table);
+    let trick: Trick = table.tricks[0];
+    console.log(`TRACER wichita thunder\n ${trick.toString()}`);
+    let winningBid: Bid = trick.winningBid;
+    let bids: Bid[] = trick.bids;
+
+    expect(winningBid.player.name).toBe("chopin");
+    expect(bids.length).toBe(3);
+    let i = 0;
+    expect(bids[i++].player.name).toBe("beethoven");
+    expect(bids[i++].player.name).toBe("mozart");
+    expect(bids[i++].player.name).toBe("chopin");
   });
 });

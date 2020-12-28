@@ -1,15 +1,31 @@
 import { Card } from "./card";
-import { Deck } from "./deck";
-import { Config } from "./config";
-import { Table } from "./table";
-import { of } from "rxjs";
-import { tap } from "rxjs/operators";
+import { Ranker } from "./ranker";
+import { Suit } from "./suit";
+import { Util } from "./util";
 
 export class Hand {
   private _cards: Card[] = [];
 
   dealCard(card: Card) {
     this._cards.push(card);
+  }
+
+  sortCards(trumpSuit: Suit) {
+    new Ranker(trumpSuit).customSortArray(this._cards);
+  }
+
+  getNumCards() {
+    return this._cards.length;
+  }
+
+  shuffleForTesting() {
+    new Util().shuffle(this._cards);
+  }
+
+  selectBestCard(): Card {
+    let card: Card = this._cards.shift();
+    this._cards.filter((c) => c !== card);
+    return card;
   }
 
   public toString() {
@@ -20,10 +36,6 @@ export class Hand {
   }
 
   // ------------ getters / setters
-
-  get cards(): Card[] {
-    return this._cards;
-  }
 
   set cards(value: Card[]) {
     this._cards = value;
