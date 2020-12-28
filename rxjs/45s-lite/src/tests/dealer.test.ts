@@ -82,16 +82,47 @@ describe("Dealer", () => {
     const dealer: Dealer = new Dealer();
     players.forEach((p) => {
       p.shuffleHandForTesting();
-      p.notifyGameStart(trumpSuit);
+      p.notifyTrumpSuit(trumpSuit);
+    });
+
+    // test
+    /*
+    dealer.playRound(table);
+    let trick: Trick = table.tricks[0];
+    let winningBid: Bid = trick.winningBid;
+    let bids: Bid[] = trick.bids;
+
+    expect(winningBid.player.name).toBe("chopin");
+    expect(bids.length).toBe(3);
+    let i = 0;
+    expect(bids[i++].player.name).toBe("beethoven");
+    expect(bids[i++].player.name).toBe("mozart");
+    expect(bids[i++].player.name).toBe("chopin");
+    */
+  });
+
+  test("play round w/o leading suit", () => {
+    const trumpSuit: Suit = Suit.CLUBS;
+    const players: Player[] = [
+      p("mozart", [c(Ordinal.QUEEN, Suit.DIAMONDS), c(Ordinal.TEN, Suit.HEARTS)]),
+      p("chopin", [c(Ordinal.JACK, trumpSuit), c(Ordinal.EIGHT, Suit.DIAMONDS)]),
+      p("beethoven", [c(Ordinal.SIX, Suit.HEARTS), c(Ordinal.ACE, Suit.SPADES)]),
+    ];
+    const table: Table = new Table(players);
+    table.topCard = new Card(Ordinal.SIX, trumpSuit);
+    const dealer: Dealer = new Dealer();
+    players.forEach((p) => {
+      p.shuffleHandForTesting();
+      p.notifyTrumpSuit(trumpSuit);
     });
 
     // test
     dealer.playRound(table);
     let trick: Trick = table.tricks[0];
-    console.log(`TRACER wichita thunder\n ${trick.toString()}`);
     let winningBid: Bid = trick.winningBid;
     let bids: Bid[] = trick.bids;
 
+    expect(table.leadingCard.suit).toStrictEqual(Suit.DIAMONDS);
     expect(winningBid.player.name).toBe("chopin");
     expect(bids.length).toBe(3);
     let i = 0;

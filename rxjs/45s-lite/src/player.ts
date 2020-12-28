@@ -28,7 +28,7 @@ export class Player {
     this._hand.shuffleForTesting();
   }
 
-  public getBid(topCard: Card, trumpSuit: Suit, leadingSuit: Suit): Bid {
+  public getBid(trumpSuit: Suit, leadingSuit: Suit): Bid {
     let card: Card = this._strategy.select(this._hand, trumpSuit, leadingSuit);
 
     let bid: Bid = new Bid(card, this);
@@ -40,8 +40,12 @@ export class Player {
     return result;
   }
 
-  public notifyGameStart(trump: Suit) {
+  public notifyTrumpSuit(trump: Suit) {
     this._hand.sortCards(trump);
+  }
+
+  public notifyLeadingSuitForRound(trumpSuit: Suit, leadingSuit: Suit) {
+    this._hand.sortCards(trumpSuit, leadingSuit);
   }
 
   // -------------- getters / setters

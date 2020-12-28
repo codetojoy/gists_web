@@ -48,9 +48,11 @@ export class Dealer {
 
     table.players.forEach((player) => {
       let leadingSuit: Suit = table.leadingCard != null ? table.leadingCard.suit : null;
-      let bid: Bid = player.getBid(topCard, table.trumpSuit, leadingSuit);
+      let bid: Bid = player.getBid(table.trumpSuit, leadingSuit);
+      // console.log(`TRACER toronto st patricks bid: ${bid}`);
       if (table.leadingCard == null) {
         table.leadingCard = bid.card;
+        player.notifyLeadingSuitForRound(table.trumpSuit, table.leadingCard.suit);
       }
       bids.push(bid);
     });

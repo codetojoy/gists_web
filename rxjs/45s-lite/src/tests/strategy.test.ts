@@ -28,6 +28,7 @@ describe.each`
   it("card should be expected", () => {
     let strategy: Strategy = new Strategies().getStrategy("default");
     let expectedNumCards: number = hand.getNumCards() - 1;
+    hand.sortCards(trumpSuit, leadingSuit);
 
     // test
     let result: Card = strategy.select(hand, trumpSuit, leadingSuit);

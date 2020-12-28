@@ -390,15 +390,16 @@ describe("Ranker", () => {
 });
 
 describe.each`
-  num  | trump          | leading        | a                                | b                                | expected
-  ${1} | ${Suit.HEARTS} | ${null}        | ${c(Ordinal.KING, Suit.HEARTS)}  | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${1}
-  ${2} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TWO, Suit.DIAMONDS)} | ${c(Ordinal.ACE, Suit.DIAMONDS)} | ${1}
-  ${3} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${0}
-  ${4} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.ACE, Suit.CLUBS)}    | ${c(Ordinal.KING, Suit.SPADES)}  | ${1}
-  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.CLUBS)}    | ${c(Ordinal.KING, Suit.HEARTS)}  | ${1}
-  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.SPADES)}   | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
-  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
-  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${1}
+  num  | trump          | leading        | a                                  | b                                | expected
+  ${1} | ${Suit.HEARTS} | ${null}        | ${c(Ordinal.KING, Suit.HEARTS)}    | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${1}
+  ${2} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TWO, Suit.DIAMONDS)}   | ${c(Ordinal.ACE, Suit.DIAMONDS)} | ${1}
+  ${3} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TEN, Suit.DIAMONDS)}   | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${0}
+  ${4} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.ACE, Suit.CLUBS)}      | ${c(Ordinal.KING, Suit.SPADES)}  | ${1}
+  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.CLUBS)}      | ${c(Ordinal.KING, Suit.HEARTS)}  | ${1}
+  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.SPADES)}     | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
+  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TEN, Suit.DIAMONDS)}   | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
+  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.HEARTS)}     | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${1}
+  ${9} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.QUEEN, Suit.DIAMONDS)} | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${1}
 `(
   "for customSort, with n:$num t:$trump l:$leading a:$a b:$b expected=$expected",
   ({ trump, leading, a, b, expected }) => {

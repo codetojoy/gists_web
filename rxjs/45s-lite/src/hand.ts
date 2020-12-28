@@ -10,8 +10,8 @@ export class Hand {
     this._cards.push(card);
   }
 
-  sortCards(trumpSuit: Suit) {
-    new Ranker(trumpSuit).customSortArray(this._cards);
+  sortCards(trumpSuit: Suit, leadingSuit?: Suit) {
+    new Ranker(trumpSuit, leadingSuit).customSortArray(this._cards);
   }
 
   getNumCards() {
@@ -23,8 +23,7 @@ export class Hand {
   }
 
   selectBestCard(): Card {
-    let card: Card = this._cards.shift();
-    this._cards.filter((c) => c !== card);
+    let card: Card = this._cards.pop();
     return card;
   }
 

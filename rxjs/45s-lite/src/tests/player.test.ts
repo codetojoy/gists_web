@@ -25,15 +25,16 @@ describe("Player", () => {
     hand.cards = buildHand();
     let player: Player = new Player("mozart");
     player.hand = hand;
-    let topCard: Card = buildCard(Ordinal.NINE, Suit.DIAMONDS);
-    let trumpSuit: Suit = topCard.suit;
-    let leadingSuit: Suit = null;
+    const topCard: Card = buildCard(Ordinal.NINE, Suit.DIAMONDS);
+    const trumpSuit: Suit = topCard.suit;
+    const leadingSuit: Suit = null;
+    player.notifyTrumpSuit(trumpSuit);
 
     // test
-    let bid: Bid = player.getBid(topCard, trumpSuit, leadingSuit);
+    let bid: Bid = player.getBid(trumpSuit, leadingSuit);
 
     expect(bid.player.getNumCardsInHand()).toBe(4);
-    expect(bid.card.ordinal).toBe(Ordinal.THREE);
-    expect(bid.card.suit).toBe(Suit.CLUBS);
+    expect(bid.card.ordinal).toBe(Ordinal.JACK);
+    expect(bid.card.suit).toBe(Suit.DIAMONDS);
   });
 });

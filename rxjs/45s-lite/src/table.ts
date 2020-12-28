@@ -28,7 +28,7 @@ export class Table {
 
   public notifyGameStart() {
     let trump: Suit = this.topCard.suit;
-    this.players.forEach((player) => player.notifyGameStart(trump));
+    this.players.forEach((player) => player.notifyTrumpSuit(trump));
   }
 
   public toString() {
