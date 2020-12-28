@@ -11,53 +11,20 @@ abstract class BaseMap {
 
   // map Card.id to rank #
   private _map = {};
-  private _rankValue: number = 0;
 
-  /*
-  protected init(ord: Ordinal, suit: Suit, value: number) {
-    let id: number = new Card(ord, suit).id;
-    this._map[id] = value;
-  }
-  */
-
-  protected setCard(ord: Ordinal, suit: Suit) {
-    let id: number = new Card(ord, suit).id;
-    this._map[id] = this._rankValue;
+  protected setCard(cardObj: any) {
+    let id: number = new Card(cardObj.ord, cardObj.suit).id;
+    this._map[id] = cardObj.rank;
   }
 
-  protected setCards(initRankValue: number, cards: any[]) {
-    this._rankValue = initRankValue;
-
-    cards.forEach((cardObj) => {
-      if (cardObj.incRankValue === true) {
-        this.incrementRankValue();
-      } else {
-        this.setCard(cardObj.ord, cardObj.suit);
-        this.incrementRankValue();
-      }
+  protected setCards(cardsObj: any[]) {
+    cardsObj.forEach((cardObj) => {
+      this.setCard(cardObj);
     });
-  }
-
-  private getRankValue() {
-    return this._rankValue;
-  }
-
-  private setRankValue(value: number) {
-    this._rankValue = value;
-  }
-
-  private incrementRankValue() {
-    this._rankValue++;
   }
 
   public getAt(id: number): number {
     return this._map[id];
-  }
-
-  protected assertRank(value: number) {
-    if (this._rankValue != value) {
-      throw new TypeError(`internal error value: ${this._rankValue}`);
-    }
   }
 }
 
@@ -67,43 +34,39 @@ class OffsuitBlackMap extends BaseMap {
 
     // off-suit CLUBS
     let cards: any = [
-      { ord: Ordinal.TEN, suit: Suit.CLUBS },
-      { ord: Ordinal.NINE, suit: Suit.CLUBS },
-      { ord: Ordinal.EIGHT, suit: Suit.CLUBS },
-      { ord: Ordinal.SEVEN, suit: Suit.CLUBS },
-      { ord: Ordinal.SIX, suit: Suit.CLUBS },
-      { ord: Ordinal.FIVE, suit: Suit.CLUBS },
-      { ord: Ordinal.FOUR, suit: Suit.CLUBS },
-      { ord: Ordinal.THREE, suit: Suit.CLUBS },
-      { ord: Ordinal.TWO, suit: Suit.CLUBS },
-      { ord: Ordinal.ACE, suit: Suit.CLUBS },
-      { ord: Ordinal.JACK, suit: Suit.CLUBS },
-      { ord: Ordinal.QUEEN, suit: Suit.CLUBS },
-      { ord: Ordinal.KING, suit: Suit.CLUBS },
+      { ord: Ordinal.TEN, suit: Suit.CLUBS, rank: 1 },
+      { ord: Ordinal.NINE, suit: Suit.CLUBS, rank: 2 },
+      { ord: Ordinal.EIGHT, suit: Suit.CLUBS, rank: 3 },
+      { ord: Ordinal.SEVEN, suit: Suit.CLUBS, rank: 4 },
+      { ord: Ordinal.SIX, suit: Suit.CLUBS, rank: 5 },
+      { ord: Ordinal.FIVE, suit: Suit.CLUBS, rank: 6 },
+      { ord: Ordinal.FOUR, suit: Suit.CLUBS, rank: 7 },
+      { ord: Ordinal.THREE, suit: Suit.CLUBS, rank: 8 },
+      { ord: Ordinal.TWO, suit: Suit.CLUBS, rank: 9 },
+      { ord: Ordinal.ACE, suit: Suit.CLUBS, rank: 10 },
+      { ord: Ordinal.JACK, suit: Suit.CLUBS, rank: 11 },
+      { ord: Ordinal.QUEEN, suit: Suit.CLUBS, rank: 12 },
+      { ord: Ordinal.KING, suit: Suit.CLUBS, rank: 13 },
     ];
-    this.setCards(1, cards);
-
-    this.assertRank(cards.length + 1);
+    this.setCards(cards);
 
     // off-suit SPADES
     cards = [
-      { ord: Ordinal.TEN, suit: Suit.SPADES },
-      { ord: Ordinal.NINE, suit: Suit.SPADES },
-      { ord: Ordinal.EIGHT, suit: Suit.SPADES },
-      { ord: Ordinal.SEVEN, suit: Suit.SPADES },
-      { ord: Ordinal.SIX, suit: Suit.SPADES },
-      { ord: Ordinal.FIVE, suit: Suit.SPADES },
-      { ord: Ordinal.FOUR, suit: Suit.SPADES },
-      { ord: Ordinal.THREE, suit: Suit.SPADES },
-      { ord: Ordinal.TWO, suit: Suit.SPADES },
-      { ord: Ordinal.ACE, suit: Suit.SPADES },
-      { ord: Ordinal.JACK, suit: Suit.SPADES },
-      { ord: Ordinal.QUEEN, suit: Suit.SPADES },
-      { ord: Ordinal.KING, suit: Suit.SPADES },
+      { ord: Ordinal.TEN, suit: Suit.SPADES, rank: 1 },
+      { ord: Ordinal.NINE, suit: Suit.SPADES, rank: 2 },
+      { ord: Ordinal.EIGHT, suit: Suit.SPADES, rank: 3 },
+      { ord: Ordinal.SEVEN, suit: Suit.SPADES, rank: 4 },
+      { ord: Ordinal.SIX, suit: Suit.SPADES, rank: 5 },
+      { ord: Ordinal.FIVE, suit: Suit.SPADES, rank: 6 },
+      { ord: Ordinal.FOUR, suit: Suit.SPADES, rank: 7 },
+      { ord: Ordinal.THREE, suit: Suit.SPADES, rank: 8 },
+      { ord: Ordinal.TWO, suit: Suit.SPADES, rank: 9 },
+      { ord: Ordinal.ACE, suit: Suit.SPADES, rank: 10 },
+      { ord: Ordinal.JACK, suit: Suit.SPADES, rank: 11 },
+      { ord: Ordinal.QUEEN, suit: Suit.SPADES, rank: 12 },
+      { ord: Ordinal.KING, suit: Suit.SPADES, rank: 13 },
     ];
-    this.setCards(1, cards);
-
-    this.assertRank(cards.length + 1);
+    this.setCards(cards);
   }
 }
 
@@ -113,43 +76,38 @@ class OffsuitRedMap extends BaseMap {
 
     // off-suit DIAMONDS
     let cards: any = [
-      { ord: Ordinal.ACE, suit: Suit.DIAMONDS },
-      { ord: Ordinal.TWO, suit: Suit.DIAMONDS },
-      { ord: Ordinal.THREE, suit: Suit.DIAMONDS },
-      { ord: Ordinal.FOUR, suit: Suit.DIAMONDS },
-      { ord: Ordinal.FIVE, suit: Suit.DIAMONDS },
-      { ord: Ordinal.SIX, suit: Suit.DIAMONDS },
-      { ord: Ordinal.SEVEN, suit: Suit.DIAMONDS },
-      { ord: Ordinal.EIGHT, suit: Suit.DIAMONDS },
-      { ord: Ordinal.NINE, suit: Suit.DIAMONDS },
-      { ord: Ordinal.TEN, suit: Suit.DIAMONDS },
-      { ord: Ordinal.JACK, suit: Suit.DIAMONDS },
-      { ord: Ordinal.QUEEN, suit: Suit.DIAMONDS },
-      { ord: Ordinal.KING, suit: Suit.DIAMONDS },
+      { ord: Ordinal.ACE, suit: Suit.DIAMONDS, rank: 1 },
+      { ord: Ordinal.TWO, suit: Suit.DIAMONDS, rank: 2 },
+      { ord: Ordinal.THREE, suit: Suit.DIAMONDS, rank: 3 },
+      { ord: Ordinal.FOUR, suit: Suit.DIAMONDS, rank: 4 },
+      { ord: Ordinal.FIVE, suit: Suit.DIAMONDS, rank: 5 },
+      { ord: Ordinal.SIX, suit: Suit.DIAMONDS, rank: 6 },
+      { ord: Ordinal.SEVEN, suit: Suit.DIAMONDS, rank: 7 },
+      { ord: Ordinal.EIGHT, suit: Suit.DIAMONDS, rank: 8 },
+      { ord: Ordinal.NINE, suit: Suit.DIAMONDS, rank: 9 },
+      { ord: Ordinal.TEN, suit: Suit.DIAMONDS, rank: 10 },
+      { ord: Ordinal.JACK, suit: Suit.DIAMONDS, rank: 11 },
+      { ord: Ordinal.QUEEN, suit: Suit.DIAMONDS, rank: 12 },
+      { ord: Ordinal.KING, suit: Suit.DIAMONDS, rank: 13 },
     ];
-    this.setCards(1, cards);
-
-    this.assertRank(cards.length + 1);
+    this.setCards(cards);
 
     // off-suit HEARTS
     cards = [
-      { ord: Ordinal.TWO, suit: Suit.HEARTS },
-      { ord: Ordinal.THREE, suit: Suit.HEARTS },
-      { ord: Ordinal.FOUR, suit: Suit.HEARTS },
-      { ord: Ordinal.FIVE, suit: Suit.HEARTS },
-      { ord: Ordinal.SIX, suit: Suit.HEARTS },
-      { ord: Ordinal.SEVEN, suit: Suit.HEARTS },
-      { ord: Ordinal.EIGHT, suit: Suit.HEARTS },
-      { ord: Ordinal.NINE, suit: Suit.HEARTS },
-      { ord: Ordinal.TEN, suit: Suit.HEARTS },
-      // { ord: Ordinal.ACE, suit: Suit.HEARTS },
-      { ord: Ordinal.JACK, suit: Suit.HEARTS },
-      { ord: Ordinal.QUEEN, suit: Suit.HEARTS },
-      { ord: Ordinal.KING, suit: Suit.HEARTS },
+      { ord: Ordinal.TWO, suit: Suit.HEARTS, rank: 2 },
+      { ord: Ordinal.THREE, suit: Suit.HEARTS, rank: 3 },
+      { ord: Ordinal.FOUR, suit: Suit.HEARTS, rank: 4 },
+      { ord: Ordinal.FIVE, suit: Suit.HEARTS, rank: 5 },
+      { ord: Ordinal.SIX, suit: Suit.HEARTS, rank: 6 },
+      { ord: Ordinal.SEVEN, suit: Suit.HEARTS, rank: 7 },
+      { ord: Ordinal.EIGHT, suit: Suit.HEARTS, rank: 8 },
+      { ord: Ordinal.NINE, suit: Suit.HEARTS, rank: 9 },
+      { ord: Ordinal.TEN, suit: Suit.HEARTS, rank: 10 },
+      { ord: Ordinal.JACK, suit: Suit.HEARTS, rank: 11 },
+      { ord: Ordinal.QUEEN, suit: Suit.HEARTS, rank: 12 },
+      { ord: Ordinal.KING, suit: Suit.HEARTS, rank: 13 },
     ];
-    this.setCards(2, cards);
-
-    this.assertRank(1 + cards.length + 1);
+    this.setCards(cards);
   }
 }
 
@@ -160,28 +118,25 @@ class TrumpClubsMap extends BaseMap {
     // trump CLUBS
     let suit: Suit = Suit.CLUBS;
     let cards: any = [
-      { ord: Ordinal.TEN, suit: suit },
-      { ord: Ordinal.NINE, suit: suit },
-      { ord: Ordinal.EIGHT, suit: suit },
-      { ord: Ordinal.SEVEN, suit: suit },
-      { ord: Ordinal.SIX, suit: suit },
-      { ord: Ordinal.FOUR, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.THREE, suit: suit },
-      { ord: Ordinal.TWO, suit: suit },
-      { incRankValue: true },
-      { incRankValue: true },
-      { ord: Ordinal.QUEEN, suit: suit },
-      { ord: Ordinal.KING, suit: suit },
-      { ord: Ordinal.ACE, suit: suit },
-      { ord: Ordinal.ACE, suit: Suit.HEARTS },
-      { ord: Ordinal.JACK, suit: suit },
-      { ord: Ordinal.FIVE, suit: suit },
+      { ord: Ordinal.TEN, suit: suit, rank: 1 },
+      { ord: Ordinal.NINE, suit: suit, rank: 2 },
+      { ord: Ordinal.EIGHT, suit: suit, rank: 3 },
+      { ord: Ordinal.SEVEN, suit: suit, rank: 4 },
+      { ord: Ordinal.SIX, suit: suit, rank: 5 },
+      // { rank: 6 }
+      { ord: Ordinal.FOUR, suit: suit, rank: 7 },
+      { ord: Ordinal.THREE, suit: suit, rank: 8 },
+      { ord: Ordinal.TWO, suit: suit, rank: 9 },
+      // { rank: 10 }
+      // { rank: 11 }
+      { ord: Ordinal.QUEEN, suit: suit, rank: 12 },
+      { ord: Ordinal.KING, suit: suit, rank: 13 },
+      { ord: Ordinal.ACE, suit: suit, rank: 14 },
+      { ord: Ordinal.ACE, suit: Suit.HEARTS, rank: 15 },
+      { ord: Ordinal.JACK, suit: suit, rank: 16 },
+      { ord: Ordinal.FIVE, suit: suit, rank: 17 },
     ];
-
-    this.setCards(1, cards);
-
-    this.assertRank(this.MAX_RANK_CEILING);
+    this.setCards(cards);
   }
 }
 
@@ -192,28 +147,26 @@ class TrumpSpadesMap extends BaseMap {
     // trump SPADES
     let suit = Suit.SPADES;
     let cards: any = [
-      { ord: Ordinal.TEN, suit: suit },
-      { ord: Ordinal.NINE, suit: suit },
-      { ord: Ordinal.EIGHT, suit: suit },
-      { ord: Ordinal.SEVEN, suit: suit },
-      { ord: Ordinal.SIX, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.FOUR, suit: suit },
-      { ord: Ordinal.THREE, suit: suit },
-      { ord: Ordinal.TWO, suit: suit },
-      { incRankValue: true },
-      { incRankValue: true },
-      { ord: Ordinal.QUEEN, suit: suit },
-      { ord: Ordinal.KING, suit: suit },
-      { ord: Ordinal.ACE, suit: suit },
-      { ord: Ordinal.ACE, suit: Suit.HEARTS },
-      { ord: Ordinal.JACK, suit: suit },
-      { ord: Ordinal.FIVE, suit: suit },
+      { ord: Ordinal.TEN, suit: suit, rank: 1 },
+      { ord: Ordinal.NINE, suit: suit, rank: 2 },
+      { ord: Ordinal.EIGHT, suit: suit, rank: 3 },
+      { ord: Ordinal.SEVEN, suit: suit, rank: 4 },
+      { ord: Ordinal.SIX, suit: suit, rank: 5 },
+      // { rank: 6 }
+      { ord: Ordinal.FOUR, suit: suit, rank: 7 },
+      { ord: Ordinal.THREE, suit: suit, rank: 8 },
+      { ord: Ordinal.TWO, suit: suit, rank: 9 },
+      // { rank: 10 }
+      // { rank: 11 }
+      { ord: Ordinal.QUEEN, suit: suit, rank: 12 },
+      { ord: Ordinal.KING, suit: suit, rank: 13 },
+      { ord: Ordinal.ACE, suit: suit, rank: 14 },
+      { ord: Ordinal.ACE, suit: Suit.HEARTS, rank: 15 },
+      { ord: Ordinal.JACK, suit: suit, rank: 16 },
+      { ord: Ordinal.FIVE, suit: suit, rank: 17 },
     ];
 
-    this.setCards(1, cards);
-
-    this.assertRank(this.MAX_RANK_CEILING);
+    this.setCards(cards);
   }
 }
 
@@ -224,27 +177,25 @@ class TrumpDiamondsMap extends BaseMap {
     // trump DIAMONDS
     let suit: Suit = Suit.DIAMONDS;
     let cards: any = [
-      { ord: Ordinal.TWO, suit: suit },
-      { ord: Ordinal.THREE, suit: suit },
-      { ord: Ordinal.FOUR, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.SIX, suit: suit },
-      { ord: Ordinal.SEVEN, suit: suit },
-      { ord: Ordinal.EIGHT, suit: suit },
-      { ord: Ordinal.NINE, suit: suit },
-      { ord: Ordinal.TEN, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.QUEEN, suit: suit },
-      { ord: Ordinal.KING, suit: suit },
-      { ord: Ordinal.ACE, suit: suit },
-      { ord: Ordinal.ACE, suit: Suit.HEARTS },
-      { ord: Ordinal.JACK, suit: suit },
-      { ord: Ordinal.FIVE, suit: suit },
+      { ord: Ordinal.TWO, suit: suit, rank: 2 },
+      { ord: Ordinal.THREE, suit: suit, rank: 3 },
+      { ord: Ordinal.FOUR, suit: suit, rank: 4 },
+      // { rank: 5 }
+      { ord: Ordinal.SIX, suit: suit, rank: 6 },
+      { ord: Ordinal.SEVEN, suit: suit, rank: 7 },
+      { ord: Ordinal.EIGHT, suit: suit, rank: 8 },
+      { ord: Ordinal.NINE, suit: suit, rank: 9 },
+      { ord: Ordinal.TEN, suit: suit, rank: 10 },
+      // { rank: 11 }
+      { ord: Ordinal.QUEEN, suit: suit, rank: 12 },
+      { ord: Ordinal.KING, suit: suit, rank: 13 },
+      { ord: Ordinal.ACE, suit: suit, rank: 14 },
+      { ord: Ordinal.ACE, suit: Suit.HEARTS, rank: 15 },
+      { ord: Ordinal.JACK, suit: suit, rank: 16 },
+      { ord: Ordinal.FIVE, suit: suit, rank: 17 },
     ];
 
-    this.setCards(2, cards);
-
-    this.assertRank(this.MAX_RANK_CEILING);
+    this.setCards(cards);
   }
 }
 
@@ -255,27 +206,25 @@ class TrumpHeartsMap extends BaseMap {
     // trump HEARTS
     let suit: Suit = Suit.HEARTS;
     let cards: any = [
-      { ord: Ordinal.TWO, suit: suit },
-      { ord: Ordinal.THREE, suit: suit },
-      { ord: Ordinal.FOUR, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.SIX, suit: suit },
-      { ord: Ordinal.SEVEN, suit: suit },
-      { ord: Ordinal.EIGHT, suit: suit },
-      { ord: Ordinal.NINE, suit: suit },
-      { ord: Ordinal.TEN, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.QUEEN, suit: suit },
-      { ord: Ordinal.KING, suit: suit },
-      { incRankValue: true },
-      { ord: Ordinal.ACE, suit: suit },
-      { ord: Ordinal.JACK, suit: suit },
-      { ord: Ordinal.FIVE, suit: suit },
+      { ord: Ordinal.TWO, suit: suit, rank: 2 },
+      { ord: Ordinal.THREE, suit: suit, rank: 3 },
+      { ord: Ordinal.FOUR, suit: suit, rank: 4 },
+      // { rank: 5 }
+      { ord: Ordinal.SIX, suit: suit, rank: 6 },
+      { ord: Ordinal.SEVEN, suit: suit, rank: 7 },
+      { ord: Ordinal.EIGHT, suit: suit, rank: 8 },
+      { ord: Ordinal.NINE, suit: suit, rank: 9 },
+      { ord: Ordinal.TEN, suit: suit, rank: 10 },
+      // { rank: 11 }
+      { ord: Ordinal.QUEEN, suit: suit, rank: 12 },
+      { ord: Ordinal.KING, suit: suit, rank: 13 },
+      // { rank: 14 }
+      { ord: Ordinal.ACE, suit: suit, rank: 15 },
+      { ord: Ordinal.JACK, suit: suit, rank: 16 },
+      { ord: Ordinal.FIVE, suit: suit, rank: 17 },
     ];
 
-    this.setCards(2, cards);
-
-    this.assertRank(this.MAX_RANK_CEILING);
+    this.setCards(cards);
   }
 }
 
