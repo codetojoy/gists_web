@@ -101,7 +101,7 @@ describe("Dealer", () => {
     */
   });
 
-  test("play round w/o leading suit", () => {
+  test("play round w/o leading suit case 1", () => {
     const trumpSuit: Suit = Suit.CLUBS;
     const players: Player[] = [
       p("mozart", [c(Ordinal.QUEEN, Suit.DIAMONDS), c(Ordinal.TEN, Suit.HEARTS)]),
@@ -123,11 +123,11 @@ describe("Dealer", () => {
     let bids: Bid[] = trick.bids;
 
     expect(table.leadingCard.suit).toStrictEqual(Suit.DIAMONDS);
-    expect(winningBid.player.name).toBe("chopin");
+    expect(winningBid.player.name).toBe("mozart");
     expect(bids.length).toBe(3);
     let i = 0;
     expect(bids[i++].player.name).toBe("beethoven");
-    expect(bids[i++].player.name).toBe("mozart");
     expect(bids[i++].player.name).toBe("chopin");
+    expect(bids[i++].player.name).toBe("mozart");
   });
 });

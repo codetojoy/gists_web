@@ -1,14 +1,9 @@
 import { Card } from "./card";
-import { Deck } from "./deck";
-import { Config } from "./config";
-import { Table } from "./table";
 import { Hand } from "./hand";
-import { Bid } from "./bid";
-import { Suit } from "./suit";
-import { Ranker } from "./ranker";
+import { Trick } from "./trick";
 
 export interface Strategy {
-  select(hand: Hand, trumpSuit: Suit, leadingSuit: Suit): Card;
+  select(hand: Hand, trick: Trick): Card;
 }
 
 export class Strategies {
@@ -18,7 +13,7 @@ export class Strategies {
 }
 
 class DefaultStrategy implements Strategy {
-  public select(hand: Hand, trumpSuit: Suit, leadingSuit: Suit): Card {
-    return hand.selectBestCard();
+  public select(hand: Hand, trick: Trick): Card {
+    return hand.selectBestCard(trick);
   }
 }

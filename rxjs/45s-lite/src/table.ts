@@ -1,18 +1,17 @@
 import { Card } from "./card";
 import { Player } from "./player";
-import { Trick } from "./trick";
-
-import { of } from "rxjs";
-import { tap } from "rxjs/operators";
 import { Suit } from "./suit";
+import { Trick } from "./trick";
 
 export class Table {
   private _players: Player[];
   private _topCard: Card;
-  private _trumpSuit: Suit;
-  private _leadingCard: Card;
   private _roundNum: number = 0;
   private _tricks: Trick[] = [];
+
+  // maybe these move into Trick?
+  private _trumpSuit: Suit;
+  private _leadingCard: Card;
 
   constructor(players: Player[]) {
     this._players = players;

@@ -1,13 +1,9 @@
-import { Card } from "./card";
-import { Deck } from "./deck";
-import { Config } from "./config";
-import { Table } from "./table";
-import { Hand } from "./hand";
 import { Bid } from "./bid";
-import { Suit } from "./suit";
-import { Ranker } from "./ranker";
+import { Card } from "./card";
+import { Hand } from "./hand";
 import { Strategies, Strategy } from "./strategy";
-import { Util } from "./util";
+import { Suit } from "./suit";
+import { Trick } from "./trick";
 
 export class Player {
   private _name: string;
@@ -24,12 +20,16 @@ export class Player {
     return this._hand.getNumCards();
   }
 
+  public handContainsCardOfSuit(suit: Suit) {
+    return this._hand.containsCardOfSuit(suit);
+  }
+
   public shuffleHandForTesting() {
     this._hand.shuffleForTesting();
   }
 
-  public getBid(trumpSuit: Suit, leadingSuit: Suit): Bid {
-    let card: Card = this._strategy.select(this._hand, trumpSuit, leadingSuit);
+  public getBid(trick: Trick): Bid {
+    let card: Card = this._strategy.select(this._hand, trick);
 
     let bid: Bid = new Bid(card, this);
     return bid;

@@ -4,6 +4,7 @@ import { Mapper } from "../mapper";
 import { Ordinal } from "../ordinal";
 import { Strategies, Strategy } from "../strategy";
 import { Suit } from "../suit";
+import { Trick } from "../trick";
 
 function c(ordinal: Ordinal, suit: Suit) {
   return new Card(ordinal, suit);
@@ -29,9 +30,11 @@ describe.each`
     let strategy: Strategy = new Strategies().getStrategy("default");
     let expectedNumCards: number = hand.getNumCards() - 1;
     hand.sortCards(trumpSuit, leadingSuit);
+    let trick: Trick = new Trick(trumpSuit);
+    trick.leadingSuit = leadingSuit;
 
     // test
-    let result: Card = strategy.select(hand, trumpSuit, leadingSuit);
+    let result: Card = strategy.select(hand, trick);
 
     expect(hand.getNumCards()).toBe(expectedNumCards);
     expect(result.ordinal).toBe(expected.ordinal);
