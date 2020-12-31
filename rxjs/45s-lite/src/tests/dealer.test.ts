@@ -10,6 +10,7 @@ import { Player } from "../player";
 import { Suit } from "../suit";
 import { Table } from "../table";
 import { Trick } from "../trick";
+import { C } from "../c";
 
 function c(ord: Ordinal, suit: Suit) {
   return new Card(ord, suit);
@@ -72,9 +73,9 @@ describe("Dealer", () => {
     const trumpSuit: Suit = Suit.CLUBS;
     const leadingSuit: Suit = Suit.DIAMONDS;
     const players: Player[] = [
-      p("mozart", [c(Ordinal.ACE, leadingSuit), c(Ordinal.TEN, Suit.HEARTS)]),
+      p("mozart", [c(Ordinal.ACE, leadingSuit), C._10H]),
       p("chopin", [c(Ordinal.JACK, trumpSuit), c(Ordinal.EIGHT, leadingSuit)]),
-      p("beethoven", [c(Ordinal.SIX, Suit.HEARTS), c(Ordinal.ACE, Suit.SPADES)]),
+      p("beethoven", [C._6H, C._AS]),
     ];
     const table: Table = new Table(players);
     table.topCard = new Card(Ordinal.SIX, trumpSuit);
@@ -101,9 +102,9 @@ describe("Dealer", () => {
   test("play round w/o leading suit case 1", () => {
     const trumpSuit: Suit = Suit.CLUBS;
     const players: Player[] = [
-      p("mozart", [c(Ordinal.QUEEN, Suit.DIAMONDS), c(Ordinal.TEN, Suit.HEARTS)]),
-      p("chopin", [c(Ordinal.JACK, trumpSuit), c(Ordinal.EIGHT, Suit.DIAMONDS)]),
-      p("beethoven", [c(Ordinal.SIX, Suit.HEARTS), c(Ordinal.ACE, Suit.SPADES)]),
+      p("mozart", [C._QD, C._10H]),
+      p("chopin", [c(Ordinal.JACK, trumpSuit), C._8D]),
+      p("beethoven", [C._6H, C._AS]),
     ];
     const table: Table = new Table(players);
     table.topCard = new Card(Ordinal.SIX, trumpSuit);

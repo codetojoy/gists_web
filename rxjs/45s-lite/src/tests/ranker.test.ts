@@ -391,16 +391,18 @@ describe("Ranker", () => {
 });
 
 describe.each`
-  num  | trump          | leading        | a         | b         | expected
-  ${1} | ${Suit.HEARTS} | ${null}        | ${C._KH}  | ${C._2H}  | ${1}
-  ${2} | ${Suit.CLUBS}  | ${null}        | ${C._2D}  | ${C._AD}  | ${1}
-  ${3} | ${Suit.CLUBS}  | ${null}        | ${C._10D} | ${C._10H} | ${0}
-  ${4} | ${Suit.CLUBS}  | ${null}        | ${C._AC}  | ${C._KS}  | ${1}
-  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2C}  | ${C._KH}  | ${1}
-  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2S}  | ${C._6S}  | ${1}
-  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._10D} | ${C._6S}  | ${1}
-  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2H}  | ${C._10D} | ${1}
-  ${9} | ${Suit.CLUBS}  | ${null}        | ${C._QD}  | ${C._10H} | ${1}
+  num   | trump          | leading        | a         | b         | expected
+  ${1}  | ${Suit.HEARTS} | ${null}        | ${C._KH}  | ${C._2H}  | ${1}
+  ${2}  | ${Suit.CLUBS}  | ${null}        | ${C._2D}  | ${C._AD}  | ${1}
+  ${3}  | ${Suit.CLUBS}  | ${null}        | ${C._10D} | ${C._10H} | ${0}
+  ${4}  | ${Suit.CLUBS}  | ${null}        | ${C._AC}  | ${C._KS}  | ${1}
+  ${5}  | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2C}  | ${C._KH}  | ${1}
+  ${6}  | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2S}  | ${C._6S}  | ${1}
+  ${7}  | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._10D} | ${C._6S}  | ${1}
+  ${8}  | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2H}  | ${C._10D} | ${1}
+  ${9}  | ${Suit.CLUBS}  | ${null}        | ${C._QD}  | ${C._10H} | ${1}
+  ${10} | ${Suit.CLUBS}  | ${Suit.CLUBS}  | ${C._QC}  | ${C._10C} | ${1}
+  ${11} | ${Suit.CLUBS}  | ${Suit.CLUBS}  | ${C._QS}  | ${C._10S} | ${1}
 `(
   "for customSort, with n:$num t:$trump l:$leading a:$a b:$b expected=$expected",
   ({ trump, leading, a, b, expected }) => {

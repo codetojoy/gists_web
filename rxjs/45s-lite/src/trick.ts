@@ -16,8 +16,10 @@ export class Trick {
   _pointValue: number = 5;
   _bids: Bid[];
 
-  constructor(trumpSuit: Suit) {
+  constructor(trumpSuit: Suit, leadingSuit?: Suit, hasTrumpBeenPlayed?: boolean) {
     this._trumpSuit = trumpSuit;
+    this._leadingSuit = leadingSuit;
+    this.hasTrumpBeenPlayed = hasTrumpBeenPlayed;
   }
 
   get trickState(): TrickState {

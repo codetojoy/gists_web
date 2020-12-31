@@ -1,30 +1,19 @@
+import { C } from "../c";
 import { Card } from "../card";
 import { Hand } from "../hand";
-import { Mapper } from "../mapper";
-import { Ordinal } from "../ordinal";
 import { Strategies, Strategy } from "../strategy";
 import { Suit } from "../suit";
 import { Trick } from "../trick";
 
-function c(ordinal: Ordinal, suit: Suit) {
-  return new Card(ordinal, suit);
-}
-
-function h(ids: number[]) {
+function h(cards: Card[]) {
   let hand: Hand = new Hand();
-  let mapper: Mapper = new Mapper();
-  hand.cards = ids.map((id) => mapper.mapInt(id));
-
+  hand.cards = cards;
   return hand;
 }
 
-/*
-THREE CLUBS, EIGHT CLUBS, JACK DIAMONDS, FOUR HEARTS, KING SPADES
-*/
-
 describe.each`
-  hand                     | trumpSuit     | leadingSuit | expected
-  ${h([2, 7, 23, 29, 51])} | ${Suit.CLUBS} | ${null}     | ${c(Ordinal.THREE, Suit.CLUBS)}
+  hand                                      | trumpSuit     | leadingSuit | expected
+  ${h([C._3C, C._8C, C._JD, C._4H, C._KS])} | ${Suit.CLUBS} | ${null}     | ${C._3C}
 `("for select, with h=$hand t=$trumpSuit l:leadingSuit e=$expected", ({ hand, trumpSuit, leadingSuit, expected }) => {
   it("card should be expected", () => {
     let strategy: Strategy = new Strategies().getStrategy("default");

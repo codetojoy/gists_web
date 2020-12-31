@@ -10,9 +10,9 @@ export class Player {
   private _hand: Hand;
   private _strategy: Strategy;
 
-  constructor(name: string) {
+  constructor(name: string, hand?: Hand) {
     this._name = name;
-    this._hand = new Hand();
+    this._hand = hand == null ? new Hand() : hand;
     this._strategy = new Strategies().getStrategy("default");
   }
 
