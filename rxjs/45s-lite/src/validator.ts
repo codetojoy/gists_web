@@ -2,6 +2,7 @@ import { Bid } from "./bid";
 import { Trick, TrickState } from "./trick";
 
 export interface Validator {
+  doesApply(bid: Bid, trick: Trick): boolean;
   validate(bid: Bid, trick: Trick): boolean;
 }
 
@@ -15,7 +16,6 @@ export class Validators {
 
     switch (type) {
       case this.ALL:
-        // validator = new MultiValidator([new IdentityValidator()]); // , new FollowLeadingSuitRule()]);
         validator = new MultiValidator([new IdentityValidator(), new FollowLeadingSuitRule()]);
         break;
       case this.IDENTITY:
@@ -34,20 +34,34 @@ export class Validators {
 }
 
 class IdentityValidator implements Validator {
+  public doesApply(bid: Bid, trick: Trick): boolean {
+    return true;
+  }
+
   public validate(bid: Bid, trick: Trick): boolean {
     return true;
   }
 }
 
 class FollowLeadingSuitRule implements Validator {
+  public doesApply(bid: Bid, trick: Trick): boolean {
+    let result: boolean = trick.trickState === TrickState.LEADING_NO_TRUMP && bid.card.suit != trick.leadingSuit;
+    return result;
+  }
+
   public validate(bid: Bid, trick: Trick): boolean {
     let result: boolean = true;
 
+    if (this.doesApply(bid, trick)) {
+      result = !bid.player.handContainsCardOfSuit(trick.leadingSuit);
+    }
+    /*
     if (trick.trickState === TrickState.LEADING_NO_TRUMP) {
       if (bid.card.suit != trick.leadingSuit) {
         result = !bid.player.handContainsCardOfSuit(trick.leadingSuit);
       }
     }
+      */
 
     return result;
   }
@@ -58,6 +72,10 @@ class MultiValidator implements Validator {
 
   constructor(validators: Validator[]) {
     this._validators = validators;
+  }
+
+  public doesApply(bid: Bid, trick: Trick): boolean {
+    return true;
   }
 
   public validate(bid: Bid, trick: Trick): boolean {
