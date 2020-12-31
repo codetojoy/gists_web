@@ -9,14 +9,13 @@ import { Validator, Validators } from "../validator";
 import { C } from "../c";
 
 function h(cards: Card[]) {
-  let hand: Hand = new Hand();
-  hand.cards = cards;
-
-  return hand;
+  return new Hand(cards);
 }
 
 const CLUBS: Suit = Suit.CLUBS;
 const DIAMONDS: Suit = Suit.DIAMONDS;
+
+let validators: Validators = new Validators();
 
 describe.each`
   hand          | card      | trumpSuit | leadingSuit | hasTrumpBeenPlayed | expected
@@ -25,7 +24,6 @@ describe.each`
   "for dummy validator, with h=$hand c=$card t=$trumpSuit l=$leadingSuit h=$hasTrumpBeenPlayed e=$expected",
   ({ hand, card, trumpSuit, leadingSuit, hasTrumpBeenPlayed, expected }) => {
     it("card should be expected", () => {
-      let validators: Validators = new Validators();
       let validator: Validator = validators.getValidator(validators.IDENTITY);
       let trick: Trick = new Trick(trumpSuit, leadingSuit, hasTrumpBeenPlayed);
       let player: Player = new Player("p1", hand);
@@ -51,7 +49,6 @@ describe.each`
   "for FollowLeadingSuitRule validator, with h=$hand c=$card t=$trumpSuit l=$leadingSuit h=$hasTrumpBeenPlayed e=$expected",
   ({ hand, card, trumpSuit, leadingSuit, hasTrumpBeenPlayed, expected }) => {
     it("card should be expected", () => {
-      let validators: Validators = new Validators();
       let validator: Validator = validators.getValidator(validators.RULE_FOLLOW_LEADING_SUIT);
       let trick: Trick = new Trick(trumpSuit, leadingSuit, hasTrumpBeenPlayed);
       let player: Player = new Player("p1", hand);

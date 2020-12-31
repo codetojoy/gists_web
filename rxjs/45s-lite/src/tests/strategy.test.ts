@@ -6,9 +6,7 @@ import { Suit } from "../suit";
 import { Trick } from "../trick";
 
 function h(cards: Card[]) {
-  let hand: Hand = new Hand();
-  hand.cards = cards;
-  return hand;
+  return new Hand(cards);
 }
 
 describe.each`

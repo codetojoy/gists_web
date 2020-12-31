@@ -9,11 +9,9 @@ import { C } from "../c";
 
 describe("Player", () => {
   test("get bid : first play", () => {
-    let hand: Hand = new Hand();
-    hand.cards = [C._3C, C._8C, C._JD, C._4H, C._KS];
+    let hand: Hand = new Hand([C._3C, C._8C, C._JD, C._4H, C._KS]);
     let numCards: number = hand.getNumCards();
-    let player: Player = new Player("mozart");
-    player.hand = hand;
+    let player: Player = new Player("mozart", hand);
     const topCard: Card = C._9D;
     const trumpSuit: Suit = topCard.suit;
     const leadingSuit: Suit = null;

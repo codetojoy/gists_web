@@ -23,9 +23,10 @@ function p(name: string, cards: Card[]) {
 }
 
 describe("Dealer", () => {
+  let dealer: Dealer = new Dealer();
+
   test("deal", () => {
     let table: Table = new Config().table;
-    let dealer: Dealer = new Dealer();
 
     // test
     dealer.deal(table);
@@ -38,7 +39,6 @@ describe("Dealer", () => {
   });
   test("dealHand to players", () => {
     let table: Table = new Config().table;
-    let dealer: Dealer = new Dealer();
     let deck: Deck = new Deck();
 
     // test
@@ -54,7 +54,6 @@ describe("Dealer", () => {
   });
   test("dealHand to player", () => {
     let table: Table = new Config().table;
-    let dealer: Dealer = new Dealer();
     let player: Player = table.players.shift();
     let deck: Deck = new Deck();
 
@@ -67,7 +66,10 @@ describe("Dealer", () => {
     const NUM_HANDS = 1;
     expect(deck.cards.length).toBe(NUM_CARDS_IN_DECK - NUM_CARDS_IN_HAND * NUM_HANDS);
   });
-  test("play round w/ leading suit", () => {
+
+  // trump: CLUBS, leading: DIAMONDS
+  // chopin wins with Jack of CLUBS
+  test("play round w/ leading suit case 1", () => {
     const trumpSuit: Suit = Suit.CLUBS;
     const leadingSuit: Suit = Suit.DIAMONDS;
     const players: Player[] = [
@@ -78,7 +80,6 @@ describe("Dealer", () => {
     const table: Table = new Table(players);
     table.topCard = new Card(Ordinal.SIX, trumpSuit);
     table.leadingCard = new Card(Ordinal.SEVEN, leadingSuit);
-    const dealer: Dealer = new Dealer();
     players.forEach((p) => {
       p.shuffleHandForTesting();
       p.notifyTrumpSuit(trumpSuit);
@@ -97,6 +98,8 @@ describe("Dealer", () => {
     expect(bids[i++].player.name).toBe("chopin");
   });
 
+  // trump: CLUBS, leading: n/a
+  // Q: can you lead with trump ? if so, then this is wrong
   test("play round w/o leading suit case 1", () => {
     const trumpSuit: Suit = Suit.CLUBS;
     const players: Player[] = [
@@ -106,7 +109,6 @@ describe("Dealer", () => {
     ];
     const table: Table = new Table(players);
     table.topCard = new Card(Ordinal.SIX, trumpSuit);
-    const dealer: Dealer = new Dealer();
     players.forEach((p) => {
       p.shuffleHandForTesting();
       p.notifyTrumpSuit(trumpSuit);
