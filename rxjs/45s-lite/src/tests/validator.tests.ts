@@ -27,11 +27,8 @@ describe.each`
     it("card should be expected", () => {
       let validators: Validators = new Validators();
       let validator: Validator = validators.getValidator(validators.IDENTITY);
-      let trick: Trick = new Trick(trumpSuit);
-      trick.leadingSuit = leadingSuit;
-      trick.hasTrumpBeenPlayed = hasTrumpBeenPlayed;
-      let player: Player = new Player("p1");
-      player.hand = hand;
+      let trick: Trick = new Trick(trumpSuit, leadingSuit, hasTrumpBeenPlayed);
+      let player: Player = new Player("p1", hand);
       let bid: Bid = new Bid(card, player);
 
       // test
@@ -48,6 +45,8 @@ describe.each`
   ${h([C._8D])} | ${C._10H} | ${CLUBS}  | ${DIAMONDS} | ${false}           | ${false}
   ${h([C._8S])} | ${C._10H} | ${CLUBS}  | ${DIAMONDS} | ${false}           | ${true}
   ${h([C._8S])} | ${C._10C} | ${CLUBS}  | ${DIAMONDS} | ${true}            | ${true}
+  ${h([C._8S])} | ${C._10C} | ${CLUBS}  | ${CLUBS}    | ${true}            | ${true}
+  ${h([C._8C])} | ${C._10S} | ${CLUBS}  | ${CLUBS}    | ${true}            | ${false}
 `(
   "for FollowLeadingSuitRule validator, with h=$hand c=$card t=$trumpSuit l=$leadingSuit h=$hasTrumpBeenPlayed e=$expected",
   ({ hand, card, trumpSuit, leadingSuit, hasTrumpBeenPlayed, expected }) => {
@@ -55,8 +54,7 @@ describe.each`
       let validators: Validators = new Validators();
       let validator: Validator = validators.getValidator(validators.RULE_FOLLOW_LEADING_SUIT);
       let trick: Trick = new Trick(trumpSuit, leadingSuit, hasTrumpBeenPlayed);
-      let player: Player = new Player("p1");
-      player.hand = hand;
+      let player: Player = new Player("p1", hand);
       let bid: Bid = new Bid(card, player);
 
       // test
