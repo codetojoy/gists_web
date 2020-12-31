@@ -5,7 +5,11 @@ import { Util } from "./util";
 import { Trick, TrickState } from "./trick";
 
 export class Hand {
-  private _cards: Card[] = [];
+  private _cards: Card[];
+
+  constructor(cards?: Card[]) {
+    this._cards = cards != null ? cards : [];
+  }
 
   dealCard(card: Card) {
     this._cards.push(card);

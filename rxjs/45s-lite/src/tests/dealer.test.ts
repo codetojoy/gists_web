@@ -17,10 +17,8 @@ function c(ord: Ordinal, suit: Suit) {
 }
 
 function p(name: string, cards: Card[]) {
-  let player: Player = new Player(name);
-  let hand: Hand = new Hand();
-  hand.cards = cards;
-  player.hand = hand;
+  let hand: Hand = new Hand(cards);
+  let player: Player = new Player(name, hand);
   return player;
 }
 
