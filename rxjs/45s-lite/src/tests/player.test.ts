@@ -5,29 +5,16 @@ import { Ordinal } from "../ordinal";
 import { Player } from "../player";
 import { Suit } from "../suit";
 import { Trick } from "../trick";
-
-function buildCard(ordinal: Ordinal, suit: Suit) {
-  return new Card(ordinal, suit);
-}
-
-function buildHand() {
-  let cards: Card[] = [];
-  cards.push(buildCard(Ordinal.THREE, Suit.CLUBS));
-  cards.push(buildCard(Ordinal.EIGHT, Suit.CLUBS));
-  cards.push(buildCard(Ordinal.JACK, Suit.DIAMONDS));
-  cards.push(buildCard(Ordinal.FOUR, Suit.HEARTS));
-  cards.push(buildCard(Ordinal.KING, Suit.SPADES));
-  return cards;
-}
+import { C } from "../c";
 
 describe("Player", () => {
   test("get bid : first play", () => {
     let hand: Hand = new Hand();
-    hand.cards = buildHand();
+    hand.cards = [C._3C, C._8C, C._JD, C._4H, C._KS];
     let numCards: number = hand.getNumCards();
     let player: Player = new Player("mozart");
     player.hand = hand;
-    const topCard: Card = buildCard(Ordinal.NINE, Suit.DIAMONDS);
+    const topCard: Card = C._9D;
     const trumpSuit: Suit = topCard.suit;
     const leadingSuit: Suit = null;
     player.notifyTrumpSuit(trumpSuit);

@@ -6,6 +6,7 @@ import { Ranker } from "../ranker";
 import { Util } from "../util";
 import { Player } from "../player";
 import { Bid } from "../bid";
+import { C } from "../c";
 
 function c(ord: Ordinal, suit: Suit) {
   return new Card(ord, suit);
@@ -390,16 +391,16 @@ describe("Ranker", () => {
 });
 
 describe.each`
-  num  | trump          | leading        | a                                  | b                                | expected
-  ${1} | ${Suit.HEARTS} | ${null}        | ${c(Ordinal.KING, Suit.HEARTS)}    | ${c(Ordinal.TWO, Suit.HEARTS)}   | ${1}
-  ${2} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TWO, Suit.DIAMONDS)}   | ${c(Ordinal.ACE, Suit.DIAMONDS)} | ${1}
-  ${3} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.TEN, Suit.DIAMONDS)}   | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${0}
-  ${4} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.ACE, Suit.CLUBS)}      | ${c(Ordinal.KING, Suit.SPADES)}  | ${1}
-  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.CLUBS)}      | ${c(Ordinal.KING, Suit.HEARTS)}  | ${1}
-  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.SPADES)}     | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
-  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TEN, Suit.DIAMONDS)}   | ${c(Ordinal.SIX, Suit.SPADES)}   | ${1}
-  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${c(Ordinal.TWO, Suit.HEARTS)}     | ${c(Ordinal.TEN, Suit.DIAMONDS)} | ${1}
-  ${9} | ${Suit.CLUBS}  | ${null}        | ${c(Ordinal.QUEEN, Suit.DIAMONDS)} | ${c(Ordinal.TEN, Suit.HEARTS)}   | ${1}
+  num  | trump          | leading        | a         | b         | expected
+  ${1} | ${Suit.HEARTS} | ${null}        | ${C._KH}  | ${C._2H}  | ${1}
+  ${2} | ${Suit.CLUBS}  | ${null}        | ${C._2D}  | ${C._AD}  | ${1}
+  ${3} | ${Suit.CLUBS}  | ${null}        | ${C._10D} | ${C._10H} | ${0}
+  ${4} | ${Suit.CLUBS}  | ${null}        | ${C._AC}  | ${C._KS}  | ${1}
+  ${5} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2C}  | ${C._KH}  | ${1}
+  ${6} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2S}  | ${C._6S}  | ${1}
+  ${7} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._10D} | ${C._6S}  | ${1}
+  ${8} | ${Suit.CLUBS}  | ${Suit.HEARTS} | ${C._2H}  | ${C._10D} | ${1}
+  ${9} | ${Suit.CLUBS}  | ${null}        | ${C._QD}  | ${C._10H} | ${1}
 `(
   "for customSort, with n:$num t:$trump l:$leading a:$a b:$b expected=$expected",
   ({ trump, leading, a, b, expected }) => {

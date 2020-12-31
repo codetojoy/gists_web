@@ -85,8 +85,6 @@ describe("Dealer", () => {
       p.notifyTrumpSuit(trumpSuit);
     });
 
-    // test
-    /*
     dealer.playRound(table);
     let trick: Trick = table.tricks[0];
     let winningBid: Bid = trick.winningBid;
@@ -98,7 +96,6 @@ describe("Dealer", () => {
     expect(bids[i++].player.name).toBe("beethoven");
     expect(bids[i++].player.name).toBe("mozart");
     expect(bids[i++].player.name).toBe("chopin");
-    */
   });
 
   test("play round w/o leading suit case 1", () => {

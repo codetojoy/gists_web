@@ -2,7 +2,7 @@ import { Card } from "./card";
 import { Ranker } from "./ranker";
 import { Suit } from "./suit";
 import { Util } from "./util";
-import { Trick } from "./trick";
+import { Trick, TrickState } from "./trick";
 
 export class Hand {
   private _cards: Card[] = [];
@@ -30,9 +30,9 @@ export class Hand {
   selectBestCard(trick: Trick): Card {
     let card: Card = null;
 
-    /*
-     */
-    if (trick.leadingSuit != null) {
+    if (trick.trickState === TrickState.NEW) {
+      card = this._cards.pop();
+    } else if (trick.trickState === TrickState.LEADING_NO_TRUMP) {
       let cardsOfSuit: Card[] = this._cards.filter((c) => c.suit === trick.leadingSuit);
       if (cardsOfSuit.length > 0) {
         card = cardsOfSuit[cardsOfSuit.length - 1];
@@ -40,7 +40,7 @@ export class Hand {
       } else {
         card = this._cards.pop();
       }
-    } else {
+    } else if (trick.trickState === TrickState.TRUMP_PLAYED) {
       card = this._cards.pop();
     }
 

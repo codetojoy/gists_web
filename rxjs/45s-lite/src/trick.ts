@@ -3,7 +3,7 @@ import { Suit } from "./suit";
 
 export enum TrickState {
   UNKNOWN = 0,
-  OPEN = 1,
+  NEW = 1,
   LEADING_NO_TRUMP = 2,
   TRUMP_PLAYED = 3,
 }
@@ -24,8 +24,13 @@ export class Trick {
     let result: TrickState = TrickState.UNKNOWN;
 
     if (this._trumpSuit != null && this._leadingSuit == null && !this._hasTrumpBeenPlayed) {
-      result = TrickState.OPEN;
-    } else if (this._trumpSuit != null && this._leadingSuit != null && !this._hasTrumpBeenPlayed) {
+      result = TrickState.NEW;
+    } else if (
+      this._trumpSuit != null &&
+      this._leadingSuit != null &&
+      this._trumpSuit !== this._leadingSuit &&
+      !this._hasTrumpBeenPlayed
+    ) {
       result = TrickState.LEADING_NO_TRUMP;
     } else if (this._trumpSuit != null && this._leadingSuit != null && this._hasTrumpBeenPlayed) {
       result = TrickState.TRUMP_PLAYED;
