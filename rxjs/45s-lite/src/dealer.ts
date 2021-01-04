@@ -33,6 +33,7 @@ export class Dealer {
     this.determineRoundWinner(table, bids, trick);
     table.addTrick(trick);
     table.bumpRoundNum();
+    // TODO: award points
   }
 
   determineRoundWinner(table: Table, bids: Bid[], trick: Trick) {

@@ -55,13 +55,6 @@ class FollowLeadingSuitRule implements Validator {
     if (this.doesApply(bid, trick)) {
       result = !bid.player.handContainsCardOfSuit(trick.leadingSuit);
     }
-    /*
-    if (trick.trickState === TrickState.LEADING_NO_TRUMP) {
-      if (bid.card.suit != trick.leadingSuit) {
-        result = !bid.player.handContainsCardOfSuit(trick.leadingSuit);
-      }
-    }
-      */
 
     return result;
   }

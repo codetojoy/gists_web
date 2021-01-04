@@ -1,8 +1,8 @@
 import { Card } from "./card";
 import { Ranker } from "./ranker";
 import { Suit } from "./suit";
-import { Util } from "./util";
 import { Trick, TrickState } from "./trick";
+import { Util } from "./util";
 
 export class Hand {
   private _cards: Card[];
@@ -56,11 +56,5 @@ export class Hand {
     this._cards.map((card) => (result += ` ${card.toString()}`));
 
     return result;
-  }
-
-  // ------------ getters / setters
-
-  set cards(value: Card[]) {
-    this._cards = value;
   }
 }

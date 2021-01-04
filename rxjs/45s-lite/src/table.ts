@@ -74,10 +74,4 @@ export class Table {
   get players(): Player[] {
     return this._players;
   }
-
-  /*
-  set players(value: Player[]) {
-    this._players = value;
-  }
-  */
 }
