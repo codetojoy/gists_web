@@ -5,12 +5,17 @@
     </div>
   </div>
   <div class="row">
+    <!-- *ngIf is a structural directive because it affects the DOM -->
     <div class="col-md-12">
       <app-foo *ngIf="this.isStateFoo()"></app-foo>
       <app-bar *ngIf="this.isStateBar()"></app-bar>
       <app-admin *ngIf="this.isStateAdmin()"></app-admin>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <hr />
+      <p>{{ footerInfo }}</p>
+    </div>
+  </div>
 </div>
-<hr />
-<p>footer</p>

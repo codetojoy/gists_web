@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Util } from './util/Util';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  @Input() footerInfo: string;
+
+  // internal page state
   state: string = 'foo';
 
-  isState(s: string): boolean {
+  ngOnInit(): void {
+    let util: Util = new Util();
+    this.footerInfo = util.tracer('footer ... copyright 2021 etc');
+  }
+
+  private isState(s: string): boolean {
     return this.state === s;
   }
 
