@@ -7,6 +7,8 @@ import { FooComponent } from './foo/foo.component';
 import { BarComponent } from './bar/bar.component';
 import { AdminComponent } from './admin/admin.component';
 import { HeaderComponent } from './header/header.component';
+import { FooListComponent } from './foo/foo-list/foo-list.component';
+import { FooEditComponent } from './foo/foo-edit/foo-edit.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +16,12 @@ import { HeaderComponent } from './header/header.component';
     FooComponent,
     BarComponent,
     AdminComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooListComponent,
+    FooEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
