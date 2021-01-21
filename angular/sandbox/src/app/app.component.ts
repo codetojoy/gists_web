@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Config } from './shared/config.model';
 import { Util } from './util/Util';
 
 @Component({
@@ -8,6 +9,7 @@ import { Util } from './util/Util';
 })
 export class AppComponent implements OnInit {
   @Input() footerInfo: string;
+  config: Config = new Config();
 
   // internal page state
   state: string = 'foo';
@@ -15,6 +17,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     let util: Util = new Util();
     this.footerInfo = util.tracer('footer ... copyright 2021 etc');
+  }
+
+  onConfigChanged(config: Config): void {
+    this.config = config;
   }
 
   private isState(s: string): boolean {

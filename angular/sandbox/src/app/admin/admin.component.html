@@ -2,7 +2,17 @@
 <h3>Admin</h3>
 <input type="text" name="keyA" [(ngModel)]="config.keyA" />
 <input type="text" name="valueA" [(ngModel)]="config.valueA" />
-<input type="number" name="maxFoos" [(ngModel)]="config.maxFoos" />
+
+<!-- this seems really hacky, re: valueChanged()
+    * we need Reactive forms or a way to bind to the entire model, or a lifecycle hook
+    * ngOnChanges doesn't apply here
+-->
+<input
+  type="number"
+  name="maxFoos"
+  [(ngModel)]="config.maxFoos"
+  (input)="valueChanged($event)"
+/>
 <br />
 <h3>output:</h3>
 <p>keyA: {{ config.keyA }}</p>

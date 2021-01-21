@@ -9,11 +9,16 @@
     <div class="col-md-12">
       <app-foo *ngIf="this.isStateFoo()"></app-foo>
       <app-bar *ngIf="this.isStateBar()"></app-bar>
-      <app-admin *ngIf="this.isStateAdmin()"></app-admin>
+      <app-admin
+        *ngIf="this.isStateAdmin()"
+        (configChanged)="onConfigChanged($event)"
+      ></app-admin>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
+      <hr />
+      <p>max foos: {{ config.maxFoos }}</p>
       <hr />
       <p>{{ footerInfo }}</p>
     </div>

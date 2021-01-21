@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  EventEmitter,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { Config } from '../shared/config.model';
 
@@ -9,6 +17,7 @@ import { Config } from '../shared/config.model';
 })
 export class AdminComponent implements OnInit {
   @Input() config: Config;
+  @Output() configChanged: EventEmitter<Config> = new EventEmitter<Config>();
 
   constructor() {}
 
@@ -17,5 +26,11 @@ export class AdminComponent implements OnInit {
     this.config.keyA = 'n/a';
     this.config.valueA = 'n/a';
     this.config.maxFoos = 0;
+  }
+
+  valueChanged(event: any): void {
+    // console.log(`TRACER AC.ngOnChanges v: ${event.target.value}`);
+    // console.log(`TRACER AC.ngOnChanges c.maxFoos: ${this.config.maxFoos}`);
+    this.configChanged.emit(this.config);
   }
 }
