@@ -20,4 +20,6 @@ npm install --save bootstrap@3
 x - Admin should have a Config object
 x - reflect admin value in console log ?
 * Admin fires event on changes to `maxFoos` but it seems like a kludge
+    - also, App component has a copy of config ?? 
+    - page navigation doesn't seem happy 
 * click on Foo item should go to an edit page
