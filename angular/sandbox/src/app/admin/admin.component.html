@@ -1,1 +1,10 @@
-<p>admin works!</p>
+<!-- 2-way binding with model -->
+<h3>Admin</h3>
+<input type="text" name="keyA" [(ngModel)]="config.keyA" />
+<input type="text" name="valueA" [(ngModel)]="config.valueA" />
+<input type="number" name="maxFoos" [(ngModel)]="config.maxFoos" />
+<br />
+<h3>output:</h3>
+<p>keyA: {{ config.keyA }}</p>
+<p>valueA: {{ config.valueA }}</p>
+<p>maxFoos: {{ config.maxFoos }}</p>
