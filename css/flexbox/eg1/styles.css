@@ -1,0 +1,27 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.Menu {
+  background-color: indigo;
+  color: #ebebeb;
+  font-family: "Oswald", sans-serif;
+  font-size: 1rem;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 800px) {
+  .Menu {
+     flex-direction: row;
+  }
+
+  .MenuItem {
+    margin-right: 1rem;
+  }
+}
