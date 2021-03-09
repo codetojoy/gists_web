@@ -1,1 +1,21 @@
-<p>player-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <p>id: {{ player.id }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" name="name" [(ngModel)]="player.name" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" name="strategy" [(ngModel)]="player.strategy" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onSave()">Save</button>
+  </div>
+</div>

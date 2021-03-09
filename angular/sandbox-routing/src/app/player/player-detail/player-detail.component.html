@@ -1,2 +1,23 @@
-<p>{{ player.name }} (id: {{ player.id }})</p>
-<p>{{ player.strategy }}</p>
+<div class="row">
+  <div class="col-xs-12">
+    <p>{{ player.name }} (id: {{ player.id }})</p>
+    <p>{{ player.strategy }}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        Manage Player <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a [routerLink]="['/admin', 'players', player.id, 'edit']"
+            >Edit Player</a
+          >
+        </li>
+        <li><a>Delete Player</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
