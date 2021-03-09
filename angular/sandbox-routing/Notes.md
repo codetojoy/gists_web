@@ -17,3 +17,10 @@ npm install --save bootstrap@3
 
 ### TODO
 
+* 'please select player'
+* new player
+* delete player
+* edit player 
+    - for dirty data, should not leave the edit component
+        - deactivate
+* strategy as enum with dropdown  

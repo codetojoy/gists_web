@@ -19,6 +19,7 @@ import { PlayerListItemComponent } from './player/player-list-item/player-list-i
 import { PlayerComponent } from './player/player.component';
 import { PlayersComponent } from './players/players.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { NoPlayerComponent } from './player/no-player/no-player.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     PlayerDetailComponent,
     PlayerListItemComponent,
     DropdownDirective,
+    NoPlayerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [PlayerService],
