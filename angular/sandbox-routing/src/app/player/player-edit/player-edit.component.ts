@@ -24,6 +24,7 @@ export class PlayerEditComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log(`TRACER PlayerEdit::save TODO name: ${this.player.name}`);
+    this.playerService.updatePlayer(this.player);
+    this.playerService.logPlayers();
   }
 }

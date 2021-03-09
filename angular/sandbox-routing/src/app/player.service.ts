@@ -7,7 +7,7 @@ export class PlayerService {
   private nextId: number = 5150;
 
   constructor() {
-    let player1: Player = new Player(this.getNextId(), 'You', 'interactive');
+    let player1: Player = new Player(this.getNextId(), 'User', 'interactive');
     let player2: Player = new Player(this.getNextId(), 'Mozart', 'NextCard');
     let player3: Player = new Player(this.getNextId(), 'Brahms', 'NearestCard');
 
@@ -20,6 +20,30 @@ export class PlayerService {
 
   findPlayerById(id: number): Player {
     return this.players.find((recipe) => recipe.id == id);
+  }
+
+  findIndexById(id: number): number {
+    let result = 0;
+    this.players.forEach((player, index) => {
+      if (player.id === id) {
+        result = index;
+      }
+    });
+    return result;
+  }
+
+  logPlayers(): void {
+    this.players.forEach((player, index) => {
+      console.log(
+        `TRACER ${index} ${player.id} ${player.name} ${player.strategy}`
+      );
+    });
+  }
+
+  updatePlayer(player: Player): void {
+    let index = this.findIndexById(player.id);
+    this.players[index].name = player.name;
+    this.players[index].strategy = player.strategy;
   }
 
   getPlayers(): Player[] {
