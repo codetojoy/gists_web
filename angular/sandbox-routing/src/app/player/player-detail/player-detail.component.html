@@ -16,7 +16,11 @@
             >Edit Player</a
           >
         </li>
-        <li><a>Delete Player</a></li>
+        <li>
+          <a [routerLink]="['/admin', 'players', player.id, 'delete']"
+            >Delete Player</a
+          >
+        </li>
       </ul>
     </div>
   </div>

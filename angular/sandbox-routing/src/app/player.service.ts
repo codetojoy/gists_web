@@ -46,6 +46,10 @@ export class PlayerService {
     this.players[index].strategy = player.strategy;
   }
 
+  deletePlayerById(id: number): void {
+    this.players = this.players.filter((p) => p.id != id);
+  }
+
   getPlayers(): Player[] {
     return this.players.slice();
   }

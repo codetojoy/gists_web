@@ -20,6 +20,7 @@ import { PlayerComponent } from './player/player.component';
 import { PlayersComponent } from './players/players.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { NoPlayerComponent } from './player/no-player/no-player.component';
+import { PlayerDeleteComponent } from './player/player-delete/player-delete.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NoPlayerComponent } from './player/no-player/no-player.component';
     PlayerListItemComponent,
     DropdownDirective,
     NoPlayerComponent,
+    PlayerDeleteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [PlayerService],

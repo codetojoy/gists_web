@@ -19,7 +19,9 @@ npm install --save bootstrap@3
 
 x * 'please select player'
 * new player
-* delete player
+y delete player
+    - need to refresh the players list after delete, because it's a copy
+    - fire event ? 
 y * edit player 
     - for dirty data, should not leave the edit component
         - deactivate
