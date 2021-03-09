@@ -23,7 +23,7 @@ export class PlayerService {
   }
 
   findIndexById(id: number): number {
-    let result = 0;
+    let result = -1;
     this.players.forEach((player, index) => {
       if (player.id === id) {
         result = index;
@@ -40,10 +40,21 @@ export class PlayerService {
     });
   }
 
+  newPlayer(): Player {
+    let player = new Player(this.getNextId(), 'placeholder', 'placeholder');
+    return player;
+  }
+
   updatePlayer(player: Player): void {
     let index = this.findIndexById(player.id);
-    this.players[index].name = player.name;
-    this.players[index].strategy = player.strategy;
+
+    if (index == -1) {
+      // new player being saved
+      this.players.push(player);
+    } else {
+      this.players[index].name = player.name;
+      this.players[index].strategy = player.strategy;
+    }
   }
 
   deletePlayerById(id: number): void {

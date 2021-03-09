@@ -17,12 +17,14 @@ npm install --save bootstrap@3
 
 ### TODO
 
-x * 'please select player'
-* new player
-y delete player
+* x - 'please select player'
+* y - new player
     - need to refresh the players list after delete, because it's a copy
     - fire event ? 
-y * edit player 
+* y - delete player
+    - need to refresh the players list after delete, because it's a copy
+    - fire event ? 
+* y - edit player 
     - for dirty data, should not leave the edit component
         - deactivate
 * strategy as enum with dropdown  

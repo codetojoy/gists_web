@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Player } from '../player.model';
 import { PlayerService } from '../player.service';
 
@@ -12,13 +13,13 @@ import { PlayerService } from '../player.service';
 export class PlayersComponent implements OnInit {
   players: Player[];
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private playerService: PlayerService, private router: Router) {}
 
   ngOnInit(): void {
     this.players = this.playerService.getPlayers();
   }
 
   onNewPlayer(): void {
-    console.log(`TRACER PlayersComponent TODO`);
+    this.router.navigate(['admin', 'players', 'new']);
   }
 }

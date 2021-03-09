@@ -10,6 +10,7 @@ import { PlayerService } from 'src/app/player.service';
 })
 export class PlayerEditComponent implements OnInit {
   player: Player;
+  editMode: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,8 +19,15 @@ export class PlayerEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const id = +params['id'];
-      this.player = this.playerService.findPlayerById(id);
+      const tmpId = params['id'];
+      this.editMode = tmpId != null;
+
+      if (this.editMode) {
+        const id = +tmpId;
+        this.player = this.playerService.findPlayerById(id);
+      } else {
+        this.player = this.playerService.newPlayer();
+      }
     });
   }
 
