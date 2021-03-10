@@ -5,6 +5,7 @@ import { GameComponent } from './game/game.component';
 import { NoPlayerComponent } from './player/no-player/no-player.component';
 import { PlayerDeleteComponent } from './player/player-delete/player-delete.component';
 import { PlayerDetailComponent } from './player/player-detail/player-detail.component';
+import { CanDeactivateGuard } from './player/player-edit/can-deactivate-guard.service';
 import { PlayerEditComponent } from './player/player-edit/player-edit.component';
 
 const routes: Routes = [
@@ -15,9 +16,17 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: '', component: NoPlayerComponent },
-      { path: 'players/new', component: PlayerEditComponent },
+      {
+        path: 'players/new',
+        component: PlayerEditComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
       { path: 'players/:id', component: PlayerDetailComponent },
-      { path: 'players/:id/edit', component: PlayerEditComponent },
+      {
+        path: 'players/:id/edit',
+        component: PlayerEditComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
       { path: 'players/:id/delete', component: PlayerDeleteComponent },
     ],
   },
