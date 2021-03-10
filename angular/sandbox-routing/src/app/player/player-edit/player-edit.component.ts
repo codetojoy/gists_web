@@ -57,7 +57,6 @@ export class PlayerEditComponent implements OnInit, CanComponentDeactivate {
     ) {
       result = confirm('Do you want to discard the changes?');
     }
-    console.log(`TRACER PEC.canDeact result: ${result}`);
     return result;
   }
 }
