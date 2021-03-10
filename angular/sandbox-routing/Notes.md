@@ -17,15 +17,13 @@ npm install --save bootstrap@3
 
 ### TODO
 
-* fake auth guard for admin 
-* y - new player
-    - need to refresh the players list after delete, because it's a copy
-    - fire event ? 
-* y - delete player
-    - need to refresh the players list after delete, because it's a copy
-    - fire event ? 
-* strategy as enum with dropdown  
+* y - fake auth guard for admin 
+    - redirect to login page or modal ?
+    - spinner while waiting?
+* x - strategy as enum with dropdown  
 * x - 'please select player'
 * x - edit player 
     - for dirty data, should not leave the edit component
         - deactivate
+* x - new player
+* x - delete player

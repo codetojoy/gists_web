@@ -12,8 +12,13 @@ import { PlayerService } from '../player.service';
 })
 export class PlayersComponent implements OnInit {
   players: Player[];
+  private playerServiceSubscription;
 
-  constructor(private playerService: PlayerService, private router: Router) {}
+  constructor(private playerService: PlayerService, private router: Router) {
+    this.playerService.playersChanged.subscribe(
+      (newPlayers: Player[]) => (this.players = newPlayers)
+    );
+  }
 
   ngOnInit(): void {
     this.players = this.playerService.getPlayers();

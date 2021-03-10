@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
 import { GameComponent } from './game/game.component';
 import { HeaderComponent } from './header/header.component';
 import { PlayerService } from './player.service';
@@ -33,7 +35,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     PlayerDeleteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [PlayerService, CanDeactivateGuard],
+  providers: [PlayerService, CanDeactivateGuard, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

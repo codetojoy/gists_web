@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './auth-guard.service';
 import { GameComponent } from './game/game.component';
 import { NoPlayerComponent } from './player/no-player/no-player.component';
 import { PlayerDeleteComponent } from './player/player-delete/player-delete.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: NoPlayerComponent },
       {

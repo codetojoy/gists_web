@@ -10,7 +10,15 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <input type="text" name="strategy" [(ngModel)]="player.strategy" />
+    <select [(ngModel)]="player.strategy">
+      <option
+        *ngFor="let strategy of strategies"
+        [ngValue]="strategy"
+        [selected]="player.strategy === strategy"
+      >
+        {{ strategy }}
+      </option>
+    </select>
   </div>
 </div>
 
