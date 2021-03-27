@@ -11,7 +11,7 @@ fi
 
 ### replace    ./my_resources/environment.ts 
 ###         -> ./my_resources/environment.stamped.ts 
-### copy    -> ./src/environment/environment.ts
+### copy    -> ./src/environments/environment.ts
 
 SRC_FILE=./my_resources/environment.ts
 STAMPED_FILE=./my_resources/environment.stamped.ts
@@ -19,8 +19,8 @@ DEST_FILE=./src/environments/environment.ts
 
 sed "s|MY_API_URL|$MY_API_URL|" $SRC_FILE > $STAMPED_FILE
 
-cp $SRC_FILE $DEST_FILE
+cp $STAMPED_FILE $DEST_FILE
 
-# ng serve
+ng serve
 
 echo "Ready."
