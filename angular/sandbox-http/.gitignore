@@ -1,5 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+./client.sh
 ./secret.sh
 ./src/environment/environment.ts
 ./my_resources/environment.stamped.ts
