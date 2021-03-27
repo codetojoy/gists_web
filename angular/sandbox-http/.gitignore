@@ -2,6 +2,7 @@
 
 ./secret.sh
 ./src/environment/environment.ts
+./my_resources/environment.stamped.ts
 
 # compiled output
 /dist
