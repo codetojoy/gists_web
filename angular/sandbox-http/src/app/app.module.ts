@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,7 +35,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     NoPlayerComponent,
     PlayerDeleteComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [PlayerService, CanDeactivateGuard, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })

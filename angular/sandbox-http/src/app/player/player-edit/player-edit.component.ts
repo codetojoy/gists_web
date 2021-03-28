@@ -32,7 +32,7 @@ export class PlayerEditComponent implements OnInit, CanComponentDeactivate {
       this.editMode = tmpId != null;
 
       if (this.editMode) {
-        const id = +tmpId;
+        const id = tmpId;
         this.player = this.playerService.findPlayerById(id);
       } else {
         this.player = this.playerService.newPlayer();

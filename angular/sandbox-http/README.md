@@ -17,5 +17,11 @@ npm install --save bootstrap@3
 
 ### TODO
 
-* 
+* save 'seed' players to database 
+* load players
+* edit a player
+* delete a player
+* clear all players
+* save a new player 
+* switch to observables
 

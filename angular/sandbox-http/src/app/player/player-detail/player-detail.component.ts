@@ -18,7 +18,7 @@ export class PlayerDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const id = +params['id'];
+      const id = params['id'];
       this.player = this.playerService.findPlayerById(id);
     });
   }
