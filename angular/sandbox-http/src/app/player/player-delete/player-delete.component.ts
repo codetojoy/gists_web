@@ -15,7 +15,7 @@ export class PlayerDeleteComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const id = +params['id'];
+      const id = params['id'];
       this.playerService.deletePlayerById(id);
     });
   }

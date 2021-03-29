@@ -1,11 +1,10 @@
-
 ### Summary
 
-* Spin-off from sandbox for some http experimentation.
+- Spin-off from sandbox for some http experimentation.
 
 ### Setup
 
-* in parent dir: `ng new sandbox`
+- in parent dir: `ng new sandbox`
 
 ```
 ng generate component players
@@ -17,11 +16,10 @@ npm install --save bootstrap@3
 
 ### TODO
 
-* save 'seed' players to database 
-* load players
-* edit a player
-* delete a player
-* clear all players
-* save a new player 
-* switch to observables
-
+- X switch to observables in player service
+- X save 'seed' players to database
+- X load players
+- X delete a player
+- create a new player
+- update/edit a player
+- bug: on seed, auto-load players

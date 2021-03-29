@@ -20,4 +20,8 @@ export class Endpoints {
   public getPostUri(): string {
     return this.apiMain;
   }
+
+  public getDeleteByIdUri(id: string): string {
+    return `${this.apiRoot}/${id}.json`;
+  }
 }

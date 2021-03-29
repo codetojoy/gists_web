@@ -12,27 +12,7 @@ export class PlayerService {
   private nextId: number = 5150;
   playersChanged: Subject<Player[]> = new Subject<Player[]>();
 
-  constructor(private http: HttpClient) {
-    /*
-    let player1: Player = new Player(
-      this.getNextId(),
-      'User',
-      Strategy.UserChoice
-    );
-    let player2: Player = new Player(
-      this.getNextId(),
-      'Mozart',
-      Strategy.NextCard
-    );
-    let player3: Player = new Player(
-      this.getNextId(),
-      'Brahms',
-      Strategy.MaxCard
-    );
-
-    this.players.push(player1, player2, player3);
-    */
-  }
+  constructor(private http: HttpClient) {}
 
   getNextId(): number {
     return this.nextId++;
@@ -61,7 +41,7 @@ export class PlayerService {
     });
   }
 
-  firePlayersChangedEvent(): void {
+  private notifyPlayersChanged(): void {
     this.playersChanged.next(this.getPlayers());
   }
 
@@ -84,15 +64,16 @@ export class PlayerService {
       this.players[index].strategy = player.strategy;
     }
 
-    this.firePlayersChangedEvent();
+    this.notifyPlayersChanged();
   }
 
-  deletePlayerById(id: number): void {
-    /*
+  /*
+  deletePlayerById(id: string): void {
+    console.log(`TRACER MAR 29 delete id: ${id}`);
     this.players = this.players.filter((p) => p.id != id);
     this.firePlayersChangedEvent();
-    */
   }
+    */
 
   getPlayers(): Player[] {
     console.log(
@@ -105,12 +86,22 @@ export class PlayerService {
     this.fetchPlayers();
   }
 
+  deletePlayerById(id: string): void {
+    this.http
+      .delete(this.endpoints.getDeleteByIdUri(id))
+      .subscribe((responseData) => {
+        console.log(`TRACER 29-MAR delete OK !!! `);
+        // this.notifyPlayersChanged();
+      });
+  }
+
   seedPlayer(): void {
     let player: Player = this.newPlayer();
     this.http
       .post(this.endpoints.getPostUri(), player)
       .subscribe((responseData) => {
-        console.log(`TRACER post OK !!! montreal maroons ${responseData}`);
+        console.log(`TRACER post OK`);
+        this.notifyPlayersChanged();
       });
   }
 
@@ -148,7 +139,7 @@ export class PlayerService {
           );
         });
         console.log(`TRACER GET cp 2 # p: ${this.players.length}`);
-        this.firePlayersChangedEvent();
+        this.notifyPlayersChanged();
       });
   }
 }
