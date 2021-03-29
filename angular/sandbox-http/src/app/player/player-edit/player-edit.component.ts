@@ -43,7 +43,11 @@ export class PlayerEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSave(): void {
-    this.playerService.updatePlayer(this.player);
+    if (this.editMode) {
+      this.playerService.updatePlayer(this.player);
+    } else {
+      this.playerService.createPlayer(this.player);
+    }
     this.changesSaved = true;
     this.playerService.logPlayers();
   }

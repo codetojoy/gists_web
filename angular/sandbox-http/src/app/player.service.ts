@@ -9,28 +9,13 @@ import { Endpoints } from './util/Endpoints';
 export class PlayerService {
   private endpoints: Endpoints = new Endpoints();
   private players: Player[] = [];
-  private nextId: number = 5150;
   playersChanged: Subject<Player[]> = new Subject<Player[]>();
 
   constructor(private http: HttpClient) {}
 
-  getNextId(): number {
-    return this.nextId++;
-  }
-
   findPlayerById(id: string): Player {
     console.log(`TRACER 28-MAR id: ${id} # p: ${this.players.length}`);
     return this.players.find((player) => player.id === id);
-  }
-
-  findIndexById(id: string): number {
-    let result = -1;
-    this.players.forEach((player, index) => {
-      if (player.id === id) {
-        result = index;
-      }
-    });
-    return result;
   }
 
   logPlayers(): void {
@@ -52,23 +37,6 @@ export class PlayerService {
     };
     return player;
   }
-
-  /*
-  updatePlayer(player: Player): void {
-    let newPlayer: Player = {};
-    let index = this.findIndexById(player.id);
-
-    if (index == -1) {
-      // new player being saved
-      this.players.push(player);
-    } else {
-      this.players[index].name = player.name;
-      this.players[index].strategy = player.strategy;
-    }
-
-    this.notifyPlayersChanged();
-  }
-  */
 
   getPlayers(): Player[] {
     console.log(
@@ -99,6 +67,15 @@ export class PlayerService {
       });
   }
 
+  createPlayer(player: Player): void {
+    this.http
+      .post(this.endpoints.getPostUri(), player)
+      .subscribe((responseData) => {
+        console.log(`TRACER post OK`);
+        this.notifyPlayersChanged();
+      });
+  }
+
   seedPlayer(): void {
     let player: Player = this.newPlayer();
     this.http
@@ -108,9 +85,6 @@ export class PlayerService {
         this.notifyPlayersChanged();
       });
   }
-
-  // TODO: delete with button
-  deleteSeedPlayer(): void {}
 
   private fetchPlayers() {
     this.http

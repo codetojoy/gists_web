@@ -1,6 +1,7 @@
 ### Summary
 
 - Spin-off from sandbox for some http experimentation.
+- see `client.sh` for CLI that uses Firebase basics for realtime DB
 
 ### Setup
 
@@ -21,5 +22,5 @@ npm install --save bootstrap@3
 - X load players
 - X delete a player
 - X update/edit a player
-- create a new player
+- X create a new player
 - bug: on seed, auto-load players

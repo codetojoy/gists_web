@@ -19,14 +19,12 @@ export class PlayersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.playerServiceSubscription = this.playerService.playersChanged.subscribe(
       (newPlayers: Player[]) => {
-        console.log(`TRACER PC.sub HELLO cp 1`);
         this.players = newPlayers;
         this.players.forEach((p) => {
-          console.log(`TRACER PC.sub n: ${p.name}`);
+          console.log(`TRACER 29-MAR PC.sub n: ${p.name}`);
         });
       }
     );
-    // this.players = this.playerService.getPlayers();
   }
 
   ngOnDestroy(): void {
@@ -43,9 +41,5 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
   onSeedPlayer(): void {
     this.playerService.seedPlayer();
-  }
-
-  onDeleteSeedPlayer(): void {
-    this.playerService.deleteSeedPlayer();
   }
 }
