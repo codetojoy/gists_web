@@ -13,15 +13,11 @@ export class Endpoints {
     return this.apiMain;
   }
 
-  public getGetByIdUri(id: string): string {
+  public getByIdUri(id: string): string {
     return `${this.apiRoot}/${id}.json`;
   }
 
   public getPostUri(): string {
     return this.apiMain;
-  }
-
-  public getDeleteByIdUri(id: string): string {
-    return `${this.apiRoot}/${id}.json`;
   }
 }

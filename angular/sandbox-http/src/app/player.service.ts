@@ -53,7 +53,9 @@ export class PlayerService {
     return player;
   }
 
+  /*
   updatePlayer(player: Player): void {
+    let newPlayer: Player = {};
     let index = this.findIndexById(player.id);
 
     if (index == -1) {
@@ -66,14 +68,7 @@ export class PlayerService {
 
     this.notifyPlayersChanged();
   }
-
-  /*
-  deletePlayerById(id: string): void {
-    console.log(`TRACER MAR 29 delete id: ${id}`);
-    this.players = this.players.filter((p) => p.id != id);
-    this.firePlayersChangedEvent();
-  }
-    */
+  */
 
   getPlayers(): Player[] {
     console.log(
@@ -86,9 +81,18 @@ export class PlayerService {
     this.fetchPlayers();
   }
 
+  updatePlayer(player: Player): void {
+    this.http
+      .put(this.endpoints.getByIdUri(player.id), player)
+      .subscribe((responseData) => {
+        console.log(`TRACER 29-MAR put OK !!! `);
+        this.notifyPlayersChanged();
+      });
+  }
+
   deletePlayerById(id: string): void {
     this.http
-      .delete(this.endpoints.getDeleteByIdUri(id))
+      .delete(this.endpoints.getByIdUri(id))
       .subscribe((responseData) => {
         console.log(`TRACER 29-MAR delete OK !!! `);
         // this.notifyPlayersChanged();
@@ -105,15 +109,8 @@ export class PlayerService {
       });
   }
 
-  deleteSeedPlayer(): void {
-    /*
-    let player: Player = this.newPlayer();
-    this.http.delete(this.apiUri, player).subscribe((responseData) => {
-      console.log(`TRACER delete OK !!!`);
-      this.fetchPlayers();
-    });
-    */
-  }
+  // TODO: delete with button
+  deleteSeedPlayer(): void {}
 
   private fetchPlayers() {
     this.http

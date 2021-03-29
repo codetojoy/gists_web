@@ -20,6 +20,6 @@ npm install --save bootstrap@3
 - X save 'seed' players to database
 - X load players
 - X delete a player
+- X update/edit a player
 - create a new player
-- update/edit a player
 - bug: on seed, auto-load players
