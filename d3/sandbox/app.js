@@ -39,7 +39,8 @@ function update() {
 
 function updateContentA() {
   let svg = d3.select("#content-a");
-  svg.append("circle").attr("cx", 200).attr("cy", 200).attr("r", 40).style("fill", "blue");
+  svg.append("g").attr("transform", "translate(0,20)").append("text").text("Mozart was a great composer.");
+  svg.append("circle").attr("cx", 80).attr("cy", 80).attr("r", 55).style("fill", "blue");
 }
 
 function updateContentC() {
