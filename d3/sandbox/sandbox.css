@@ -29,15 +29,10 @@ li {
 .container {
   display: grid;
   grid-template-columns: repeat(4, 25%);
-  grid-template-rows: 50px 10px 50px 10px repeat(4, 200px) 10px 50px;
+  grid-template-rows: 50px 10px repeat(1, 1400px) 10px 50px;
   grid-template-areas:
     "header header header header"
     ". . . ."
-    "sidebar sidebar sidebar sidebar"
-    ". . . ."
-    "content content content content"
-    "content content content content"
-    "content content content content"
     "content content content content"
     ". . . ."
     "footer footer footer footer";
@@ -49,8 +44,7 @@ li {
 }
 
 .sidebar {
-  background: rgba(255, 0, 0, 0.5);
-  grid-area: sidebar;
+  display: none;
 }
 
 .content {
@@ -90,5 +84,11 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  .sidebar {
+    display: block;
+    background: rgba(255, 0, 0, 0.5);
+    grid-area: sidebar;
   }
 }
