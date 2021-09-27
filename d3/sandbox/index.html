@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sandbox</title>
+    <link rel="stylesheet" href="sandbox.css" />
+    <script src="https://d3js.org/d3.v5.min.js" defer></script>
+    <script src="https://d3js.org/d3-scale.v3.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body onload="update()">
+    <div class="container">
+      <div class="header"><p>header text</p></div>
+      <div class="sidebar"><p>sidebar text</p></div>
+      <div class="content">
+        <div class="content-container">
+          <div class="content-container-a">
+            <p>content A</p>
+          </div>
+          <div class="content-container-b">
+            <h2>sandbox v1</h2>
+            <form onsubmit="event.preventDefault()">
+              <label>New:</label><input type="text" id="new-attendee"></input>
+              <button id="add-button">Add</button>
+            </form>
+            <br/>
+            <button id="shuffle-button">Shuffle</button>
+            <button id="play-button">Play!</button>
+            <hr/>
+            <ul></ul>
+          </div>
+          <div class="content-container-c">
+            <p>content C</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><p>footer text</p></div>
+    </div>
+  </body>
+</html>

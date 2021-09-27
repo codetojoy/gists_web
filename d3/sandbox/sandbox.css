@@ -1,0 +1,94 @@
+html {
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+
+li {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 1rem 0;
+  padding: 0.5rem;
+}
+
+.added {
+  background-color: greenyellow;
+}
+
+.redundant {
+  background-color: lightcoral;
+}
+
+.updated {
+  background-color: orange;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: 50px 10px 50px 10px repeat(4, 200px) 10px 50px;
+  grid-template-areas:
+    "header header header header"
+    ". . . ."
+    "sidebar sidebar sidebar sidebar"
+    ". . . ."
+    "content content content content"
+    "content content content content"
+    "content content content content"
+    "content content content content"
+    ". . . ."
+    "footer footer footer footer";
+}
+
+.header {
+  background: rgba(255, 154, 72, 0.5);
+  grid-area: header;
+}
+
+.sidebar {
+  background: rgba(255, 0, 0, 0.5);
+  grid-area: sidebar;
+}
+
+.content {
+  background: rgba(0, 128, 0, 0.5);
+  grid-area: content;
+}
+
+.footer {
+  background: rgba(0, 4, 255, 0.5);
+  grid-area: footer;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+    is min-width >= 40rem ? i.e. desktop size, and not mobile
+*/
+@media (min-width: 40rem) {
+  .container {
+    display: grid;
+    grid-template-columns: 15% 20px repeat(5, 15%) 20px;
+    grid-template-rows: 50px 20px repeat(3, 200px) 20px 50px;
+    grid-template-areas:
+      "header header header header header header header header header"
+      ". . . . . . . . ."
+      "sidebar . content content content content content content content"
+      "sidebar . content content content content content content content"
+      "sidebar . content content content content content content content"
+      ". . . . . . . . ."
+      "footer footer footer footer footer footer footer footer footer";
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
