@@ -62,6 +62,12 @@ li {
   flex-direction: column;
 }
 
+svg {
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
 /*
     is min-width >= 40rem ? i.e. desktop size, and not mobile
 */
