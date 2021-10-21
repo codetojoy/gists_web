@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script type="module">
+      import {myFoo} from './foo.js'
+
+      document.querySelector('#myButton').addEventListener('click', myFoo)
+      window.addEventListener('DOMContentLoaded', myFoo, false);
+    </script>
+  </head>
+  <body>
+    <p>hello there</p>
+    <button id="myButton">Go</button>
+  </body>
+</html>
