@@ -1,7 +1,13 @@
 
-import {myBar} from './bar.js';
+import * as bar from './bar.js';
 
 export const myFoo = () => {
-  myBar();
+  bar.myBar();
   console.log('TRACER myFoo');
 }
+
+export const append = (s) => {
+  const t = bar.append(s);
+  return `foo::${t}`; 
+} 
+

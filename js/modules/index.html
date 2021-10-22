@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <script type="module">
-      import {myFoo} from './foo.js'
+      import {myFoo, append} from './foo.js'
 
       document.querySelector('#myButton').addEventListener('click', myFoo)
       window.addEventListener('DOMContentLoaded', myFoo, false);
+      console.log(append('MOZART'));
     </script>
   </head>
   <body>
