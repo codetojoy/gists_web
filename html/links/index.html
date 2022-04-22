@@ -1,0 +1,104 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+<meta charset="UTF-8"/>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: antique-white;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.link {
+    margin: 1rem;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+.button {
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 4rem;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #2c974b;
+}
+
+.button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+</style>
+
+</head>
+
+<body>
+<div class="layout">
+  <div class="link">
+    <a href="https://www.nytimes.com/puzzles/spelling-bee" class="button">Spelling Bee</a>
+  </div>
+  <div class="link">
+    <a href="https://www.quordle.com/" class="button">Quordle</a>
+  </div>
+  <div class="link">
+    <a href="https://www.nytimes.com/games/wordle/index.html" class="button">Wordle</a>
+  </div>
+  <div class="link">
+    <a href="https://www.facebook.com" class="button">Facebook</a>
+  </div>
+</div>
+</body>
+</html>
