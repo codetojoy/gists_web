@@ -1,0 +1,77 @@
+<!DOCTYPE html lang="en">
+<html>
+
+<head>
+<meta charset="UTF-8"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+<link rel="stylesheet" href="./main.css">
+
+</head>
+
+<!--
+from: https://www.youtube.com/watch?v=XhfPaNTEuTs
+ and: https://codepen.io/punkydrewster713/full/wvMrvpX
+-->
+
+<body>
+
+<div id="knockout-app" class="card">
+   <header>
+      Good Dog Walks Inc.
+   </header>
+   <div class="card-section">
+      <h2>Hello, <span data-bind="text: userName"></span></h2>
+      <p>How many walks will we take today?</p>
+      <div class="counter-ui-container">
+         <button data-bind="click: decrease">-</button>
+         <span class="counter" data-bind="text: count">0</span>
+         <button data-bind="click: increase">+</button>
+      </div>
+      <p>
+         Your dog is <span data-bind="text: dogStatus"></span>
+      </p>
+   </div>
+   <footer>
+      <span>Have a tail wagging day!</span>
+   </footer>
+</div>
+
+<script>
+function CounterViewModel() {
+   var self = this;
+   self.userName = ko.observable("Wayne");
+   self.count = ko.observable(0);
+   
+   self.increase = function() {
+      var currentValue = self.count();
+      self.count(currentValue + 1);
+   }
+   
+   self.decrease = function() {
+      var currentValue = self.count();
+      if (currentValue > 0) {
+         self.count(currentValue - 1);
+      }
+   }
+   
+   self.dogStatus = ko.computed(function() {
+      if (self.count() === 1) {
+         return "UNDERWHELMED."
+      }
+      if (self.count() === 2) {
+         return "LISTENING..."
+      }
+      if (self.count() > 2) {
+         return "THRILLED!"
+      }
+      return "UPSET."
+   });
+};
+
+const knockoutApp = document.querySelector("#knockout-app");
+ko.applyBindings(new CounterViewModel(), knockoutApp);
+</script>
+
+</body>
+</html>
