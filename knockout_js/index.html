@@ -1,12 +1,56 @@
-<!DOCTYPE html lang="en">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8" />
+
 
 <head>
-<meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
-<link rel="stylesheet" href="./main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
 
+    <link rel="stylesheet" href="./main.css">
+
+    <script>
+        function CounterViewModel() {
+           var self = this;
+           self.userName = ko.observable("TRACER: mozart");
+           self.count = ko.observable(0);
+           
+           self.increase = function() {
+              var currentValue = self.count();
+              self.count(currentValue + 1);
+           }
+           
+           self.decrease = function() {
+              var currentValue = self.count();
+              if (currentValue > 0) {
+                 self.count(currentValue - 1);
+              }
+           }
+           
+           self.dogStatus = ko.computed(function() {
+              if (self.count() === 1) {
+                 return "UNDERWHELMED."
+              }
+              if (self.count() === 2) {
+                 return "LISTENING..."
+              }
+              if (self.count() > 2) {
+                 return "THRILLED!"
+              }
+              return "UPSET."
+           });
+        };
+
+        // --------------- main 
+
+        $(document).ready(function () {
+            const knockoutApp = document.querySelector("#knockout-app");
+            ko.applyBindings(new CounterViewModel(), knockoutApp);
+        });
+    </script>
 </head>
 
 <!--
@@ -36,42 +80,6 @@ from: https://www.youtube.com/watch?v=XhfPaNTEuTs
       <span>Have a tail wagging day!</span>
    </footer>
 </div>
-
-<script>
-function CounterViewModel() {
-   var self = this;
-   self.userName = ko.observable("Wayne");
-   self.count = ko.observable(0);
-   
-   self.increase = function() {
-      var currentValue = self.count();
-      self.count(currentValue + 1);
-   }
-   
-   self.decrease = function() {
-      var currentValue = self.count();
-      if (currentValue > 0) {
-         self.count(currentValue - 1);
-      }
-   }
-   
-   self.dogStatus = ko.computed(function() {
-      if (self.count() === 1) {
-         return "UNDERWHELMED."
-      }
-      if (self.count() === 2) {
-         return "LISTENING..."
-      }
-      if (self.count() > 2) {
-         return "THRILLED!"
-      }
-      return "UPSET."
-   });
-};
-
-const knockoutApp = document.querySelector("#knockout-app");
-ko.applyBindings(new CounterViewModel(), knockoutApp);
-</script>
 
 </body>
 </html>
