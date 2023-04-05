@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+    <link rel="stylesheet" href="./inventory.css">
+
+    <script>
+        function InventoryViewModel() {
+           var self = this;
+           
+           var iconTypes = [
+              { icon: "icon-bone", text: "Bone"},
+              { icon: "icon-ball", text: "Ball"},
+              { icon: "icon-circle", text: "Circle"},
+              { icon: "icon-rabbit", text: "Rabbit"},
+           ]
+           
+           self.inventory = ko.observableArray([
+              iconTypes[1]
+           ]);
+           
+           self.addItem = function() {
+              var index = Math.floor(Math.random() * iconTypes.length);
+              self.inventory.push(iconTypes[index]); //Add a new item to the list
+           }
+           
+           self.removeItem = function(data, event) {      
+              var indexToRemove = event.target.getAttribute("item-index")
+              self.inventory.splice(indexToRemove, 1);
+           }
+        };
+
+        // --------------- main 
+
+        $(document).ready(function () {
+            const knockoutApp = document.querySelector("#knockout-app");
+            ko.applyBindings(new InventoryViewModel(), knockoutApp);
+        });
+    </script>
+</head>
+
+<!--
+from: https://codepen.io/punkydrewster713/pen/VweMLKO
+-->
+
+<body>
+
+<div id="knockout-app" class="card">
+   <header>
+      Header here.
+   </header>
+   <div class="card-section">
+      <h2>Toy Inventory</h2>
+      <p data-bind="visible: inventory().length === 0">You don't have any toys yet!</p>
+      <p data-bind="visible: inventory().length > 0">These are the assets we have to work with.</p>
+      
+      <button data-bind="click: addItem, enable: inventory().length < 5">+ Add Toy</button>
+      <ul class="counter-ui-container" data-bind="foreach: inventory">
+         <li>
+            <span>
+               <span data-bind="class: $data.icon"></span>
+               <span class="li_label" data-bind="text: $data.text"></span>
+            </span>
+            <button class="button_small" data-bind="click: $parent.removeItem, attr: {'item-index': $index}">
+               &times;
+            </button>
+         </li>
+      </ul>
+   </div>
+   <footer>
+      <span>footer here. copyright 2023</span>
+   </footer>
+</div>
+
+</body>
+</html>
