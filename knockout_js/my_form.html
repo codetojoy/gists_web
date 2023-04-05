@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+    <link rel="stylesheet" href="./my_form.css">
+
+    <script>
+        function CreateAccountViewModel() {
+           var self = this;
+          
+           self.firstName = ko.observable("").extend({
+              required: true,
+              minLength: 2,
+              // validation: {
+              //    message: "Please enter at least 2 characters",
+              //    validator: function(value) {
+              //       return value.length >= 2;
+              //    }
+              // }
+           });
+           self.emailAddress = ko.observable("").extend({
+              required: true,
+              email: true
+           });
+           self.subscriptionType = ko.observable("standard");
+           self.hasBeenSubmitted = ko.observable(false);
+           
+           window.firstName = self.firstName;
+           
+           self.handleSubmit = function() {
+              
+              //Check for errors      
+              var errors = ko.validation.group(self);
+              if (errors().length > 0) {
+                 errors.showAllMessages();
+                 return;
+              }
+
+              self.hasBeenSubmitted(true);
+              
+              //Form is valid!
+              console.log('submit the form!')
+              //Api call would go here...
+              //
+              //
+              console.log({
+                 firstName: self.firstName(),
+                 emailAddress: self.emailAddress(),
+                 subscriptionType: self.subscriptionType(),
+              })
+           }
+        };
+
+        // --------------- main 
+
+        $(document).ready(function () {
+            const knockoutApp = document.querySelector("#knockout-app");
+            ko.applyBindings(new CreateAccountViewModel(), knockoutApp);
+        });
+    </script>
+</head>
+
+<!--
+from: https://www.youtube.com/watch?v=XhfPaNTEuTs
+ and: https://codepen.io/punkydrewster713/full/wvMrvpX
+-->
+
+<body>
+
+<div id="knockout-app" class="card">
+   <header>
+      Header goes here.
+   </header>
+   
+   <div class="card-section" style="display:none;" data-bind="visible: hasBeenSubmitted">
+      <h2>Thank you for submitting the form!</h2>
+      <p>Please check your email for a confirmation link.</p>
+   </div>
+   
+   <div class="card-section" data-bind="visible: !hasBeenSubmitted()">
+      <h2>Create Account</h2>
+      <p>Enter your name and details to get that tail wagging</p>
+      <form data-bind="submit: handleSubmit">
+         <div class="field">
+            <label for="first-name">First Name*</label>
+            <input data-bind="value: firstName, css: { error: firstName.error() && firstName.isModified() }" id="first-name" type="text" />
+         </div>
+         <div class="field">
+            <label for="email">Email Address*</label>
+            <input data-bind="value: emailAddress, css: { error: emailAddress.error() && emailAddress.isModified() }" placeholder="you@mail.com" id="email" type="text" />
+         </div>
+         <div class="field">
+            <label for="subscription">Subscription*</label>
+            <div class="select-container">
+               <select id="subscription" data-bind="value: subscriptionType">
+                  <option value="standard">Standard</option>
+                  <option value="pro">Pro</option>
+                  <option value="superPro">Super Pro</option>
+               </select>
+               <svg class="select_arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 768 768">
+                  <path fill="#222" d="M223.5 319.5h321l-160.5 160.5z"></path>
+               </svg>
+            </div>
+         </div>
+         <input type="submit" value="Continue">
+      </form>
+   </div>
+   <footer>
+      <span>footer here. copyright 2023</span>
+   </footer>
+</div>
+
+</body>
+</html>
