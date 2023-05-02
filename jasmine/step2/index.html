@@ -1,0 +1,36 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.0/jasmine.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.0/jasmine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.0/jasmine-html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.0/boot.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    <script type="text/javascript">
+    require.config({
+      paths: {
+        "jquery": 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min',
+        "knockout": 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest',
+        "testViewModel" : "viewmodel",
+        "MySpec" : "specs/MySpec"
+      }
+    });
+    let loadFunc = function () {
+        window.jasmine = jasmineRequire.core(jasmineRequire);
+        jasmineRequire.html(jasmine);
+        jasmine.getEnv();
+        
+        console.log('All assets are loaded');
+    }
+    window.addEventListener('load', loadFunc);
+
+    // list spec files here
+
+    require(["knockout","jquery", "MySpec", "testViewModel"], loadFunc);
+</script>
+</head>
+<body>
+</body>
+</html>
