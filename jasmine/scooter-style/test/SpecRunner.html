@@ -21,12 +21,12 @@
         }]
     };
 </script>
-<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dojo/1.17.3/dojo.js"></script>
 <script type="text/javascript">
     require(['dojo/ready', 'spec/UtilsSpec', 'spec/AttendeeListSpec'], function (ready) {
         ready(function () {
-            window.jasmine = jasmineRequire.core( jasmineRequire);
-            jasmineRequire.html( jasmine);
+            window.jasmine = jasmineRequire.core(jasmineRequire);
+            jasmineRequire.html(jasmine);
             jasmine.getEnv();
         });
     });
