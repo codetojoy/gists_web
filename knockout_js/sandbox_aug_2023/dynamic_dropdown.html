@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+    <script type="text/javascript" src="https://knockoutjs.com/downloads/knockout-3.2.0.js"></script>
+  </head>
+  <body>
+    <!-- HTML -->
+    <p>
+      Your country:
+      <select
+        data-bind="options: availableCountries,
+                         optionsText: 'countryName',
+                         value: selectedCountry,
+                         optionsCaption: 'Choose...'"
+        onchange="myChangeHandler(); return false;"
+      ></select>
+    </p>
+
+    <div data-bind="visible: selectedCountry">
+      <!-- Appears when you select something -->
+      You have chosen a country with population
+      <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
+    </div>
+    <button onclick="myButtonHandler(); return false;">add country</button>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+      let count = 1;
+
+      function myChangeHandler() {
+        console.log(`TRACER change: cp 1`);
+        const e = document.getElementById("my-selector");
+        if (e != null) {
+          const choice = e.options[e.selectedIndex].text;
+          if (choice != null) {
+            console.log(`TRACER change: selected is ${choice}`);
+          }
+        }
+      }
+
+      function myButtonHandler() {
+        console.log(`TRACER hello from go`);
+        const name = `country-${count}`;
+        const population = 1000000 * count;
+        viewModel.availableCountries.push(new Country(name, population));
+        count++;
+      }
+
+      // Constructor for an object with two properties
+      var Country = function (name, population) {
+        this.countryName = name;
+        this.countryPopulation = population;
+      };
+
+      var viewModel = {
+        availableCountries: ko.observableArray([
+          new Country("UK", 65000000),
+          new Country("USA", 320000000),
+          new Country("Sweden", 29000000),
+        ]),
+        selectedCountry: ko.observable(), // Nothing selected by default
+      };
+
+      // ----------------- BIND
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>
