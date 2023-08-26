@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+    <script type="text/javascript" src="https://knockoutjs.com/downloads/knockout-3.2.0.js"></script>
+  </head>
+  <body>
+    <!-- HTML -->
+
+    <p>
+      Choose some countries you would like to visit:
+      <select
+        id="my-selector"
+        onchange="myChangeHandler(); return false;"
+        data-bind="options: availableCountries"
+        size="5"
+        multiple="true"
+      ></select>
+    </p>
+    <button onclick="myButtonHandler(); return false;">go</button>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+      let count = 1;
+
+      function myChangeHandler() {
+        console.log(`TRACER change: count: ${count}`);
+        const e = document.getElementById("my-selector");
+        if (e != null) {
+          for (opt of e.options) {
+            if (opt.selected === true) {
+              console.log(`TRACER selected: ${opt.text}`);
+            }
+          }
+        }
+        count++;
+      }
+
+      function myButtonHandler() {
+        console.log(`TRACER hello from go`);
+        viewModel.availableCountries.push(`country-${count}`);
+        count++;
+      }
+
+      var viewModel = {
+        availableCountries: ko.observableArray(["France", "Germany", "Spain"]),
+      };
+
+      viewModel.availableCountries.push("China");
+
+      // ----------------- BIND
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>
