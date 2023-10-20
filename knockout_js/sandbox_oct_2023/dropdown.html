@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+    <script type="text/javascript" src="https://knockoutjs.com/downloads/knockout-3.2.0.js"></script>
+  </head>
+  <body>
+    <!-- HTML -->
+    <p>
+      items:
+      <select
+        id="my-selector"
+        onchange="myChangeHandler(); return false;"
+        data-bind="options: items, optionsText: 'displayName', selectedOptions: userChoice"
+      ></select>
+      <button onclick="addHandler(); return false;">add item</button>
+      <button onclick="selectHandler(); return false;">select random</button>
+    </p>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+
+      let state = 5150;
+
+      function myChangeHandler() {
+        console.log(`TRACER change: cp 1`);
+        const e = document.getElementById("my-selector");
+        const choice = e.options[e.selectedIndex].text;
+        console.log(`TRACER change: selected is ${choice}`);
+        console.log(`TRACER change: total num is ${ko.unwrap(viewModel.items).length}`);
+      }
+
+      function addHandler() {
+        console.log(`TRACER add button: hello`);
+        let i = new Item(`i-${state}-${state}`, state);
+        viewModel.items.push(i);
+        state++;
+      }
+
+      function selectHandler() {
+        console.log(`TRACER select button: hello`);
+        let numItems = ko.unwrap(viewModel.items).length;
+        let index = getRandom(0, numItems);
+        console.log(`TRACER select button max: ${numItems} index: ${index}`);
+        viewModel.userChoice = ko.unwrap(viewModel.items)[index];
+        console.log(`TRACER select button: ${viewModel.userChoice}`);
+      }
+
+      function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      let Item = function(name, displayName) {
+        this.name = name;
+        this.displayName = displayName;
+      }
+
+
+      const item1 = new Item("ABC-001", "abc");
+      const item2 = new Item("DEF-002", "def");
+      const item3 = new Item("IJK-003", "ijk");
+
+      let userChoice = item2;
+
+      var viewModel = {
+        items: ko.observableArray([item1, item2, item3]),
+        userChoice: ko.observable(userChoice), 
+      };
+
+      // ----------------- BIND
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>
