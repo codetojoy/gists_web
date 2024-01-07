@@ -1,0 +1,34 @@
+<html>
+<head>
+    <script>
+
+const employee = {
+    name: null,
+    id: null,
+
+    init(name,id) {
+        this.name = name;
+        this.id = id;
+    },
+    toString() {
+        return `${this.name} ${this.id}`;
+    },
+};
+
+function go() {
+    try {
+        // implicit (simple)
+        employee.init('mozart', 5150);
+        const s = employee.toString();
+        console.log(`TRACER s: ${s}`);
+    } catch(err) {
+        console.log(`TRACER error: ${err}`);
+    }
+}
+
+    </script>
+</head>
+<body>
+<button onclick="go();">Go</button>
+</body>
+</html>
