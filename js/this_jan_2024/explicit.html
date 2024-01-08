@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script>
+
+const employee = {
+    name: null,
+    id: null,
+
+    init(name,id) {
+        this.name = name;
+        this.id = id;
+    },
+    toString() {
+        return `${this.name} ${this.id}`;
+    },
+};
+
+function go() {
+    try {
+        // explicit
+        const init = employee.init;
+        const toString = employee.toString;
+
+        const emp = {};
+        init.call(emp, 'mozart', 5150);
+        const s1 = toString.call(emp);
+        console.log(`TRACER emp s1: ${s1}`);
+
+        const s2 = employee.toString();
+        console.log(`TRACER employee s2: ${s2}`);
+    } catch(err) {
+        console.log(`TRACER error: ${err}`);
+    }
+}
+
+    </script>
+</head>
+<body>
+<button onclick="go();">Go</button>
+</body>
+</html>
