@@ -1,15 +1,23 @@
 
-body {
+* {
   box-sizing: border-box;
+}
+
+.my-section {
+    height: 20%;
+    width: 20%;
+    margin-left: 4rem;
+    border: 3px solid silver;
 }
 
 .my-container {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
 }
 
 .my-item {
   text-align: left;
+  width: 100%;
 }
 
