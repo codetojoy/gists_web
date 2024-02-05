@@ -1,0 +1,15 @@
+
+body {
+  box-sizing: border-box;
+}
+
+.my-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+}
+
+.my-item {
+  text-align: left;
+}
+

@@ -1,0 +1,11 @@
+
+.my-container {
+  display: flex;
+  direction: column;
+}
+
+.my-pair {
+    display: flex;
+    direction: row;
+}
+
