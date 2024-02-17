@@ -18,6 +18,7 @@
       const CASE1 = "case-1";
       const CASE2 = "case-2";
       const CASE3 = "case-3";
+      const CASE4 = "case-4";
 
       $(document).ready(function () {
         $("#button-1").click(function () {
@@ -26,11 +27,13 @@
 
           if (value === CASE1) {
             $(".my-items").css("grid-template-columns", "1fr 1fr");
+            $(".my-items").css("grid-template-rows", "auto");
           } else if (value === CASE2) {
-            emitLog(`case2`);
             $(".my-items").css("grid-template-columns", "5rem 1fr");
           } else if (value === CASE3) {
-            $(".my-items").css("grid-template-columns", "2fr 1fr");
+            $(".my-items").css("grid-template-columns", "1fr 1fr");
+          } else if (value === CASE4) {
+            $(".my-items").css("grid-template-rows", "30vh 2fr 1fr 1fr");
           }
         });
       });
@@ -48,6 +51,7 @@
             <option value="case-1">case 1</option>
             <option value="case-2">case 2</option>
             <option value="case-3">case 3</option>
+            <option value="case-4">case 4</option>
           </select>
         </div>
       </div>
