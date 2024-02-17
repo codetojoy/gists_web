@@ -26,10 +26,12 @@ body {
     display: grid;
     grid-template-columns: 1fr 5fr;
     font-size: 5rem;
+    grid-gap: 20px;
 }
 
 .my-controls {
     border: 1px solid silver;
+    background-color: var(--primary-darker);
 }
 
 button {
