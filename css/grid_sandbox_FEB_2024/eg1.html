@@ -1,69 +1,69 @@
 <html>
-<head>
-<!-- -------------------- Includes -------------------- -->
-<link rel="stylesheet" href="eg1.css">
+  <head>
+    <!-- -------------------- Includes -------------------- -->
+    <link rel="stylesheet" href="eg1.css" />
 
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"
+    ></script>
 
-<!-- -------------------- Handlers -------------------- -->
-<script>
+    <!-- -------------------- Handlers -------------------- -->
+    <script>
+      function emitLog(s) {
+        console.log(`TRACER ${s}`);
+      }
 
-function emitLog(s) {
-    console.log(`TRACER ${s}`);
-}
+      const CASE1 = "case-1";
+      const CASE2 = "case-2";
+      const CASE3 = "case-3";
 
-const CASE1 = "case-1";
-const CASE2 = "case-2";
-const CASE3 = "case-3";
+      $(document).ready(function () {
+        $("#button-1").click(function () {
+          const value = $("#dropdown-1").val();
+          emitLog(`begin, button-1 value: ${value}`);
 
-$(document).ready(function() {
-  $('#button-1').click(function() {
-    const value = $('#dropdown-1').val();
-    emitLog(`begin, button-1 value: ${value}`);
+          if (value === CASE1) {
+            $(".my-items").css("grid-template-columns", "1fr 1fr");
+          } else if (value === CASE2) {
+            emitLog(`case2`);
+            $(".my-items").css("grid-template-columns", "5rem 1fr");
+          } else if (value === CASE3) {
+            $(".my-items").css("grid-template-columns", "2fr 1fr");
+          }
+        });
+      });
+    </script>
+  </head>
 
-    if (value === CASE1) {
-        $('.my-items').css('grid-template-columns','1fr 1fr');
-    } else if (value === CASE2) {
-        emitLog(`case2`);
-        $('.my-items').css('grid-template-columns','5rem 1fr');
-    } else if (value === CASE3) {
-        $('.my-items').css('grid-template-columns','2fr 1fr');
-    }
-  });
-});
+  <body>
+    <div class="my-page">
+      <!-- -------------------- Controls -------------------- -->
 
-</script>
-</head>
+      <div class="my-controls">
+        <div class="my-control"><button id="button-1">go</button></div>
+        <div class="my-control">
+          <select id="dropdown-1" class="dropdown">
+            <option value="case-1">case 1</option>
+            <option value="case-2">case 2</option>
+            <option value="case-3">case 3</option>
+          </select>
+        </div>
+      </div>
 
-<body>
-<div class="my-page">
+      <!-- -------------------- Items -------------------- -->
 
-<!-- -------------------- Controls -------------------- -->
-
-<div class="my-controls">
-<div class="my-control"><button id="button-1">Go</button></div>
-<div class="my-control">
-<select id="dropdown-1">
-  <option value="case-1">case 1</option>
-  <option value="case-2">case 2</option>
-  <option value="case-3">case 3</option>
-</select>
-</div>
-</div>
-
-<!-- -------------------- Items -------------------- -->
-
-<div class="my-items">
-<div class="my-item"><span>Bach</span></div>
-<div class="my-item"><span>Brahms</span></div>
-<div class="my-item"><span>Beethoven</span></div>
-<div class="my-item"><span>Chopin</span></div>
-<div class="my-item"><span>Liszt</span></div>
-<div class="my-item"><span>Mozart</span></div>
-<div class="my-item"><span>Paganini</span></div>
-<div class="my-item"><span>Rachmaninov</span></div>
-</div>
-
-</div>
-</body>
+      <div class="my-items">
+        <div class="my-item"><span>Bach</span></div>
+        <div class="my-item"><span>Brahms</span></div>
+        <div class="my-item"><span>Beethoven</span></div>
+        <div class="my-item"><span>Chopin</span></div>
+        <div class="my-item"><span>Liszt</span></div>
+        <div class="my-item"><span>Mozart</span></div>
+        <div class="my-item"><span>Paganini</span></div>
+        <div class="my-item"><span>Rachmaninov</span></div>
+      </div>
+    </div>
+  </body>
 </html>
