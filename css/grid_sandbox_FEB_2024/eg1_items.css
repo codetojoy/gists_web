@@ -1,0 +1,22 @@
+
+/*
+:root {
+  --primary: linen;
+  --primary-darker: goldenrod;
+  --background: black;
+  --secondary: white;
+}
+*/
+
+/* ----------------- items ------------ */
+
+.my-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.my-item {
+  border: 1px solid var(--secondary);
+  background-color: var(--primary-darker);
+}

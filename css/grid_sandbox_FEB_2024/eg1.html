@@ -1,7 +1,8 @@
 <html>
   <head>
     <!-- -------------------- Includes -------------------- -->
-    <link rel="stylesheet" href="eg1.css" />
+    <link rel="stylesheet" href="eg1_controls.css" />
+    <link rel="stylesheet" href="eg1_items.css" />
 
     <script
       src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
@@ -28,10 +29,14 @@
           if (value === CASE1) {
             $(".my-items").css("grid-template-columns", "1fr 1fr");
             $(".my-items").css("grid-template-rows", "auto");
+            $(".my-items").css("grid-row-gap", "");
+            $(".my-items").css("grid-gap", "");
           } else if (value === CASE2) {
-            $(".my-items").css("grid-template-columns", "5rem 1fr");
+            $(".my-items").css("grid-template-columns", "1fr 3fr");
+            $(".my-items").css("grid-row-gap", "10px");
           } else if (value === CASE3) {
-            $(".my-items").css("grid-template-columns", "1fr 1fr");
+            $(".my-items").css("grid-template-columns", "3fr 1fr");
+            $(".my-items").css("grid-gap", "2rem");
           } else if (value === CASE4) {
             $(".my-items").css("grid-template-rows", "30vh 2fr 1fr 1fr");
           }

@@ -60,16 +60,3 @@ button {
   font-size: 2rem;
   border: 1px solid var(--background);
 }
-
-/* ----------------- items ------------ */
-
-.my-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-}
-
-.my-item {
-  border: 1px solid var(--secondary);
-  background-color: var(--primary-darker);
-}
