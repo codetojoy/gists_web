@@ -15,8 +15,10 @@
 * flex-shrink: 1;
     * ratio of shrink to container resize
 * flex-basis: 300px;
+    * let V = 300px here
     * minimum regardless of content width 
     * ignores width entirely 
+    * but flex-basis will use max(V, min-width)
 
 ### flexbox item
 
