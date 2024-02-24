@@ -14,6 +14,8 @@
     * ratio of growth to container resize
 * flex-shrink: 1;
     * ratio of shrink to container resize
+* flex-basis: 300px;
+    * minimum regardless of content width 
 
 ### flexbox item
 
