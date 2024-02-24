@@ -19,6 +19,8 @@
     * minimum regardless of content width 
     * ignores width entirely 
     * but flex-basis will use max(V, min-width)
+    * and flex-basis will use min(V, max-width)
+    * however, when column, then this is height
 
 ### flexbox item
 
