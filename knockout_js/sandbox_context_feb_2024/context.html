@@ -54,6 +54,16 @@
       <!-- /ko -->
     <!-- /ko -->
 
+    <hr/>
+    <h1>foreach events</h1>
+    <!-- ko foreach: departments -->
+        <!-- ko foreach: teams -->
+            <!-- ko foreach: {data: employees, afterRender: $root.myAfterRender} -->
+            <p data-bind="text: `parents[0]: ${JSON.stringify($parents[0])}`"></p>
+            <!-- /ko -->
+      <!-- /ko -->
+    <!-- /ko -->
+
     <!-- JS -->
 
     <script type="text/javascript">
@@ -100,11 +110,21 @@
       const softwareDev = new Department("Software Development", [team1,team2]);
       const finance = new Department("Sales", [team3,team4]);
 
-      let viewModel = {
-        departments: [softwareDev, finance]
+      function ViewModel() {
+        let self = this;
+        self.departments = [softwareDev, finance];
+
+        self.emitLog = function(s) {
+          console.log(`TRACER ${s}`);
+        }
+
+        self.myAfterRender = function(element, index, data) {
+          self.emitLog(`hello from myAfterRender. index: ${JSON.stringify(index)}`);
+   			};
       };
 
       // ----------------- BIND
+      let viewModel = new ViewModel();
       ko.applyBindings(viewModel);
     </script>
   </body>
