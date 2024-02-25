@@ -16,7 +16,9 @@
             <h2 data-bind="text: 'team: ' + teamName"></h2>        
             <ul>
             <!-- ko foreach: employees -->
-                <li data-bind="text: 'emp: ' + employeeName"></li>        
+                <!-- ko with: location -->
+                <li data-bind="text: `emp: ${$parent.employeeName} (${street}, ${city}, ${province})`"></li>        
+                <!-- /ko -->
             <!-- /ko -->
             </ul>
         <!-- /ko -->
