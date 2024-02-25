@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+  </head>
+  <body>
+
+    <!-- HTML -->
+
+    <button type="button" data-bind="click: updateObservable">Go</button>
+    <div data-bind="visible: doShow" style="display: none"> 
+        <hr/>
+        <h1>Departments v1</h1>
+        <!-- ko foreach: departments -->
+            <h2 data-bind="text: 'dept: ' + deptName"></h2>
+            <!-- ko foreach: teams -->
+                <h3 data-bind="text: 'team: ' + teamName"></h3>
+                <ul>
+                <!-- ko foreach: employees -->
+                    <!-- ko with: location -->
+                    <li data-bind="text: `emp: ${$parent.employeeName} (${street}, ${city}, ${province})`"></li>
+                    <!-- /ko -->
+                <!-- /ko -->
+                </ul>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+
+      let Location = function(province, city, street) {
+        this.province = province;
+        this.city = city;
+        this.street = street;
+      }
+      let Employee = function(name, location) {
+        this.employeeName = name;
+        this.location = location;
+      }
+      let Team = function(name, employees) {
+        this.teamName = name;
+        this.employees = employees;
+      }
+      let Department = function(name, teams) {
+        this.deptName = name;
+        this.teams = teams;
+      }
+
+      const loc1 = new Location("PEI", "Charlottetown", "Queen St");
+      const loc2 = new Location("Ontario", "Toronto", "Bloor St");
+      const loc3 = new Location("Alberta", "Calgary", "17th Ave");
+      const loc4 = new Location("BC", "Vancouver", "Main St");
+
+      const e1 = new Employee("Emp 1", loc1);
+      const e2 = new Employee("Emp 2", loc2);
+      const e3 = new Employee("Emp 3", loc3);
+      const e4 = new Employee("Emp 4", loc4);
+      const e5 = new Employee("Emp 5", loc1);
+      const e6 = new Employee("Emp 6", loc2);
+      const e7 = new Employee("Emp 7", loc3);
+      const e8 = new Employee("Emp 8", loc4);
+      const e9 = new Employee("Emp 9", loc1);
+      const e10 = new Employee("Emp 10", loc2);
+
+      const team1 = new Team("Project Foo", [e1,e2,e3]);
+      const team2 = new Team("Project Bar", [e4,e5,e6]);
+      const team3 = new Team("West Coast", [e7,e8]);
+      const team4 = new Team("East Coast", [e9,e10]);
+
+      const softwareDev = new Department("Software Development", [team1,team2]);
+      const finance = new Department("Sales", [team3,team4]);
+
+      function ViewModel() {
+        let self = this;
+        self.departments = [softwareDev, finance];
+
+        self.emitLog = function(s) {
+          console.log(`TRACER ${s}`);
+        }
+
+        self.doShow = ko.observable(false);
+
+        self.updateObservable = function() {
+            self.doShow(!self.doShow());
+   		};
+      };
+
+      // ----------------- BIND
+      let viewModel = new ViewModel();
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>
