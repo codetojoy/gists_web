@@ -9,19 +9,49 @@
 
     <!-- HTML -->
     <hr/>
-    <p>Departments v1</p>
+    <h1>Departments v1</h1>
     <!-- ko foreach: departments -->
-        <h1 data-bind="text: 'dept: ' + deptName"></h1>        
+        <h2 data-bind="text: 'dept: ' + deptName"></h2>
         <!-- ko foreach: teams -->
-            <h2 data-bind="text: 'team: ' + teamName"></h2>        
+            <h3 data-bind="text: 'team: ' + teamName"></h3>
             <ul>
             <!-- ko foreach: employees -->
                 <!-- ko with: location -->
-                <li data-bind="text: `emp: ${$parent.employeeName} (${street}, ${city}, ${province})`"></li>        
+                <li data-bind="text: `emp: ${$parent.employeeName} (${street}, ${city}, ${province})`"></li>
                 <!-- /ko -->
             <!-- /ko -->
             </ul>
         <!-- /ko -->
+    <!-- /ko -->
+    <hr/>
+    <h1>data</h1>
+    <p data-bind="text: JSON.stringify($data)"></p>
+
+    <hr/>
+    <h1>index</h1>
+    <!-- ko foreach: departments -->
+        <!-- ko foreach: teams -->
+            <!-- ko foreach: employees -->
+            <p data-bind="text: `${employeeName} emp-index: ${$index()} team-index: ${$parentContext.$index()}`"></p>
+        <!-- /ko -->
+      <!-- /ko -->
+    <!-- /ko -->
+
+    <hr/>
+    <h1>sandbox</h1>
+    <!-- ko foreach: departments -->
+        <!-- ko foreach: teams -->
+            <ul>
+            <!-- ko foreach: employees -->
+            <!--
+            <li data-bind="text: `parent: ${JSON.stringify($parent)}`"></li>
+            <li data-bind="text: `parents[1]: ${JSON.stringify($parents[1])}`"></li>
+            <li data-bind="text: `parentContext: ${JSON.stringify($parentContext)}`"></li>
+            -->
+            <li data-bind="text: `parents[0]: ${JSON.stringify($parents[0])}`"></li>
+            <!-- /ko -->
+            </ul>
+      <!-- /ko -->
     <!-- /ko -->
 
     <!-- JS -->
