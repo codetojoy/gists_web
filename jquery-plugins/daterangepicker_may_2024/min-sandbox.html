@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  </head>
+
+  <body>
+    <!-- HTML -->
+
+    <h3>TRACER SANDBOX</h3>
+    <p>This is some random text.</p>
+    <p>If not shutdown by HR dept.</p>
+    <button onclick="handleClick()">Go</button>
+    <hr/>
+
+<form>
+<input type="text" id="daterange" name="daterange" value="01/01/2018 - 01/15/2018" />
+</form>
+
+    <p>footer</p>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("TRACER selected : " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+
+$('#daterange').on('apply.daterangepicker', function(ev, picker) {
+  console.log('TRACER start : ' + picker.startDate.format('YYYY-MM-DD'));
+  console.log('TRACER end : ' + picker.endDate.format('YYYY-MM-DD'));
+});
+});
+
+    function handleClick() {
+        console.log(`TRACER handle click`);
+        //change the selected date range of that picker
+        $('#daterange').data('daterangepicker').setStartDate('01/26/1963');
+        $('#daterange').data('daterangepicker').setEndDate('02/05/1973');
+    }
+
+    </script>
+  </body>
+</html>
