@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sandbox</title>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+  </head>
+
+  <body>
+    <!-- HTML -->
+
+    <h3>TRACER SANDBOX</h3>
+    <p>This is some random text.</p>
+    <p>If not shutdown by HR dept.</p>
+    <button onclick="handleClick()">Go</button>
+    <hr/>
+
+<form>
+<input type="text" id="daterange" name="daterange" value="01/01/2018 - 01/15/2018" />
+</form>
+
+    <p>footer</p>
+
+    <!-- JS -->
+
+    <script type="text/javascript">
+
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("TRACER selected : " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+
+$('#daterange').on('apply.daterangepicker', function(ev, picker) {
+  console.log('TRACER start : ' + picker.startDate.format('YYYY-MM-DD'));
+  console.log('TRACER end : ' + picker.endDate.format('YYYY-MM-DD'));
+});
+});
+
+    function handleClick() {
+        console.log(`TRACER handle click`);
+        //change the selected date range of that picker
+        $('#daterange').data('daterangepicker').setStartDate('01/26/2020');
+        $('#daterange').data('daterangepicker').setEndDate('02/05/2020');
+    }
+
+      let Employee = function(name) {
+        this.employeeName = name;
+      }
+      let Team = function(name, employees) {
+        this.teamName = name;
+        this.employees = employees;
+      }
+      let Department = function(name, teams) {
+        this.deptName = name;
+        this.teams = teams;
+      }
+
+      const e1 = new Employee("Emp 1");
+      const e2 = new Employee("Emp 2");
+      const e3 = new Employee("Emp 3");
+      const e4 = new Employee("Emp 4");
+      const e5 = new Employee("Emp 5");
+
+      const team1 = new Team("Project Foo", [e1,e2,e3]);
+      const team2 = new Team("Project Bar", [e4,e5]);
+
+      const softwareDev = new Department("Software Development", [team1]);
+      const finance = new Department("Sales", [team2]);
+
+      function ViewModel() {
+        let self = this;
+        self.departments = [softwareDev, finance];
+
+        self.emitLog = function(s) {
+          console.log(`TRACER ${s}`);
+        }
+      };
+
+      // ----------------- BIND
+      let viewModel = new ViewModel();
+      ko.applyBindings(viewModel);
+
+    </script>
+  </body>
+</html>
