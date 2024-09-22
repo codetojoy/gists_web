@@ -1,0 +1,60 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+<script>
+
+    // ready
+    $(function() {
+        console.log('Ready.');
+    });
+
+    function goButtonHandler(event) {
+        myRun();
+    }
+
+    function clearButtonHandler(event) {
+        const myConsole = document.getElementById("my-console");
+        myConsole.innerHTML = "";
+    }
+
+    function consoleLog(msg) {
+        console.log(`TRACER ${msg}`);
+        const myConsole = document.getElementById("my-console");
+        const prevHTML = myConsole.innerHTML;
+        myConsole.innerHTML = prevHTML + "\n" + msg;
+    }
+
+// ----------------------- run
+
+function myRun() {
+    // function expression:
+    var factorial = (function hideTheCache() {
+        var cache = {};
+
+        function factorial(x) {
+            if (x < 2) return 1;
+            if (!(x in cache)) {
+                cache[x] = x * factorial(x - 1);
+            }
+            return cache[x];
+        }
+
+        return factorial;
+    })();
+    consoleLog(`TRACER 10! : ${factorial(10)}`);
+}
+</script>
+</head>
+<body>
+<h3>hello from sandbox</h3>
+<br/>
+<button id="my-go-button" onclick="goButtonHandler();">Go</button>
+<br/>
+<button id="my-clear-button" onclick="clearButtonHandler();">Clear</button>
+<br/>
+<label for="my-console">console:</label>
+
+<textarea id="my-console" name="my-console" rows="40" cols="120"></textarea>
+</body>
+</html>
