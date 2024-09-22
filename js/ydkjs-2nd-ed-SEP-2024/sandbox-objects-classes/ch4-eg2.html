@@ -31,7 +31,7 @@ var point = {
     x: null,
     y: null,
 
-    init(x,y) {
+    init: function(x,y) {
         this.x = x;
         this.y = y;
     },
@@ -49,24 +49,10 @@ var point = {
 };
 
 function myRun() {
-    // implicit invocation
-    point.init(21,20);
-    consoleLog(`TRACER implicit ${point.toString()}`);
+    // new invocation
+    const pointC = new point.init(51,50);
+    consoleLog(`new-call ${pointC.x} ${pointC.y}`);
 
-    const init = point.init;
-
-    // explicit invocation
-    init.call(point, 31,30);
-    consoleLog(`TRACER explicit-call ${point.toString()}`);
-
-    // explicit invocation
-    init.apply(point, [31,30]);
-    consoleLog(`TRACER explicit-apply ${point.toString()}`);
-
-    // explicit invocation v2
-    const pointB = {};
-    init.call(pointB, 41,40);
-    consoleLog(`TRACER explicit-call-v2 ${pointB.x} ${pointB.y}`);
 }
 </script>
 </head>
