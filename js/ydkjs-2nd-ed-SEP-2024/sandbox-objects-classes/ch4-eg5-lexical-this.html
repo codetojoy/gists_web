@@ -27,12 +27,17 @@
 
 // ----------------------- run
 
+/*
+output:
+TRACER outer:  42
+TRACER inner: 42
+*/
 function outer() {
     consoleLog(`TRACER outer:  ${this.value}`);
 
     // arrow functions have lexical-this by default:
     var inner = () => {
-        consoleLog(`TRACER : ${this.value}`);
+        consoleLog(`TRACER inner: ${this.value}`);
     };
 
     return inner;

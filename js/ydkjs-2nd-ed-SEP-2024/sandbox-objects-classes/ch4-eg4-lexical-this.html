@@ -27,6 +27,11 @@
 
 // ----------------------- run
 
+/*
+output:
+TRACER outer:  42
+TRACER inner: 42
+*/
 function outer() {
     // KS prefers `context` over `self`
     var self = this;
@@ -34,7 +39,7 @@ function outer() {
 
     // no longer this-aware:
     var inner = function() {
-        consoleLog(`TRACER : ${self.value}`);
+        consoleLog(`TRACER inner: ${self.value}`);
     };
 
     return inner;
