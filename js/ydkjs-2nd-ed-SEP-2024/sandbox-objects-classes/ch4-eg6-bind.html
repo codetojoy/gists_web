@@ -48,7 +48,9 @@ function myRun() {
     var two = { value: "sad face", };
 
     var innerFn = outer.call(one);
-    innerFn.call(two);
+    var f = innerFn.bind(two); 
+    // parameter doesn't matter because of bind:
+    f.call(one);
 }
 </script>
 </head>
