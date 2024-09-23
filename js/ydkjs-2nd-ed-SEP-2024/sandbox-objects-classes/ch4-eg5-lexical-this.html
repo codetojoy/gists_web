@@ -1,0 +1,61 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+<script>
+
+    // ready
+    $(function() {
+        console.log('Ready.');
+    });
+
+    function goButtonHandler(event) {
+        myRun();
+    }
+
+    function clearButtonHandler(event) {
+        const myConsole = document.getElementById("my-console");
+        myConsole.innerHTML = "";
+    }
+
+    function consoleLog(msg) {
+        console.log(`TRACER ${msg}`);
+        const myConsole = document.getElementById("my-console");
+        const prevHTML = myConsole.innerHTML;
+        myConsole.innerHTML = prevHTML + "\n" + msg;
+    }
+
+// ----------------------- run
+
+function outer() {
+    consoleLog(`TRACER outer:  ${this.value}`);
+
+    // arrow functions have lexical-this by default:
+    var inner = () => {
+        consoleLog(`TRACER : ${this.value}`);
+    };
+
+    return inner;
+}
+
+function myRun() {
+    var one = { value: 42, };
+    var two = { value: "sad face", };
+
+    var innerFn = outer.call(one);
+    innerFn.call(two);
+}
+</script>
+</head>
+<body>
+<h3>hello from sandbox</h3>
+<br/>
+<button id="my-go-button" onclick="goButtonHandler();">Go</button>
+<br/>
+<button id="my-clear-button" onclick="clearButtonHandler();">Clear</button>
+<br/>
+<label for="my-console">console:</label>
+
+<textarea id="my-console" name="my-console" rows="40" cols="120"></textarea>
+</body>
+</html>
