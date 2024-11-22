@@ -1,0 +1,44 @@
+<html>
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Create chart instance in one go
+        const chart = am4core.createFromConfig({
+            // Create pie series
+            "series": [{
+                "type": "PieSeries",
+                "dataFields": {
+                "value": "litres",
+                "category": "country"
+                }
+            }],
+            // Add data
+            "data" : [
+            { "country": "Lithuania", "litres": 501.9 },
+            { "country": "Czech Republic", "litres": 301.9 },
+            { "country": "Ireland", "litres": 201.1 },
+            { "country": "Germany", "litres": 165.8 },
+            { "country": "Australia", "litres": 139.9 },
+            { "country": "Austria", "litres": 128.3 },
+            { "country": "UK", "litres": 99 },
+            { "country": "Belgium", "litres": 60 },
+            { "country": "The Netherlands", "litres": 50 }
+        ],
+        "legend": {}
+        }, "chartdiv", am4charts.PieChart);
+    });
+</script>
+</head>
+<body>
+<h3>header</h3>
+<hr/>
+<p>hello json</p>
+<hr/>
+<div id="chartdiv" style="width: 900px; height: 800px;"></div>
+<hr/>
+</body>
+</html>
