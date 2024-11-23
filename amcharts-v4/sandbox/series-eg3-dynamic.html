@@ -36,7 +36,7 @@ $(document).ready(function () {
 // https://codepen.io/team/amcharts/pen/PBebYQ
 
 /* Create chart instance */
-var chart = am4core.create("chartdiv", am4charts.XYChart);
+const chart = am4core.create("chartdiv", am4charts.XYChart);
 
 /* Add data */
 chart.data = [
@@ -62,17 +62,17 @@ chart.data = [
 ];
 
 function addSeries() {
-  var seriesId = chart.series.length + 1;
+  const seriesId = chart.series.length + 1;
 
   // Update data
-  for(var i = 0; i < chart.data.length; i++) {
+  for(let i = 0; i < chart.data.length; i++) {
     chart.data[i]["value" + seriesId] = Math.random() * 300;
   }
 
-  console.log(chart.data);
+  console.log(JSON.stringify(chart.data));
 
   // Create series
-  var series = new am4charts.LineSeries();
+  let series = new am4charts.LineSeries();
   series.data = chart.data;
   series.dataFields.valueY = "value" + seriesId;
   series.dataFields.categoryX = "year";
@@ -85,11 +85,11 @@ function addSeries() {
 }
 
 /* Create axes */
-var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "year";
 
 /* Create value axis */
-var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
 addSeries();
 addSeries();
