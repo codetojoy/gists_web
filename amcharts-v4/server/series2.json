@@ -1,0 +1,16 @@
+[{
+  "date": new Date(2018, 3, 22),
+  "value": 101
+}, {
+  "date": new Date(2018, 3, 23),
+  "value": 79
+}, {
+  "date": new Date(2018, 3, 24),
+  "value": 90
+}, {
+  "date": new Date(2018, 3, 25),
+  "value": 60
+}, {
+  "date": new Date(2018, 3, 26),
+  "value": 115
+}]

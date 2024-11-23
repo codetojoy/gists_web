@@ -1,0 +1,34 @@
+<html>
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Create chart instance in one go
+        const chart = am4core.createFromConfig({
+            // Create pie series
+            "series": [{
+                "type": "PieSeries",
+                "dataFields": {
+                "value": "litres",
+                "category": "country"
+                }
+            }],
+            // see ../server/run_server.sh
+            "dataSource" : {"url": "http://localhost:5150/test.json"},
+        "legend": {}
+        }, "chartdiv", am4charts.PieChart);
+    });
+</script>
+</head>
+<body>
+<h3>header</h3>
+<hr/>
+<p>hello external json from URL</p>
+<hr/>
+<div id="chartdiv" style="width: 900px; height: 800px;"></div>
+<hr/>
+</body>
+</html>
