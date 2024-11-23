@@ -130,12 +130,58 @@
         - requires invalidateData() or invalidateRawData()
         - example that changes data with a timer
 * formatting dates
+* dummyData as storage (expando?)
+
+### section 6
+
+* event listeners
+* https://www.amcharts.com/docs/v4/concepts/event-listeners/
+* every object has `events` property
+    - `on()` / `off()` or `once()`
+    - hooks into lifecycle
+    - type: e.g. "hit" (click or touch)
+    - callback: function
+    - scope: ?
+* can manually trigger events
+
+### section 7
+
+* adapters
+* https://www.amcharts.com/docs/v4/concepts/adapters/
+* allows modifying via custom functions
+* e.g. customize tooltip-text
+    - e.g. a Date axes will generate a tool-tip
+    - if there is an adapter, it is called with the generated content
+    - it uses the output
+* adapters can be chained
+
+### section 8
+
+* chart types: XY chart
+* https://www.amcharts.com/docs/v4/chart-types/xy-chart/
+* components
+    - chart instance
+    - data
+    - 2+ axes (vert, horiz)
+    - 1+ series
+* for chart
+    - h: CategoryAxis, v: ValueAxis
+* dataFields binds axes to the data properties
+* 4 types of axes (see above)
+* MEGA: the series defines the type of XY Chart
+    - candlestick vs column etc
 
 ### section x
 
 - tutorial
 - manipulating chart data
 - https://www.amcharts.com/docs/v4/tutorials/manipulating-chart-data/
+
+### section x
+
+- concepts
+- loading external data
+- https://www.amcharts.com/docs/v4/concepts/data/loading-external-data/
 
 ### resources
 
