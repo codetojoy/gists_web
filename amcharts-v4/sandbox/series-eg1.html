@@ -1,0 +1,95 @@
+<html>
+
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 300px;
+}
+</style>
+
+<script>
+    $(document).ready(function () {
+
+// Use themes
+am4core.useTheme(am4themes_animated);
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+chart.paddingRight = 20;
+
+// Create axes
+var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+dateAxis.renderer.minGridDistance = 50;
+dateAxis.renderer.grid.template.location = 0.5;
+dateAxis.startLocation = 0.5;
+dateAxis.endLocation = 0.5;
+
+// Create value axis
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series1 = chart.series.push(new am4charts.LineSeries());
+series1.dataFields.valueY = "value";
+series1.dataFields.dateX = "date";
+series1.strokeWidth = 3;
+series1.tensionX = 0.8;
+series1.bullets.push(new am4charts.CircleBullet());
+series1.data = [{
+  "date": new Date(2018, 3, 20),
+  "value": 90
+}, {
+  "date": new Date(2018, 3, 23),
+  "value": 125
+}, {
+  "date": new Date(2018, 3, 26),
+  "value": 77
+}, {
+  "date": new Date(2018, 3, 28),
+  "value": 113
+}];
+
+var series2 = chart.series.push(new am4charts.LineSeries());
+series2.dataFields.valueY = "value";
+series2.dataFields.dateX = "date";
+series2.strokeWidth = 3;
+series2.tensionX = 0.8;
+series2.bullets.push(new am4charts.CircleBullet());
+series2.data = [{
+  "date": new Date(2018, 3, 22),
+  "value": 101
+}, {
+  "date": new Date(2018, 3, 23),
+  "value": 79
+}, {
+  "date": new Date(2018, 3, 24),
+  "value": 90
+}, {
+  "date": new Date(2018, 3, 25),
+  "value": 60
+}, {
+  "date": new Date(2018, 3, 26),
+  "value": 115
+}];
+
+    });
+</script>
+</head>
+
+<body>
+    <h3>independent series from general concepts</h3>
+    <hr/>
+    <div id="chartdiv"></div>
+    <hr/>
+</body>
+
+</html>
