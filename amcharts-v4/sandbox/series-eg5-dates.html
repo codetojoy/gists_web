@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 250px;
+}
+
+</style>
+
+<script>
+
+
+$(document).ready(function () {
+
+// begin ----------------------------------------
+
+// https://codepen.io/team/amcharts/pen/KJLQdo
+
+am4core.useTheme(am4themes_animated);
+
+// Create chart instance
+const chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [{
+  "date": "03/15/2019",
+  "value": 450
+}, {
+  "date": "03/16/2019",
+  "value": 320
+}, {
+  "date": "03/17/2019",
+  "value": 411
+}, {
+  "date": "03/18/2019",
+  "value": 451
+}, {
+  "date": "03/19/2019",
+  "value": 390
+}];
+
+chart.dateFormatter.inputDateFormat = "MM/dd/yyyy";
+
+// Create axes
+const categoryAxis = chart.xAxes.push(new am4charts.DateAxis());
+categoryAxis.renderer.grid.template.location = 0;
+//categoryAxis.renderer.minGridDistance = 30;
+
+const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+const series = chart.series.push(new am4charts.LineSeries());
+series.dataFields.valueY = "value";
+series.dataFields.dateX = "date";
+series.tooltipText = "{dateX}: [b]{valueY}[/]";
+series.strokeWidth = 2;
+
+const bullet = series.bullets.push(new am4charts.CircleBullet());
+bullet.circle.stroke = am4core.color("#fff");
+bullet.circle.strokeWidth = 2;
+
+chart.cursor = new am4charts.XYCursor();
+
+// end ------------------------------------------
+
+    });
+</script>
+</head>
+
+<body>
+    <h3>date-formatter</h3>
+    <hr/>
+    <div id="chartdiv"></div>
+    <hr/>
+</body>
+
+</html>
