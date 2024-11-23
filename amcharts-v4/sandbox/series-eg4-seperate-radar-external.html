@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 400px;
+}
+
+</style>
+
+<script>
+
+
+$(document).ready(function () {
+
+// begin ----------------------------------------
+
+// https://codepen.io/team/amcharts/pen/aGqZze
+
+/* Set themes */
+am4core.useTheme(am4themes_animated);
+am4core.useTheme(am4themes_kelly);
+
+/* Create chart instance */
+var chart = am4core.create("chartdiv", am4charts.RadarChart);
+
+/* Add data */
+chart.data = [{
+  "country": "Lithuania",
+  "litres": 501,
+  "units": 250
+}, {
+  "country": "Czech Republic",
+  "litres": 301,
+  "units": 222
+}, {
+  "country": "Ireland",
+  "litres": 266,
+  "units": 179
+}, {
+  "country": "Germany",
+  "litres": 165,
+  "units": 298
+}, {
+  "country": "Australia",
+  "litres": 139,
+  "units": 299
+}, {
+  "country": "Austria",
+  "litres": 336,
+  "units": 185
+}, {
+  "country": "UK",
+  "litres": 290,
+  "units": 150
+}, {
+  "country": "Belgium",
+  "litres": 325,
+  "units": 382
+}, {
+  "country": "The Netherlands",
+  "litres": 40,
+  "units": 172
+}];
+
+/* Create axes */
+var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+xAxis.renderer.maxLabelPosition = 0.99;
+
+var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+yAxis.renderer.labels.template.verticalCenter = "bottom";
+yAxis.renderer.labels.template.horizontalCenter = "right";
+yAxis.renderer.maxLabelPosition = 0.99;
+
+/* Create and configure series */
+var series1 = chart.series.push(new am4charts.RadarSeries());
+series1.bullets.push(new am4charts.CircleBullet());
+series1.strokeOpacity = 0;
+series1.dataFields.valueX = "x";
+series1.dataFields.valueY = "y";
+series1.name = "Series #1";
+series1.sequencedInterpolation = true;
+series1.sequencedInterpolationDelay = 10;
+series1.dataSource.url = "http://localhost:5150/radar1.json";
+
+var series2 = chart.series.push(new am4charts.RadarSeries());
+series2.bullets.push(new am4charts.CircleBullet());
+series2.strokeOpacity = 0;
+series2.dataFields.valueX = "x";
+series2.dataFields.valueY = "y";
+series2.name = "Series #2";
+series2.sequencedInterpolation = true;
+series2.sequencedInterpolationDelay = 10;
+series2.dataSource.url = "http://localhost:5150/radar2.json";
+
+var series3 = chart.series.push(new am4charts.RadarSeries());
+series3.bullets.push(new am4charts.CircleBullet());
+series3.strokeOpacity = 0;
+series3.dataFields.valueX = "x";
+series3.dataFields.valueY = "y";
+series3.name = "Series #3";
+series3.sequencedInterpolation = true;
+series3.sequencedInterpolationDelay = 10;
+series3.dataSource.url = "http://localhost:5150/radar3.json";
+
+/* Add legend */
+chart.legend = new am4charts.Legend();
+
+/* Add cursor */
+chart.cursor = new am4charts.RadarCursor();
+
+// end ------------------------------------------
+
+    });
+</script>
+</head>
+
+<body>
+    <h3>independent series from tutorial</h3>
+    <hr/>
+    <div id="chartdiv"></div>
+    <hr/>
+</body>
+
+</html>
