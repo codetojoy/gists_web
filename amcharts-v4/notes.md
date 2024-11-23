@@ -67,6 +67,75 @@
 * https://www.amcharts.com/docs/v4/tutorials/dynamically-adding-and-removing-series/
 * push series onto chart list
     - invalidateData to redraw
+* remove series
+    - important to dispose
+
+### section 3
+
+* Axes
+* https://www.amcharts.com/docs/v4/concepts/axes/
+* most charts will have xAxes, yAxes
+* can move axes so they are vertical
+* renderers are seperate entity
+* types
+    - value: numeric
+    - category: text-based
+    - date: date/time
+    - duration: time duration
+* logic config: axis.*
+* appearance config: axis.renderer.*
+* grid lines
+* ticks
+* labels
+* tooltips
+* axis breaks
+* ranges
+* zoom
+
+### section 4
+
+* skip
+    - legend
+    - cursor
+    - tooltip
+    - formatters
+
+### section 5
+
+* data
+* https://www.amcharts.com/docs/v4/concepts/data/
+* data is an array of objects/data-points
+* MEGA: ascending order
+* beforevalidated event
+* binding
+    - dataFields
+    - propertyFields
+        - for chart element's properties
+        - e.g. color for column
+        - so appearance is data-driven
+        - example with alternating fills
+    - configField
+        - build config
+        - more data-driven appearance config
+* text placeholders
+    - custom tooltips
+    - urls -> go to link ?
+* setting data
+    - chart.data
+    - series-specific data
+        - rabbit-hole on radar chart
+        - was able to switch URLs via UI
+    - can add individual points
+    - can change data
+        - requires invalidateData() or invalidateRawData()
+        - example that changes data with a timer
+* formatting dates
+
+### section x
+
+- tutorial
+- manipulating chart data
+- https://www.amcharts.com/docs/v4/tutorials/manipulating-chart-data/
 
 ### resources
 
