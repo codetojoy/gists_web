@@ -2,6 +2,8 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler, test
 import sys
 
+# from: https://stackoverflow.com/a/21957017/12704
+
 class CORSRequestHandler (SimpleHTTPRequestHandler):
     def end_headers (self):
         self.send_header('Access-Control-Allow-Origin', '*')

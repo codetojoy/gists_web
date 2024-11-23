@@ -3,13 +3,25 @@
 
 * Lithuania
 
-* getting started
+* using JS
+* https://www.amcharts.com/docs/v4/getting-started/using-javascript/
 * amcore : global object
 * module list
 * assets: themes, translations, etc
 * creating chart
     - object-based
+        - more readable, IDE support
+        - cannot be serialized
+        - data is always serialized
     - JSON-based
+        - serialized config (e.g. database)
+* series
+    - dataFields
+        - schema for the series
+        - e.g. PieSeries defines 'value' and 'category'
+        - each chart type has its own schema
+* external data
+    - instead of 'data', use 'dataSource'
 
 ### resources
 
