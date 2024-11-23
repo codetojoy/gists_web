@@ -34,52 +34,13 @@ am4core.useTheme(am4themes_animated);
 am4core.useTheme(am4themes_kelly);
 
 /* Create chart instance */
-var chart = am4core.create("chartdiv", am4charts.RadarChart);
-
-/* Add data */
-chart.data = [{
-  "country": "Lithuania",
-  "litres": 501,
-  "units": 250
-}, {
-  "country": "Czech Republic",
-  "litres": 301,
-  "units": 222
-}, {
-  "country": "Ireland",
-  "litres": 266,
-  "units": 179
-}, {
-  "country": "Germany",
-  "litres": 165,
-  "units": 298
-}, {
-  "country": "Australia",
-  "litres": 139,
-  "units": 299
-}, {
-  "country": "Austria",
-  "litres": 336,
-  "units": 185
-}, {
-  "country": "UK",
-  "litres": 290,
-  "units": 150
-}, {
-  "country": "Belgium",
-  "litres": 325,
-  "units": 382
-}, {
-  "country": "The Netherlands",
-  "litres": 40,
-  "units": 172
-}];
+const chart = am4core.create("chartdiv", am4charts.RadarChart);
 
 /* Create axes */
-var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+const xAxis = chart.xAxes.push(new am4charts.ValueAxis());
 xAxis.renderer.maxLabelPosition = 0.99;
 
-var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+const yAxis = chart.yAxes.push(new am4charts.ValueAxis());
 yAxis.renderer.labels.template.verticalCenter = "bottom";
 yAxis.renderer.labels.template.horizontalCenter = "right";
 yAxis.renderer.maxLabelPosition = 0.99;
@@ -87,7 +48,7 @@ yAxis.renderer.maxLabelPosition = 0.99;
 let choice = $('#my-data-select option:selected').text();
 
 /* Create and configure series */
-var series = chart.series.push(new am4charts.RadarSeries());
+const series = chart.series.push(new am4charts.RadarSeries());
 series.bullets.push(new am4charts.CircleBullet());
 series.strokeOpacity = 0;
 series.dataFields.valueX = "x";
