@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/kelly.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 400px;
+}
+
+</style>
+
+<script>
+
+
+$(document).ready(function () {
+
+// begin ----------------------------------------
+
+// https://codepen.io/team/amcharts/pen/aGqZze
+
+/* Set themes */
+am4core.useTheme(am4themes_animated);
+am4core.useTheme(am4themes_kelly);
+
+/* Create chart instance */
+var chart = am4core.create("chartdiv", am4charts.RadarChart);
+
+/* Add data */
+chart.data = [{
+  "country": "Lithuania",
+  "litres": 501,
+  "units": 250
+}, {
+  "country": "Czech Republic",
+  "litres": 301,
+  "units": 222
+}, {
+  "country": "Ireland",
+  "litres": 266,
+  "units": 179
+}, {
+  "country": "Germany",
+  "litres": 165,
+  "units": 298
+}, {
+  "country": "Australia",
+  "litres": 139,
+  "units": 299
+}, {
+  "country": "Austria",
+  "litres": 336,
+  "units": 185
+}, {
+  "country": "UK",
+  "litres": 290,
+  "units": 150
+}, {
+  "country": "Belgium",
+  "litres": 325,
+  "units": 382
+}, {
+  "country": "The Netherlands",
+  "litres": 40,
+  "units": 172
+}];
+
+/* Create axes */
+var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+xAxis.renderer.maxLabelPosition = 0.99;
+
+var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+yAxis.renderer.labels.template.verticalCenter = "bottom";
+yAxis.renderer.labels.template.horizontalCenter = "right";
+yAxis.renderer.maxLabelPosition = 0.99;
+
+let choice = $('#my-data-select option:selected').text();
+
+/* Create and configure series */
+var series = chart.series.push(new am4charts.RadarSeries());
+series.bullets.push(new am4charts.CircleBullet());
+series.strokeOpacity = 0;
+series.dataFields.valueX = "x";
+series.dataFields.valueY = "y";
+series.name = `Current Series: ${choice}`;
+series.sequencedInterpolation = true;
+series.sequencedInterpolationDelay = 10;
+series.dataSource.url = "http://localhost:5150/radar1.json";
+
+/* Add legend */
+chart.legend = new am4charts.Legend();
+
+/* Add cursor */
+chart.cursor = new am4charts.RadarCursor();
+
+function changeSeries() {
+  choice = $('#my-data-select option:selected').text();
+  const url = `http://localhost:5150/radar${choice}.json`;
+  series.name = `Current Series: ${choice}`;
+  series.dataSource.url = url;
+  series.dataSource.load();
+  // I think this should be an event listener:
+  // console.log(`TRACER data : ${JSON.stringify(series.data)}`);
+}
+
+$('#my-button').on("click", changeSeries);
+
+// end ------------------------------------------
+
+    });
+</script>
+</head>
+
+<body>
+    <h3>choose series</h3>
+    <hr/>
+    <div id="chartdiv"></div>
+    <hr/>
+<select id="my-data-select">
+  <option value="1" selected>1</option>
+  <option value="2"         >2</option>
+  <option value="3"         >3</option>
+</select>
+<button id="my-button">Go</button>
+</body>
+
+</html>
